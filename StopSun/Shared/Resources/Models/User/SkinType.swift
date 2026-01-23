@@ -5,10 +5,9 @@
 //  Created by Jun on 7/14/25.
 //
 
-import Foundation
 import SwiftUI
 
-enum SkinType: Int, Codable, CaseIterable, Identifiable {
+enum SkinType: Int, Codable, CaseIterable, Identifiable, Sendable {
     case type1 = 1
     case type2
     case type3
@@ -18,25 +17,30 @@ enum SkinType: Int, Codable, CaseIterable, Identifiable {
 
     var id: Int { rawValue }
 
-    private var localizationKeyBase: String {
-        "skin.type\(rawValue)"
+    // MARK: - Localized Strings
+    
+    var title: String {
+        L10n.SkinType.title(rawValue)
+    }
+    
+    var summary: String {
+        L10n.SkinType.summary(rawValue)
+    }
+    
+    var skinDescription: String {
+        L10n.SkinType.description(rawValue)
+    }
+    
+    var fullDescription: String {
+        "\(summary)\n\(skinDescription)"
+    }
+    
+    var maxMEDFormatted: String {
+        L10n.SkinType.maxMED(maxMED)
     }
 
-    var titleKey: String {
-        "skin.type\(rawValue).title"
-    }
-
-    var summaryKey: String {
-        "skin.type\(rawValue).summary"
-    }
-
-    var descriptionKey: String {
-        "skin.type\(rawValue).description"
-    }
-}
-
-extension SkinType {
-
+    // MARK: - Visual Properties
+    
     var color: Color {
         switch self {
         case .type1: .skintype00
@@ -48,7 +52,8 @@ extension SkinType {
         }
     }
 
-    /// 피부 타입의 하루 최대 권장 MED 평균값 (J/m²)
+    // MARK: - Data Properties
+    
     var maxMED: Double {
         switch self {
         case .type1: 150
@@ -71,4 +76,3 @@ extension SkinType {
         }
     }
 }
-

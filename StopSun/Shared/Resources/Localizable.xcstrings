@@ -1,20 +1,74 @@
 {
   "sourceLanguage" : "ko",
   "strings" : {
-    "AppName" : {
-      "comment" : "앱 이름",
+    "common.button.cancel" : {
+      "comment" : "버튼 취소",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "StopSun"
+            "state" : "translated",
+            "value" : "cancel"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "그만해"
+            "value" : "취소"
+          }
+        }
+      }
+    },
+    "common.button.continue" : {
+      "comment" : "버튼 다음",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "next"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다음"
+          }
+        }
+      }
+    },
+    "common.button.skip" : {
+      "comment" : "버튼 건너뛰기",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "skip"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "건너뛰기"
+          }
+        }
+      }
+    },
+    "onboarding.title" : {
+      "comment" : "온보딩 타이틀",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How to use App ‘StopSun’"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "그만해 앱 시작하기"
           }
         }
       }
