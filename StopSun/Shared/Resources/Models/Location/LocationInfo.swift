@@ -8,12 +8,19 @@
 import CoreLocation
 import Foundation
 
-struct LocationInfo {
+struct LocationInfo: Codable {
     let latitude: Double
     let longitude: Double
     let city: String  // 포항시
+
     var asCLLocation: CLLocation {
         CLLocation(latitude: latitude, longitude: longitude)
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case latitude
+        case longitude
+        case city
     }
 }
 
