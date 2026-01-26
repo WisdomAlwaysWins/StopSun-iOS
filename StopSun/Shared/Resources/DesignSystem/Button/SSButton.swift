@@ -5,116 +5,70 @@
 //  Created by taeni on 1/9/26.
 //
 
-
 import SwiftUI
 
+// MARK: - SSButton
+
 struct SSButton: View {
-    @Binding var isEnabled: Bool
-
-    let title: String
-    let action: () -> Void
-
-    var icon: Image?
-    var foregroundColor: Color = .white00
-    var backgroundColor: Color = .key00
     
-    var deactivateForegroundColor: Color = .white01
-    var deactivateBackgroundColor: Color = .gray00
+    enum Style {
+        case primary
+        case secondary
+        case ghost
+    }
     
-    var cornerRadius: CGFloat = 8
-    var font: Font = .ssFont(.SB2)
-    var verticalPadding: CGFloat = 14
-    var isInteractive: Bool = true
-
+    private let title: String
+    private let style: Style
+    private let action: () -> Void
+    
+    // MARK: - Initializer
+    
+    /// String 사용 (L10n과 함께 사용)
+    ///
+    /// ```swift
+    /// SSButton(L10n.Button.continue) { }
+    /// SSButton(L10n.Button.cancel, style: .secondary) { }
+    /// ```
+    init(
+        _ title: String,
+        style: Style = .primary,
+        action: @escaping () -> Void
+    ) {
+        self.title = title
+        self.style = style
+        self.action = action
+    }
+    
+    // MARK: - Body
+    
     var body: some View {
+        switch style {
+        case .primary:
+            Button(action: action) { Text(title) }
+                .buttonStyle(.ssPrimary)
+        case .secondary:
+            Button(action: action) { Text(title) }
+                .buttonStyle(.ssSecondary)
+        case .ghost:
+            Button(action: action) { Text(title) }
+                .buttonStyle(.ssGhost)
+        }
+    }
+}
+
+// MARK: - Preview
+
+#Preview("SSButton") {
+    VStack(spacing: 16) {
         Button {
-            action()
-        } label: {
-            HStack(spacing: 6) {
-                if let icon {
-                    icon
-                }
-
-                Text(title)
-                    .font(font)
-            }
-            .padding(.vertical, verticalPadding)
-            .frame(maxWidth: .infinity)
-            .foregroundStyle(isEnabled ? foregroundColor : deactivateForegroundColor)
-            .background(isEnabled ? backgroundColor : deactivateBackgroundColor)
-            .cornerRadius(cornerRadius)
-        }
-        .disabled(!isEnabled)
+            print(L10n.Button.continue)
+        } label: { Text(L10n.Button.continue) }
+            .buttonStyle(.ssPrimary)
+        
+        Button {
+            print(L10n.Button.cancel)
+        } label: { Text(L10n.Button.cancel) }
+            .buttonStyle(.ssSecondary)
     }
-}
-
-extension SSButton {
-
-    @discardableResult
-    func icon(_ image: Image) -> Self {
-        var view = self
-        view.icon = image
-        return view
-    }
-
-    @discardableResult
-    func foregroundColor(_ color: Color) -> Self {
-        var view = self
-        view.foregroundColor = color
-        return view
-    }
-
-    @discardableResult
-    func backgroundColor(_ color: Color) -> Self {
-        var view = self
-        view.backgroundColor = color
-        return view
-    }
-
-    @discardableResult
-    func font(_ font: Font) -> Self {
-        var view = self
-        view.font = font
-        return view
-    }
-
-    @discardableResult
-    func verticalPadding(_ value: CGFloat) -> Self {
-        var view = self
-        view.verticalPadding = value
-        return view
-    }
-
-    @discardableResult
-    func interactive(_ isOn: Bool) -> Self {
-        var view = self
-        view.isInteractive = isOn
-        return view
-    }
-}
-
-struct SSButtonPreview: View {
-    @State private var isEnabled = true
-
-    var body: some View {
-        VStack(spacing: 16) {
-            SSButton(isEnabled: $isEnabled, title: "기본") {
-                print("기본 tap")
-            }
-            
-            SSButton(isEnabled: $isEnabled, title: "계속") {
-                print("계속 tap")
-            }
-            .backgroundColor(.key00)
-            .foregroundColor(.white00)
-            .font(.ssFont(.SB3))
-
-            Toggle("Enabled", isOn: $isEnabled)
-        }
-        .padding()
-    }
-}
-
-#Preview {
-    SSButtonPreview()
+    .padding()
 }
