@@ -1,0 +1,420 @@
+{
+  "sourceLanguage" : "ko",
+  "strings" : {
+    "common.button.cancel" : {
+      "comment" : "버튼 취소",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "cancel"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "취소"
+          }
+        }
+      }
+    },
+    "common.button.continue" : {
+      "comment" : "버튼 다음",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "next"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다음"
+          }
+        }
+      }
+    },
+    "common.button.skip" : {
+      "comment" : "버튼 건너뛰기",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "skip"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "건너뛰기"
+          }
+        }
+      }
+    },
+    "onboarding.title" : {
+      "comment" : "온보딩 타이틀",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How to use App ‘StopSun’"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "그만해 앱 시작하기"
+          }
+        }
+      }
+    },
+    "skin.maxMED.format" : {
+      "comment" : "하루 최대 권장 MED 포맷",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Recommended max MED: %.0f J/m²"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "하루 최대 권장 MED: %.0f J/m²"
+          }
+        }
+      }
+    },
+    "skin.type1.description" : {
+      "comment" : "피부 타입 1 설명",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Always burns, never tans"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "항상 타거나 화상을 입음, 거의 태닝되지 않음"
+          }
+        }
+      }
+    },
+    "skin.type1.summary" : {
+      "comment" : "피부 타입 1 요약",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Very fair skin, many freckles"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "매우 하얀 피부, 주근깨 많음"
+          }
+        }
+      }
+    },
+    "skin.type1.title" : {
+      "comment" : "피부 타입 1 제목",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Type 1"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1형"
+          }
+        }
+      }
+    },
+    "skin.type2.description" : {
+      "comment" : "피부 타입 2 설명",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Burns easily, tans with difficulty"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "쉽게 타고, 태닝이 어려움"
+          }
+        }
+      }
+    },
+    "skin.type2.summary" : {
+      "comment" : "피부 타입 2 요약",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fair skin, some freckles"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "하얀 피부, 주근깨 있음"
+          }
+        }
+      }
+    },
+    "skin.type2.title" : {
+      "comment" : "피부 타입 2 제목",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Type 2"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2형"
+          }
+        }
+      }
+    },
+    "skin.type3.description" : {
+      "comment" : "피부 타입 3 설명",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sometimes burns, gradually tans"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "가끔 타지만 점진적으로 태닝됨"
+          }
+        }
+      }
+    },
+    "skin.type3.summary" : {
+      "comment" : "피부 타입 3 요약",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Medium skin tone"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "약간 어두운 피부"
+          }
+        }
+      }
+    },
+    "skin.type3.title" : {
+      "comment" : "피부 타입 3 제목",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Type 3"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3형"
+          }
+        }
+      }
+    },
+    "skin.type4.description" : {
+      "comment" : "피부 타입 4 설명",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Rarely burns, tans easily"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "거의 타지 않고 쉽게 태닝됨"
+          }
+        }
+      }
+    },
+    "skin.type4.summary" : {
+      "comment" : "피부 타입 4 요약",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Olive or light brown skin"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "올리브톤 또는 황갈색 피부"
+          }
+        }
+      }
+    },
+    "skin.type4.title" : {
+      "comment" : "피부 타입 4 제목",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Type 4"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "4형"
+          }
+        }
+      }
+    },
+    "skin.type5.description" : {
+      "comment" : "피부 타입 5 설명",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Very rarely burns, tans very easily"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "거의 타지 않고 매우 쉽게 태닝됨"
+          }
+        }
+      }
+    },
+    "skin.type5.summary" : {
+      "comment" : "피부 타입 5 요약",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Brown skin"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "갈색 피부"
+          }
+        }
+      }
+    },
+    "skin.type5.title" : {
+      "comment" : "피부 타입 5 제목",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Type 5"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "5형"
+          }
+        }
+      }
+    },
+    "skin.type6.description" : {
+      "comment" : "피부 타입 6 설명",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Never burns, naturally dark pigmentation"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "거의 타지 않음, 자연스럽게 어두운 색소"
+          }
+        }
+      }
+    },
+    "skin.type6.summary" : {
+      "comment" : "피부 타입 6 요약",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Very dark brown or black skin"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "매우 어두운 갈색/검은 피부"
+          }
+        }
+      }
+    },
+    "skin.type6.title" : {
+      "comment" : "피부 타입 6 제목",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Type 6"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "6형"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
