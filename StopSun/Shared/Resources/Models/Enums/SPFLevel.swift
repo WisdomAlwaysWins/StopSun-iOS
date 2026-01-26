@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// 선크림 SPF 지수
 enum SPFLevel: Int, CaseIterable, Identifiable, Codable {
     case spf15 = 15
     case spf30 = 30

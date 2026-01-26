@@ -8,13 +8,14 @@
 import Foundation
 import SwiftUI
 
+/// 피츠패트릭 피부 타입 (I~VI)
 enum SkinType: Int, Codable, CaseIterable, Identifiable {
     case type1 = 1
-    case type2
-    case type3
-    case type4
-    case type5
-    case type6
+    case type2 = 2
+    case type3 = 3
+    case type4 = 4
+    case type5 = 5
+    case type6 = 6
     
     var id: Int { rawValue }
     
@@ -64,6 +65,17 @@ enum SkinType: Int, Codable, CaseIterable, Identifiable {
         case .type4: 500.0
         case .type5: 700.0
         case .type6: 1200.0
+        }
+    }
+    
+    var maxDailyMEDinSED: Double {
+        switch self {
+        case .type1: return 2.0
+        case .type2: return 2.5
+        case .type3: return 3.0
+        case .type4: return 4.5
+        case .type5: return 6.0
+        case .type6: return 9.0
         }
     }
     
