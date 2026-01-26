@@ -1,12 +1,6 @@
 {
   "sourceLanguage" : "ko",
   "strings" : {
-    "Button + .buttonStyle() 조합" : {
-
-    },
-    "Button Enabled" : {
-
-    },
     "common.button.cancel" : {
       "comment" : "버튼 취소",
       "extractionState" : "manual",
@@ -61,45 +55,6 @@
         }
       }
     },
-    "Custom Background & Radius" : {
-
-    },
-    "Custom Style" : {
-
-    },
-    "Design System" : {
-
-    },
-    "Disabled Primary" : {
-
-    },
-    "Disabled Secondary" : {
-
-    },
-    "Ghost" : {
-
-    },
-    "Hello, world!" : {
-
-    },
-    "L10n.Button" : {
-
-    },
-    "L10n.Button.continue" : {
-
-    },
-    "L10n.SkinType" : {
-
-    },
-    "L10n.SkinType.maxMED (format)" : {
-
-    },
-    "L10n.SkinType.maxMED(150)" : {
-
-    },
-    "L10n.SkinType.title(1)" : {
-
-    },
     "onboarding.title" : {
       "comment" : "온보딩 타이틀",
       "extractionState" : "manual",
@@ -117,15 +72,6 @@
           }
         }
       }
-    },
-    "Primary" : {
-
-    },
-    "Secondary" : {
-
-    },
-    "Selected: %@" : {
-
     },
     "skin.maxMED.format" : {
       "comment" : "하루 최대 권장 MED 포맷",
@@ -468,24 +414,6 @@
           }
         }
       }
-    },
-    "SkinType 모델이 L10n을 통해 localized 값 반환" : {
-
-    },
-    "SSButton은 Button + ButtonStyle의 단순 래퍼입니다." : {
-
-    },
-    "SSSelectSkinButton" : {
-
-    },
-    "String.localized (직접 사용)" : {
-
-    },
-    "String.localized(\"onboarding.title\")" : {
-
-    },
-    "Toggle Test Button" : {
-
     }
   },
   "version" : "1.0"
