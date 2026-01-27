@@ -1,0 +1,96 @@
+//
+//  LocalStorageManagerProtocol.swift
+//  StopSun
+//
+//  Created by J on 1/26/26.
+//
+
+import Foundation
+
+/// 로컬 저장소 관리 프로토콜
+///
+/// UserDefaults를 통해 앱 데이터를 저장/조회합니다.
+///
+/// ## 저장 데이터
+/// | 키 | 모델 | 보관 |
+/// |----|------|----------|
+/// | userProfile | UserProfile | ⭕️ |
+/// | sunscreenHistory | [SunscreenApplication] | ⭕️ |
+/// | locationHistory | [LocationRecord] | ⭕️ |
+/// | exposures.{date} | [UVExposureRecord] | ⭕️ |
+/// | dailyMED.{date} | DailyMEDRecord | ⭕️ |
+///
+protocol LocalStorageManagerProtocol {
+    
+     // MARK: - UserProfile
+     
+     /// 사용자 프로필 로드
+     func loadUserProfile() -> UserProfile?
+     
+     /// 사용자 프로필 저장
+     func saveUserProfile(_ profile: UserProfile)
+     
+     /// 피부 타입 업데이트
+     ///
+     /// - Parameter skinType: 새 피부 타입
+     /// - Note: 내부에서 NotificationCenter.post 호출
+     func updateSkinType(_ skinType: SkinType)
+     
+     /// 선크림 SPF 업데이트
+     ///
+     /// - Parameter spfLevel: 새 SPF 레벨
+     /// - Note: 내부에서 NotificationCenter.post 호출
+     func updateSunscreenSPF(_ spfLevel: SPFLevel)
+     
+     // MARK: - SunscreenApplication
+     
+     /// 선크림 기록 히스토리 로드
+     func loadSunscreenHistory() -> [SunscreenApplication]
+     
+     /// 선크림 기록 저장
+     func saveSunscreenApplication(_ application: SunscreenApplication)
+     
+     /// 특정 시점에 유효한 SPF 조회
+     ///
+     /// - Parameter date: 조회할 시점
+     /// - Returns: 해당 시점에 유효한 SPFLevel (없으면 .none)
+     func getActiveSPF(at date: Date) -> SPFLevel
+     
+     // MARK: - LocationRecord
+     
+     /// 위치 히스토리 로드
+     func loadLocationHistory() -> [LocationRecord]
+     
+     /// 위치 기록 저장
+     func saveLocationRecord(_ record: LocationRecord)
+     
+     /// 특정 시점의 위치 조회
+     ///
+     /// - Parameter date: 조회할 시점
+     /// - Returns: ±30분 이내 가장 가까운 위치 기록
+     func getLocation(at date: Date) -> LocationRecord?
+     
+     // MARK: - UVExposureRecord
+     
+     /// 특정 날짜의 노출 기록 로드
+     func loadExposureRecords(for date: Date) -> [UVExposureRecord]
+     
+     /// 노출 기록 저장
+     func saveExposureRecord(_ record: UVExposureRecord)
+     
+     /// 이미 처리된 HealthKit ID인지 확인
+     func isProcessed(healthKitID: UUID) -> Bool
+     
+     // MARK: - DailyMEDRecord
+     
+     /// 특정 날짜의 일일 MED 기록 로드
+     func loadDailyMEDRecord(for date: Date) -> DailyMEDRecord?
+     
+     /// 일일 MED 기록 저장
+     func saveDailyMEDRecord(_ record: DailyMEDRecord)
+     
+     // MARK: - Cleanup
+     
+     /// 오래된 데이터 정리
+     func cleanupOldData()
+}
