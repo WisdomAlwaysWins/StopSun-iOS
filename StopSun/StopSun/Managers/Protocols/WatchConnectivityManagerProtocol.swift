@@ -17,7 +17,7 @@ import Foundation
 /// - 현재 MED 상태
 ///
 protocol WatchConnectivityManagerProtocol {
-
+    
     /// Watch 연결 상태
     var isReachable: Bool { get }
     

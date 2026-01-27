@@ -16,12 +16,12 @@ import Foundation
 /// - 과거 시점 UV Index 조회 (HealthKit 지연 도착 대응)
 ///
 protocol WeatherManagerProtocol {
-
+    
     /// 현재 날씨 조회
-     ///
-     /// - Parameter location: 위치 정보
-     /// - Returns: 현재 날씨 및 시간별 예보
-     func fetchCurrentWeather(for location: LocationInfo) async throws -> LocationWeather
+    ///
+    /// - Parameter location: 위치 정보
+    /// - Returns: 현재 날씨 및 시간별 예보
+    func fetchCurrentWeather(for location: LocationInfo) async throws -> LocationWeather
     
     /// 특정 시점의 UV Index 조회
     ///

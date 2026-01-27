@@ -34,15 +34,15 @@ protocol HealthKitManagerProtocol {
     func fetchTodayTimeInDaylight() async throws -> [TimeInDaylight]
     
     /// 특정 기간의 일광 노출 데이터 조회
-     ///
-     /// - Parameters:
-     ///   - start: 시작 날짜
-     ///   - end: 종료 날짜
-     /// - Returns: 해당 기간의 TimeInDaylight 배열
-     func fetchTimeInDaylight(from start: Date, to end: Date) async throws -> [TimeInDaylight]
-     
-     /// Background Delivery 활성화
-     ///
-     /// 새로운 timeInDaylight 데이터가 기록되면 앱에 알림
-     func enableBackgroundDelivery() async throws
+    ///
+    /// - Parameters:
+    ///   - start: 시작 날짜
+    ///   - end: 종료 날짜
+    /// - Returns: 해당 기간의 TimeInDaylight 배열
+    func fetchTimeInDaylight(from start: Date, to end: Date) async throws -> [TimeInDaylight]
+    
+    /// Background Delivery 활성화
+    ///
+    /// 새로운 timeInDaylight 데이터가 기록되면 앱에 알림
+    func enableBackgroundDelivery() async throws
 }

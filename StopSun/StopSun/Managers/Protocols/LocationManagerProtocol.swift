@@ -18,13 +18,13 @@ import Foundation
 /// - 백그라운드 위치 변경 감지
 ///
 protocol LocationManagerProtocol {
-
+    
     /// 권한 허용 여부
     var isAuthorized: Bool { get }
-     
+    
     /// 위치 권한 요청
     func requestAuthorization() async
-     
+    
     /// 현재 위치 조회
     ///
     /// - Returns: 현재 위치 정보 (도시 이름 포함)
