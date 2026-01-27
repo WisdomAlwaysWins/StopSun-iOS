@@ -7,10 +7,35 @@
 
 import Foundation
 
+/// 사용자 프로필
+///
+/// 피부 타입과 선호 SPF 설정을 저장합니다.
+///
+/// ## 저장 정보
+/// - 저장 위치: UserDefaults
+/// - 저장 키: `stopsun.userProfile`
+///
+/// ```swift
+/// let profile = UserProfile(skinType: .type2, preferredSPF: .spf30)
+/// let maxMED = profile.skinType.maxDailyMEDinSED  // 2.5 SED
+/// ```
+///
 struct UserProfile: Codable {
+    
+    /// 고유 식별자
     let id: UUID
-    var skinType: SkinType // 유저의 스킨 유형
-    var spfLevel: SPFLevel // 유저의 SPF 레벨 (초기값: 30)
+    
+    /// 피부 타입
+    ///
+    /// MED 한계치 계산에 사용됩니다.
+    var skinType: SkinType
+    
+    /// 선호 SPF
+    ///
+    /// 선크림 도포 시 기본 선택값입니다.
+    var spfLevel: SPFLevel
+    
+    /// 프로필 생성 일시
     let createdAt: Date
     
     init(
