@@ -67,7 +67,7 @@ final class DIContainer {
     // MARK: - Preview
     
     @MainActor
-    static var preview: DIContainer {
+    static let preview: DIContainer = {
         let localStorage = MockLocalStorageManager()
         let healthKit = MockHealthKitManager()
         let weather = MockWeatherManager()
@@ -93,7 +93,7 @@ final class DIContainer {
             watchConnectivity: watchConnectivity,
             syncCoordinator: syncCoordinator
         )
-    }
+    }()
     
     // MARK: - Managers
     
