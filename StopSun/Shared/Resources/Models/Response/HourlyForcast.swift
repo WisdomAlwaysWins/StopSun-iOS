@@ -15,7 +15,10 @@ import Foundation
 /// let forecast = HourlyForecast(hour: 14, uvIndex: 8.5, ...)
 /// print("오후 2시 UV: \(forecast.uvIndex)")
 /// ```
-struct HourlyForecast: Equatable {
+struct HourlyForecast: Equatable, Identifiable {
+    
+    /// UUID
+    let id = UUID()
     
     /// 시간 (0-23)
     let hour: Int

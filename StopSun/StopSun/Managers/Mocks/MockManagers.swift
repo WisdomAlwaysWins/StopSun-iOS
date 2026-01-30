@@ -29,6 +29,10 @@ final class MockHealthKitManager: HealthKitManagerProtocol {
 // MARK: - MockWeatherManager
 
 final class MockWeatherManager: WeatherManagerProtocol {
+    func fetchCurrentUVIndex(for location: LocationInfo) async throws -> Double {
+        return 2.0
+    }
+    
     func fetchCurrentWeather(for location: LocationInfo) async throws -> LocationWeather {
         return LocationWeather(
             location: location,
@@ -50,7 +54,7 @@ final class MockLocationManager: LocationManagerProtocol {
     func requestAuthorization() async {}
     
     func getCurrentLocation() async throws -> LocationInfo {
-        return .mockSeoul
+        return .mockPohang
     }
     
     func startMonitoringSignificantLocationChanges() {}

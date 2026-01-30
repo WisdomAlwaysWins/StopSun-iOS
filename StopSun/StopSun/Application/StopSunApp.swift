@@ -11,7 +11,8 @@ import SwiftUI
 struct StopSunApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+//            ContentView()
+            WeatherTestView()
         }
     }
 }
