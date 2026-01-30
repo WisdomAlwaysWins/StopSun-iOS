@@ -54,7 +54,7 @@ struct SunScreenExampleView: View {
                     VStack(alignment: .leading) {
                         Text("선크림 효과 활성")
                             .font(.headline)
-                        Text(viewModel.getFormattedRemainingTime() + " 남음")
+                        Text(viewModel.fetchFormattedRemainingTime() + " 남음")
                             .font(.caption)
                             .foregroundColor(.gray)
                     }
@@ -123,8 +123,8 @@ struct SunScreenExampleView: View {
                 .font(.headline)
 
             DetailRow(title: "발림 시각", value: viewModel.applicationTime.isEmpty ? "-" : viewModel.applicationTime)
-            DetailRow(title: "효과 상태", value: viewModel.getEffectivenessStatus())
-            DetailRow(title: "남은 시간", value: viewModel.getFormattedRemainingTime())
+            DetailRow(title: "효과 상태", value: viewModel.fetchEffectivenessStatus())
+            DetailRow(title: "남은 시간", value: viewModel.fetchFormattedRemainingTime())
             DetailRow(title: "재발림 필요", value: viewModel.needsReapplication ? "예" : "아니오")
         }
         .padding()

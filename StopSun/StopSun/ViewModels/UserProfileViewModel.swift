@@ -9,8 +9,7 @@ import Foundation
 import Combine
 
 /// 사용자 프로필 관련 View를 위한 ViewModel
-/// - ViewModel은 Service를 통해 비즈니스 로직에 접근
-/// - View는 Manager/Service에 직접 접근하지 않고 ViewModel을 통해 접근
+/// - ViewModel은 Manager를 통해 데이터에 접근
 @MainActor
 final class UserProfileViewModel: ObservableObject {
 
@@ -22,19 +21,19 @@ final class UserProfileViewModel: ObservableObject {
     @Published var isOnboardingCompleted: Bool = false
 
     // MARK: - Dependencies
-    private let profileService: UserProfileService
+    private let profileManager: UserProfileManager
 
     // MARK: - Initialization
 
-    init(profileService: UserProfileService = .shared) {
-        self.profileService = profileService
+    init(profileManager: UserProfileManager = .shared) {
+        self.profileManager = profileManager
 
-        let profile = profileService.fetchUserProfile()
+        let profile = profileManager.fetchProfileOrDefault()
         self.userProfile = profile
         self.skinType = profile.skinType
         self.spfLevel = profile.spfLevel
         self.maxMED = profile.skinType.maxMED
-        self.isOnboardingCompleted = profileService.fetchOnboardingCompleted()
+        self.isOnboardingCompleted = profileManager.fetchOnboardingCompleted()
 
         Log.debug("UserProfileViewModel initialized")
     }
@@ -44,7 +43,7 @@ final class UserProfileViewModel: ObservableObject {
     /// 피부 타입 변경
     /// - Parameter skinType: 새로운 피부 타입
     func updateSkinType(_ skinType: SkinType) {
-        let success = profileService.changeSkinType(to: skinType)
+        let success = profileManager.updateSkinType(skinType)
 
         if success {
             self.skinType = skinType
@@ -59,7 +58,7 @@ final class UserProfileViewModel: ObservableObject {
     /// SPF 레벨 변경
     /// - Parameter spfLevel: 새로운 SPF 레벨
     func updateSPFLevel(_ spfLevel: SPFLevel) {
-        let success = profileService.changeSPFLevel(to: spfLevel)
+        let success = profileManager.updateSPFLevel(spfLevel)
 
         if success {
             self.spfLevel = spfLevel
@@ -76,7 +75,7 @@ final class UserProfileViewModel: ObservableObject {
     ///   - spfLevel: SPF 레벨
     func saveProfile(skinType: SkinType, spfLevel: SPFLevel) {
         let newProfile = UserProfile(skinType: skinType, spfLevel: spfLevel)
-        let success = profileService.saveUserProfile(newProfile)
+        let success = profileManager.saveProfile(newProfile)
 
         if success {
             self.userProfile = newProfile
@@ -92,7 +91,8 @@ final class UserProfileViewModel: ObservableObject {
 
     /// 프로필 초기화
     func resetProfile() {
-        profileService.resetProfile()
+        profileManager.deleteProfile()
+        profileManager.saveOnboardingCompleted(false)
 
         let defaultProfile = UserProfile.defaultUser
         self.userProfile = defaultProfile
@@ -106,12 +106,12 @@ final class UserProfileViewModel: ObservableObject {
 
     /// 데이터 새로고침
     func refresh() {
-        let profile = profileService.fetchUserProfile()
+        let profile = profileManager.fetchProfileOrDefault()
         self.userProfile = profile
         self.skinType = profile.skinType
         self.spfLevel = profile.spfLevel
         self.maxMED = profile.skinType.maxMED
-        self.isOnboardingCompleted = profileService.fetchOnboardingCompleted()
+        self.isOnboardingCompleted = profileManager.fetchOnboardingCompleted()
 
         Log.debug("User profile refreshed")
     }
@@ -130,7 +130,7 @@ final class UserProfileViewModel: ObservableObject {
 
     /// 권장 SPF 레벨
     var recommendedSPFLevel: SPFLevel {
-        profileService.fetchRecommendedSPFLevel()
+        fetchRecommendedSPFLevel()
     }
 
     /// 권장 SPF와 현재 SPF 비교
@@ -162,7 +162,20 @@ final class UserProfileViewModel: ObservableObject {
     ///   - usingSunscreen: 선크림 사용 여부
     /// - Returns: 안전 노출 시간 (분)
     func calculateSafeExposureTime(uvIndex: Double, usingSunscreen: Bool) -> Int {
-        return profileService.calculateSafeExposureTime(uvIndex: uvIndex, usingSunscreen: usingSunscreen)
+        let maxMED = skinType.maxMED
+
+        var safeTime = maxMED / uvIndex
+
+        if usingSunscreen {
+            let spfFactor = Double(spfLevel.rawValue)
+            safeTime *= spfFactor
+        }
+
+        let safeMinutes = Int(safeTime * 10)
+
+        Log.debug("Safe exposure time calculated: \(safeMinutes) minutes (UV: \(uvIndex), SPF: \(usingSunscreen))")
+
+        return max(safeMinutes, 10)
     }
 
     /// 모든 피부 타입 목록 (UI용)
@@ -173,5 +186,19 @@ final class UserProfileViewModel: ObservableObject {
     /// 모든 SPF 레벨 목록 (UI용)
     var allSPFLevels: [SPFLevel] {
         SPFLevel.allCases
+    }
+
+    // MARK: - Private Methods
+
+    /// 피부 타입별 권장 SPF 레벨 조회
+    private func fetchRecommendedSPFLevel() -> SPFLevel {
+        switch skinType {
+        case .type1, .type2:
+            return .spf50
+        case .type3, .type4:
+            return .spf30
+        case .type5, .type6:
+            return .spf15
+        }
     }
 }
