@@ -7,6 +7,16 @@
 
 import SwiftUI
 
+/// 피츠패트릭 피부 타입 분류
+///
+/// 피부의 자외선 민감도를 6단계로 분류합니다.
+/// 각 타입별 일일 최대 허용 자외선량(MED)이 다릅니다.
+///
+/// ```swift
+/// let user = UserProfile(skinType: .type2)
+/// let limit = user.skinType.maxDailyMEDinSED // 2.5 SED
+/// ```
+///
 enum SkinType: Int, Codable, CaseIterable, Identifiable, Sendable {
     case type1 = 1
     case type2
@@ -62,6 +72,18 @@ enum SkinType: Int, Codable, CaseIterable, Identifiable, Sendable {
         case .type4: 500
         case .type5: 700
         case .type6: 1200
+        }
+    }
+    
+    /// 일일 최대 허용 자외선량 (SED 단위)
+    var maxDailyMEDinSED: Double {
+        switch self {
+        case .type1: return 2.0
+        case .type2: return 2.5
+        case .type3: return 3.0
+        case .type4: return 4.5
+        case .type5: return 6.0
+        case .type6: return 9.0
         }
     }
 
