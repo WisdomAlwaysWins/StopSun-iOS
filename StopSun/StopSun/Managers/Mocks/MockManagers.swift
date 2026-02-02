@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UserNotifications
 
 // MARK: - MockHealthKitManager
 
@@ -114,13 +115,62 @@ final class MockLocalStorageManager: LocalStorageManagerProtocol {
 // MARK: - MockNotificationManager
 
 final class MockNotificationManager: NotificationManagerProtocol {
-    var isAuthorized: Bool { true }
     
-    func requestAuthorization() async throws {}
-    func scheduleReapplyReminder(at date: Date) {}
-    func cancelReapplyReminder() {}
-    func sendMEDWarning(percentage: Double) {}
-    func cancelAllNotifications() {}
+    // MARK: - Mock State
+    
+    var _isAuthorized: Bool = true
+    var _authorizationStatus: UNAuthorizationStatus = .authorized
+    var scheduledReminders: [Date] = []
+    var sentMEDWarnings: [Double] = []
+    var shouldFailAuthorization: Bool = false
+    var shouldFailSchedule: Bool = false
+    
+    // MARK: - Protocol
+    
+    var isAuthorized: Bool { _isAuthorized }
+    
+    var authorizationStatus: UNAuthorizationStatus {
+        get async { _authorizationStatus }
+    }
+    
+    func requestAuthorization() async throws {
+        if shouldFailAuthorization {
+            throw AppError.notification(.authorizationDenied)
+        }
+        _isAuthorized = true
+    }
+    
+    func scheduleReapplyReminder(at date: Date) async throws {
+        if shouldFailSchedule {
+            throw AppError.notification(.scheduleFailed)
+        }
+        guard date > Date() else {
+            throw AppError.notification(.invalidDate)
+        }
+        scheduledReminders.append(date)
+    }
+    
+    func cancelReapplyReminder() {
+        scheduledReminders.removeAll()
+    }
+    
+    func snoozeReapplyReminder() async throws {
+        let snoozeDate = Date().addingTimeInterval(15 * 60)
+        try await scheduleReapplyReminder(at: snoozeDate)
+    }
+    
+    func sendMEDWarning(percentage: Double) {
+        sentMEDWarnings.append(percentage)
+    }
+    
+    func cancelAllNotifications() {
+        scheduledReminders.removeAll()
+        sentMEDWarnings.removeAll()
+    }
+    
+    func getPendingNotifications() async -> [UNNotificationRequest] {
+        return []
+    }
 }
 
 // MARK: - MockWatchConnectivityManager
