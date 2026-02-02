@@ -16,7 +16,7 @@ import SwiftUI
 /// // View에서 사용
 /// struct ContentView: View {
 ///     @EnvironmentObject var errorHandler: ErrorHandler
-///     
+///
 ///     var body: some View {
 ///         VStack { ... }
 ///             .errorAlert(errorHandler)
