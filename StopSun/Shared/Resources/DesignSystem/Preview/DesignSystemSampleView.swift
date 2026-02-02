@@ -52,7 +52,7 @@ struct DesignSystemSampleView: View {
             VStack(alignment: .leading, spacing: 8) {
                 Text("Primary").font(.subheadline).bold()
                 
-                Button { } label: { Text(L10n.Button.continue) }
+                Button { } label: { Text(L10n.Button.next) }
                     .buttonStyle(.ssPrimary)
                 
                 Button { } label: { Text("Disabled Primary") }
@@ -113,7 +113,7 @@ struct DesignSystemSampleView: View {
                 .font(.caption)
                 .foregroundStyle(.secondary)
             
-            SSButton(L10n.Button.continue) {
+            SSButton(L10n.Button.next) {
                 print("Continue tapped")
             }
             
@@ -193,7 +193,7 @@ struct DesignSystemSampleView: View {
                         .font(.system(.caption, design: .monospaced))
                         .foregroundStyle(.blue)
                     
-                    Text(L10n.Button.continue)
+                    Text(L10n.Button.next)
                         .padding(8)
                         .background(Color.green.opacity(0.1))
                         .cornerRadius(6)
@@ -261,7 +261,7 @@ struct DesignSystemSampleView: View {
 
 #Preview("Button Styles Only") {
     VStack(spacing: 16) {
-        Button { } label: { Text(L10n.Button.continue) }
+        Button { } label: { Text(L10n.Button.next) }
             .buttonStyle(.ssPrimary)
         
         Button { } label: { Text(L10n.Button.cancel) }
