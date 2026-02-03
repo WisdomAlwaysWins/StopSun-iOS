@@ -138,22 +138,9 @@ final class UserProfileViewModel: ObservableObject {
         spfLevel.rawValue >= recommendedSPFLevel.rawValue
     }
 
-    /// 피부 타입별 주의사항
+    /// 피부 타입별 주의사항 (Localized)
     var skinCareAdvice: String {
-        switch skinType {
-        case .type1:
-            return "매우 민감한 피부로 햇빛 노출 시 각별한 주의가 필요합니다."
-        case .type2:
-            return "민감한 피부로 선크림을 꼭 바르고 외출하세요."
-        case .type3:
-            return "보통 피부이지만 장시간 노출 시 선크림을 사용하세요."
-        case .type4:
-            return "비교적 건강한 피부이지만 자외선 차단제 사용을 권장합니다."
-        case .type5:
-            return "강한 피부이지만 장시간 야외 활동 시 보호가 필요합니다."
-        case .type6:
-            return "매우 강한 피부이지만 자외선 차단은 여전히 중요합니다."
-        }
+        skinType.skinDescription
     }
 
     /// 안전 노출 시간 계산

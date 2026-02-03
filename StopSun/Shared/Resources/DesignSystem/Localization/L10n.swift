@@ -43,22 +43,49 @@ enum L10n {
     }
     
     // MARK: - Skin Type
-    
+
     enum SkinType {
         static func title(_ type: Int) -> String {
             .localized("skin.type\(type).title")
         }
-        
+
         static func summary(_ type: Int) -> String {
             .localized("skin.type\(type).summary")
         }
-        
+
         static func description(_ type: Int) -> String {
             .localized("skin.type\(type).description")
         }
-        
+
         static func maxMED(_ value: Double) -> String {
             .localized("skin.maxMED.format", arguments: value)
+        }
+    }
+
+    // MARK: - Sunscreen
+
+    enum Sunscreen {
+
+        /// 선크림 효과 상태
+        enum Effectiveness {
+            static var excellent: String { .localized("sunscreen.effectiveness.excellent") }
+            static var good: String { .localized("sunscreen.effectiveness.good") }
+            static var weak: String { .localized("sunscreen.effectiveness.weak") }
+            static var reapply: String { .localized("sunscreen.effectiveness.reapply") }
+        }
+
+        /// 남은 시간 포맷
+        enum Time {
+            static func hoursMinutes(_ hours: Int, _ minutes: Int) -> String {
+                .localized("sunscreen.time.hours_minutes", arguments: hours, minutes)
+            }
+            static func hours(_ hours: Int) -> String {
+                .localized("sunscreen.time.hours", arguments: hours)
+            }
+            static func minutes(_ minutes: Int) -> String {
+                .localized("sunscreen.time.minutes", arguments: minutes)
+            }
+            static var expired: String { .localized("sunscreen.time.expired") }
         }
     }
 }

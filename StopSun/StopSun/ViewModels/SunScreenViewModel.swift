@@ -90,33 +90,33 @@ final class SunScreenViewModel: ObservableObject {
         Log.debug("SunScreen state refreshed")
     }
 
-    /// 남은 시간 포맷팅 (예: "1시간 30분")
+    /// 남은 시간 포맷팅 (Localized)
     func fetchFormattedRemainingTime() -> String {
         let hours = remainingMinutes / 60
         let minutes = remainingMinutes % 60
 
         if hours > 0 && minutes > 0 {
-            return "\(hours)시간 \(minutes)분"
+            return L10n.Sunscreen.Time.hoursMinutes(hours, minutes)
         } else if hours > 0 {
-            return "\(hours)시간"
+            return L10n.Sunscreen.Time.hours(hours)
         } else if minutes > 0 {
-            return "\(minutes)분"
+            return L10n.Sunscreen.Time.minutes(minutes)
         } else {
-            return "만료됨"
+            return L10n.Sunscreen.Time.expired
         }
     }
 
-    /// 효과 상태 텍스트 (예: "매우 좋음", "보통", "재발림 필요")
+    /// 효과 상태 텍스트 (Localized)
     func fetchEffectivenessStatus() -> String {
         switch effectiveness {
         case 80...100:
-            return "매우 좋음"
+            return L10n.Sunscreen.Effectiveness.excellent
         case 50..<80:
-            return "보통"
+            return L10n.Sunscreen.Effectiveness.good
         case 1..<50:
-            return "약함"
+            return L10n.Sunscreen.Effectiveness.weak
         default:
-            return "재발림 필요"
+            return L10n.Sunscreen.Effectiveness.reapply
         }
     }
 
