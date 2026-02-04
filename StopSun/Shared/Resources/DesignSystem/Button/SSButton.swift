@@ -61,8 +61,8 @@ struct SSButton: View {
 #Preview("SSButton") {
     VStack(spacing: 16) {
         Button {
-            print(L10n.Button.continue)
-        } label: { Text(L10n.Button.continue) }
+            print(L10n.Button.next)
+        } label: { Text(L10n.Button.next) }
             .buttonStyle(.ssPrimary)
         
         Button {
