@@ -154,6 +154,29 @@ enum L10n {
             static var timeout: String { .localized("error.network.timeout") }
             static func serverError(_ code: Int) -> String {
                 .localized("error.network.serverError", arguments: code)
+
+    // MARK: - Sunscreen
+
+    enum Sunscreen {
+
+        /// 선크림 효과 상태
+        enum Effectiveness {
+            static var excellent: String { .localized("sunscreen.effectiveness.excellent") }
+            static var good: String { .localized("sunscreen.effectiveness.good") }
+            static var weak: String { .localized("sunscreen.effectiveness.weak") }
+            static var reapply: String { .localized("sunscreen.effectiveness.reapply") }
+        }
+
+        /// 남은 시간 포맷
+        enum Time {
+            static func hoursMinutes(_ hours: Int, _ minutes: Int) -> String {
+                .localized("sunscreen.time.hours_minutes", arguments: hours, minutes)
+            }
+            static func hours(_ hours: Int) -> String {
+                .localized("sunscreen.time.hours", arguments: hours)
+            }
+            static func minutes(_ minutes: Int) -> String {
+                .localized("sunscreen.time.minutes", arguments: minutes)
             }
         }
         
@@ -166,5 +189,7 @@ enum L10n {
         
         /// 알 수 없는 에러
         static var unknown: String { .localized("error.unknown") }
+            static var expired: String { .localized("sunscreen.time.expired") }
+        }
     }
 }
