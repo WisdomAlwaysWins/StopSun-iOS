@@ -46,20 +46,20 @@ enum L10n {
     }
     
     // MARK: - Skin Type
-    
+
     enum SkinType {
         static func title(_ type: Int) -> String {
             .localized("skin.type\(type).title")
         }
-        
+
         static func summary(_ type: Int) -> String {
             .localized("skin.type\(type).summary")
         }
-        
+
         static func description(_ type: Int) -> String {
             .localized("skin.type\(type).description")
         }
-        
+
         static func maxMED(_ value: Double) -> String {
             .localized("skin.maxMED.format", arguments: value)
         }
@@ -154,7 +154,20 @@ enum L10n {
             static var timeout: String { .localized("error.network.timeout") }
             static func serverError(_ code: Int) -> String {
                 .localized("error.network.serverError", arguments: code)
-
+            }
+        }
+        
+        /// Watch Connectivity 에러
+        enum WatchConnectivity {
+            static var notReachable: String { .localized("error.watchConnectivity.notReachable") }
+            static var sessionInactive: String { .localized("error.watchConnectivity.sessionInactive") }
+            static var transferFailed: String { .localized("error.watchConnectivity.transferFailed") }
+        }
+        
+        /// 알 수 없는 에러
+        static var unknown: String { .localized("error.unknown") }
+    }
+    
     // MARK: - Sunscreen
 
     enum Sunscreen {
@@ -178,17 +191,6 @@ enum L10n {
             static func minutes(_ minutes: Int) -> String {
                 .localized("sunscreen.time.minutes", arguments: minutes)
             }
-        }
-        
-        /// Watch Connectivity 에러
-        enum WatchConnectivity {
-            static var notReachable: String { .localized("error.watchConnectivity.notReachable") }
-            static var sessionInactive: String { .localized("error.watchConnectivity.sessionInactive") }
-            static var transferFailed: String { .localized("error.watchConnectivity.transferFailed") }
-        }
-        
-        /// 알 수 없는 에러
-        static var unknown: String { .localized("error.unknown") }
             static var expired: String { .localized("sunscreen.time.expired") }
         }
     }
