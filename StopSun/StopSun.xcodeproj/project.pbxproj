@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		058BD68C2E793E3B00AAF08B /* StopSunWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 058BD6822E793E3A00AAF08B /* StopSunWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		804E4B5A2F2C82E70019E4EE /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 804E4B592F2C82E70019E4EE /* Moya */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				804E4B5A2F2C82E70019E4EE /* Moya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,6 +132,7 @@
 			);
 			name = StopSun;
 			packageProductDependencies = (
+				804E4B592F2C82E70019E4EE /* Moya */,
 			);
 			productName = StopSun;
 			productReference = 058BD6702E793E2C00AAF08B /* StopSun.app */;
@@ -184,6 +187,9 @@
 			);
 			mainGroup = 058BD6672E793E2C00AAF08B;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				804E4B582F2C82E70019E4EE /* XCRemoteSwiftPackageReference "Moya" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 058BD6712E793E2C00AAF08B /* Products */;
 			projectDirPath = "";
@@ -240,6 +246,8 @@
 /* Begin XCBuildConfiguration section */
 		058BD6792E793E2D00AAF08B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 058BD6722E793E2C00AAF08B /* StopSun */;
+			baseConfigurationReferenceRelativePath = Config.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -532,6 +540,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		804E4B582F2C82E70019E4EE /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		804E4B592F2C82E70019E4EE /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 804E4B582F2C82E70019E4EE /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 058BD6682E793E2C00AAF08B /* Project object */;
 }

@@ -17,7 +17,13 @@ import Foundation
 ///
 protocol WeatherManagerProtocol {
     
-    /// 현재 날씨 조회
+    /// 현재 UV Index만 조회
+    ///
+    /// - Parameter location: 위치 정보
+    /// - Returns: 현재 UV Index
+    func fetchCurrentUVIndex(for location: LocationInfo) async throws -> Double
+    
+    /// 현재 날씨 + 시간별 예보 조회
     ///
     /// - Parameter location: 위치 정보
     /// - Returns: 현재 날씨 및 시간별 예보
