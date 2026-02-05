@@ -6,7 +6,6 @@
 //
 
 import Foundation
-
 /// 위치 관리자
 final class LocationManager: LocationManagerProtocol {
     
@@ -29,9 +28,3 @@ final class LocationManager: LocationManagerProtocol {
         // TODO: 구현
     }
 }
-
-
-
-
-
-
