@@ -22,6 +22,10 @@ import UserNotifications
 /// - `reapply`: 재도포 알림 (바르기/스누즈/닫기 액션)
 /// - `medWarning`: MED 경고 알림 (닫기 액션)
 ///
+/// ## 스레드 안전성
+/// `_isAuthorized`는 `@MainActor` 격리가 아닌 내부 캐시이므로,
+/// `refreshAuthorizationStatus()`를 통해 명시적으로 갱신합니다.
+///
 final class NotificationManager: NSObject, NotificationManagerProtocol {
     
     // MARK: - Properties
@@ -29,6 +33,9 @@ final class NotificationManager: NSObject, NotificationManagerProtocol {
     private let notificationCenter = UNUserNotificationCenter.current()
     
     /// 권한 허용 여부 (캐시)
+    ///
+    /// `init()` 시점에는 `false`이며, `refreshAuthorizationStatus()` 호출 후 갱신됩니다.
+    /// `requestAuthorization()` 성공 시에도 갱신됩니다.
     private var _isAuthorized: Bool = false
     var isAuthorized: Bool { _isAuthorized }
     
@@ -44,8 +51,9 @@ final class NotificationManager: NSObject, NotificationManagerProtocol {
         super.init()
         notificationCenter.delegate = self
         registerCategories()
+        
         Task {
-            await updateAuthorizationStatus()
+            await refreshAuthorizationStatus()
         }
     }
     
@@ -58,9 +66,10 @@ final class NotificationManager: NSObject, NotificationManagerProtocol {
         }
     }
     
-    private func updateAuthorizationStatus() async {
+    func refreshAuthorizationStatus() async {
         let status = await authorizationStatus
         _isAuthorized = (status == .authorized || status == .provisional)
+        Log.debug("알림 권한 상태 갱신: \(_isAuthorized) (status: \(status.rawValue))")
     }
     
     // MARK: - Request Authorization
@@ -90,7 +99,6 @@ final class NotificationManager: NSObject, NotificationManagerProtocol {
     
     /// 알림 카테고리 및 액션 등록
     private func registerCategories() {
-        // 재도포 알림 액션
         let applyAction = UNNotificationAction(
             identifier: NotificationAction.apply,
             title: L10n.Notification.Action.apply,
@@ -109,7 +117,6 @@ final class NotificationManager: NSObject, NotificationManagerProtocol {
             options: [.destructive]
         )
         
-        // 재도포 카테고리
         let reapplyCategory = UNNotificationCategory(
             identifier: NotificationCategory.reapply,
             actions: [applyAction, snoozeAction, dismissAction],
@@ -117,7 +124,6 @@ final class NotificationManager: NSObject, NotificationManagerProtocol {
             options: []
         )
         
-        // MED 경고 카테고리
         let medCategory = UNNotificationCategory(
             identifier: NotificationCategory.medWarning,
             actions: [dismissAction],
@@ -132,15 +138,13 @@ final class NotificationManager: NSObject, NotificationManagerProtocol {
     // MARK: - Reapply Reminder
     
     func scheduleReapplyReminder(at date: Date) async throws {
-        // 과거 시간 체크
         guard date > Date() else {
             throw AppError.notification(.invalidDate)
         }
         
-        // 기존 알림 취소
+        // 기존 알림 취소 후 새로 예약
         cancelReapplyReminder()
         
-        // 알림 콘텐츠
         let content = UNMutableNotificationContent()
         content.title = L10n.Notification.Reapply.title
         content.body = L10n.Notification.Reapply.body
@@ -148,7 +152,6 @@ final class NotificationManager: NSObject, NotificationManagerProtocol {
         content.categoryIdentifier = NotificationCategory.reapply
         content.interruptionLevel = .timeSensitive
         
-        // 트리거 (특정 시간)
         let components = Calendar.current.dateComponents(
             [.year, .month, .day, .hour, .minute, .second],
             from: date
@@ -158,7 +161,6 @@ final class NotificationManager: NSObject, NotificationManagerProtocol {
             repeats: false
         )
         
-        // 요청 생성
         let request = UNNotificationRequest(
             identifier: NotificationIdentifier.reapply,
             content: content,
@@ -168,9 +170,6 @@ final class NotificationManager: NSObject, NotificationManagerProtocol {
         do {
             try await notificationCenter.add(request)
             Log.info("재도포 알림 예약: \(date)")
-            
-            // TODO: Live Activity 시작
-            // await LiveActivityManager.shared.startReapplyActivity(endDate: date)
         } catch {
             Log.error("재도포 알림 예약 실패: \(error)")
             throw AppError.notification(.scheduleFailed)
@@ -182,9 +181,6 @@ final class NotificationManager: NSObject, NotificationManagerProtocol {
             withIdentifiers: [NotificationIdentifier.reapply]
         )
         Log.debug("재도포 알림 취소")
-        
-        // TODO: Live Activity 종료
-        // await LiveActivityManager.shared.endReapplyActivity()
     }
     
     func snoozeReapplyReminder() async throws {
@@ -196,7 +192,6 @@ final class NotificationManager: NSObject, NotificationManagerProtocol {
     // MARK: - MED Warning
     
     func sendMEDWarning(percentage: Double) {
-        // 임계값 결정
         let threshold: Int
         if percentage >= 1.0 {
             threshold = 100
@@ -205,16 +200,13 @@ final class NotificationManager: NSObject, NotificationManagerProtocol {
         } else if percentage >= 0.5 {
             threshold = 50
         } else {
-            return // 50% 미만은 알림 없음
+            return
         }
         
         // 중복 방지
-        guard !sentMEDWarnings.contains(threshold) else {
-            return
-        }
+        guard !sentMEDWarnings.contains(threshold) else { return }
         sentMEDWarnings.insert(threshold)
         
-        // 알림 콘텐츠
         let content = UNMutableNotificationContent()
         content.categoryIdentifier = NotificationCategory.medWarning
         content.sound = .default
@@ -239,24 +231,23 @@ final class NotificationManager: NSObject, NotificationManagerProtocol {
             return
         }
         
-        // 즉시 발송 (trigger = nil)
         let identifier = "stopsun.notification.med.\(threshold)"
         let request = UNNotificationRequest(
             identifier: identifier,
             content: content,
-            trigger: nil
+            trigger: nil // 즉시 발송
         )
         
-        notificationCenter.add(request) { error in
-            if let error {
-                Log.error("MED 경고 알림 발송 실패: \(error)")
-            } else {
+        Task {
+            do {
+                try await notificationCenter.add(request)
                 Log.info("MED 경고 알림 발송: \(threshold)%")
+            } catch {
+                Log.error("MED 경고 알림 발송 실패: \(error)")
             }
         }
     }
     
-    /// MED 경고 이력 초기화 (날짜 변경 시 호출)
     func resetMEDWarningHistory() {
         sentMEDWarnings.removeAll()
         Log.debug("MED 경고 이력 초기화")
@@ -285,7 +276,6 @@ extension NotificationManager: UNUserNotificationCenterDelegate {
         _ center: UNUserNotificationCenter,
         willPresent notification: UNNotification
     ) async -> UNNotificationPresentationOptions {
-        // 포그라운드에서도 배너, 사운드 표시
         return [.banner, .sound]
     }
     
@@ -308,12 +298,10 @@ extension NotificationManager: UNUserNotificationCenterDelegate {
             )
             
         case NotificationAction.snooze:
-            // 스누즈
             try? await snoozeReapplyReminder()
             
         case NotificationAction.dismiss,
              UNNotificationDismissActionIdentifier:
-            // 닫기 - 아무 동작 없음
             break
             
         case UNNotificationDefaultActionIdentifier:

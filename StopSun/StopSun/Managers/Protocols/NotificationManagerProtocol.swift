@@ -67,6 +67,11 @@ protocol NotificationManagerProtocol: AnyObject {
     /// - Note: 50%, 80%, 100% 임계값에서만 알림 발송
     func sendMEDWarning(percentage: Double)
     
+    /// MED 경고 발송 이력 초기화
+    ///
+    /// 날짜가 변경되었을 때 호출하여 중복 방지 이력을 리셋합니다.
+    func resetMEDWarningHistory()
+    
     // MARK: - Management
     
     /// 모든 알림 취소
@@ -74,6 +79,13 @@ protocol NotificationManagerProtocol: AnyObject {
     
     /// 대기 중인 알림 요청 조회
     func getPendingNotifications() async -> [UNNotificationRequest]
+    
+    // MARK: - Status Refresh
+    
+    /// 권한 상태를 시스템에서 다시 조회하여 캐시 갱신
+    ///
+    /// 설정 앱에서 권한 변경 후 앱으로 돌아왔을 때 호출합니다.
+    func refreshAuthorizationStatus() async
 }
 
 // MARK: - Notification Identifiers

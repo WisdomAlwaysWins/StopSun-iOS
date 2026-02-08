@@ -163,6 +163,10 @@ final class MockNotificationManager: NotificationManagerProtocol {
         sentMEDWarnings.append(percentage)
     }
     
+    func resetMEDWarningHistory() {
+        sentMEDWarnings.removeAll()
+    }
+    
     func cancelAllNotifications() {
         scheduledReminders.removeAll()
         sentMEDWarnings.removeAll()
@@ -170,6 +174,10 @@ final class MockNotificationManager: NotificationManagerProtocol {
     
     func getPendingNotifications() async -> [UNNotificationRequest] {
         return []
+    }
+    
+    func refreshAuthorizationStatus() async {
+        // Mock
     }
 }
 
