@@ -13,7 +13,7 @@ import SwiftUI
 struct SunScreenExampleView: View {
 
     // MARK: - ViewModel
-    @StateObject private var viewModel = SunScreenViewModel()
+    @StateObject private var viewModel = SunScreenViewModel(localStorage: DIContainer.shared.localStorage)
 
     var body: some View {
         NavigationView {

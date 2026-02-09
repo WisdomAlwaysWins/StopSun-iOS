@@ -70,8 +70,9 @@ final class MockLocalStorageManager: LocalStorageManagerProtocol {
     private var locationHistory: [LocationRecord] = []
     
     // MARK: - UserProfile
-    
+
     func loadUserProfile() -> UserProfile? { userProfile }
+    func loadUserProfileOrDefault() -> UserProfile { userProfile ?? .defaultUser }
     func saveUserProfile(_ profile: UserProfile) { userProfile = profile }
     func updateSkinType(_ skinType: SkinType) {
         userProfile?.skinType = skinType
@@ -79,13 +80,29 @@ final class MockLocalStorageManager: LocalStorageManagerProtocol {
     func updateSunscreenSPF(_ spfLevel: SPFLevel) {
         userProfile?.spfLevel = spfLevel
     }
+    func deleteUserProfile() { userProfile = nil }
+    func saveOnboardingCompleted(_ isCompleted: Bool) {}
+    func loadOnboardingCompleted() -> Bool { true }
+    func checkIsFirstLaunch() -> Bool { false }
     
     
     // MARK: - SunscreenApplication
-    
+
     func loadSunscreenHistory() -> [SunscreenApplication] { sunscreenHistory }
+    func loadCurrentSunscreen() -> SunscreenApplication? { sunscreenHistory.last }
     func saveSunscreenApplication(_ application: SunscreenApplication) {
         sunscreenHistory.append(application)
+    }
+    func deleteSunscreen() { sunscreenHistory.removeAll() }
+    func isSunscreenActive() -> Bool {
+        guard let current = sunscreenHistory.last else { return false }
+        return current.isActive(at: Date())
+    }
+    func loadSunscreenRemainingMinutes() -> Int {
+        guard let current = sunscreenHistory.last else { return 0 }
+        let nextReapply = current.nextReapplyTime
+        let remaining = nextReapply.timeIntervalSince(Date())
+        return remaining > 0 ? Int(remaining / 60) : 0
     }
     func getActiveSPF(at date: Date) -> SPFLevel {
         sunscreenHistory.first { $0.isActive(at: date) }?.spfLevel ?? .none
