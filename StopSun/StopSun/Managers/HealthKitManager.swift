@@ -113,7 +113,7 @@ final class HealthKitManager: HealthKitManagerProtocol {
             guard error == nil else { return }
             
             // TODO: - NotificationCenter 파일 분리 필요
-            NotificationCenter.default.post(name: .newTimeInDaylightAvailable, object: nil)
+            NotificationCenter.default.post(name: .healthKitDataDidUpdate, object: nil)
         }
         
         healthStore.execute(query)
@@ -137,10 +137,4 @@ enum HealthKitError: Error { // TODO: - 분리 필요
             return "HealthKit query failed"
         }
     }
-}
-
-// MARK: - Notification Names
-
-extension Notification.Name { // TODO: - 분리 필요
-    static let newTimeInDaylightAvailable = Notification.Name("newTimeInDaylightAvailable")
 }
