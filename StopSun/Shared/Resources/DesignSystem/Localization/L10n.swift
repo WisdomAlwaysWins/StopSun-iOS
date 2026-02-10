@@ -43,6 +43,53 @@ enum L10n {
     
     enum Onboarding {
         static var title: String { .localized("onboarding.title") }
+        
+        // MARK: Step 1 — Watch Check
+        
+        enum Watch {
+            static var title: String { .localized("onboarding.watch.title") }
+            static var subtitle: String { .localized("onboarding.watch.subtitle") }
+            static var hasWatch: String { .localized("onboarding.watch.button.yes") }
+            static var noWatch: String { .localized("onboarding.watch.button.no") }
+            
+            enum Alert {
+                static var noWatchTitle: String { .localized("onboarding.watch.alert.noWatch.title") }
+                static var noWatchMessage: String { .localized("onboarding.watch.alert.noWatch.message") }
+                static var notPairedTitle: String { .localized("onboarding.watch.alert.notPaired.title") }
+                static var notPairedMessage: String { .localized("onboarding.watch.alert.notPaired.message") }
+            }
+        }
+        
+        // MARK: Step 2 — Permission
+        
+        enum Permission {
+            static var title: String { .localized("onboarding.permission.title") }
+            static var subtitle: String { .localized("onboarding.permission.subtitle") }
+            static var continueButton: String { .localized("onboarding.permission.button.continue") }
+            
+            enum HealthKit {
+                static var title: String { .localized("onboarding.permission.healthKit.title") }
+                static var description: String { .localized("onboarding.permission.healthKit.description") }
+            }
+            
+            enum Location {
+                static var title: String { .localized("onboarding.permission.location.title") }
+                static var description: String { .localized("onboarding.permission.location.description") }
+            }
+            
+            enum Notification {
+                static var title: String { .localized("onboarding.permission.notification.title") }
+                static var description: String { .localized("onboarding.permission.notification.description") }
+            }
+        }
+        
+        // MARK: Step 3 — Skin Type
+        
+        enum SkinTypeStep {
+            static var title: String { .localized("onboarding.skinType.title") }
+            static var subtitle: String { .localized("onboarding.skinType.subtitle") }
+            static var startButton: String { .localized("onboarding.skinType.button.start") }
+        }
     }
     
     // MARK: - Skin Type
