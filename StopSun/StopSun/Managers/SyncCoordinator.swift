@@ -279,12 +279,6 @@ final class SyncCoordinator: ObservableObject, SyncCoordinatorProtocol {
         // 4. TODO: Live Activity 시작
         
         Log.info("선크림 도포: SPF \(spf.rawValue), 재도포 알림: \(reapplyTime.formatted(date: .omitted, time: .shortened))")
-        
-        NotificationCenter.default.post(
-            name: .sunscreenDidApply,
-            object: nil,
-            userInfo: [NotificationUserInfoKey.application: application]
-        )
     }
     
     func stopSunscreen() {
@@ -494,7 +488,6 @@ private extension SyncCoordinator {
             // 만료됨
             Log.info("선크림 효과 만료됨")
             activeSunscreen = nil
-            NotificationCenter.default.post(name: .sunscreenDidExpire, object: nil)
         }
     }
     

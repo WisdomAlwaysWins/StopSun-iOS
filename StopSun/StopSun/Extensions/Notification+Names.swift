@@ -25,14 +25,6 @@ extension Notification.Name {
     /// Significant Location Changes 감지 시 발송
     static let locationDidChange = Notification.Name("locationDidChange")
     
-    // MARK: - Sunscreen
-    
-    /// 선크림 도포됨
-    static let sunscreenDidApply = Notification.Name("sunscreenDidApply")
-    
-    /// 선크림 효과 만료됨
-    static let sunscreenDidExpire = Notification.Name("sunscreenDidExpire")
-    
     // MARK: - Push Notification Actions
     
     /// 푸시 알림에서 "바르기" 버튼 탭
@@ -65,7 +57,6 @@ extension Notification.Name {
 
 enum NotificationUserInfoKey {
     static let location = "location"
-    static let application = "application"
     static let error = "error"
     static let level = "level"
 }
