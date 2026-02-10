@@ -22,9 +22,10 @@ import UserNotifications
 /// | ID | 설명 | 트리거 |
 /// |----|------|--------|
 /// | reapply | 재도포 알림 | 선크림 도포 2시간 후 |
-/// | med_50 | MED 50% 경고 | MED 50% 도달 |
-/// | med_80 | MED 80% 경고 | MED 80% 도달 |
-/// | med_100 | MED 100% 경고 | MED 100% 도달 |
+/// | med_30 | MED 30% 경고 | MED 30% 도달 (caution) |
+/// | med_50 | MED 50% 경고 | MED 50% 도달 (warning) |
+/// | med_70 | MED 70% 경고 | MED 70% 도달 (danger) |
+/// | med_100 | MED 100% 경고 | MED 100% 도달 (한계 초과) |
 ///
 protocol NotificationManagerProtocol: AnyObject {
     
@@ -64,7 +65,7 @@ protocol NotificationManagerProtocol: AnyObject {
     /// MED 경고 알림 발송
     ///
     /// - Parameter percentage: 현재 MED 비율 (0.0 ~ 1.0+)
-    /// - Note: 50%, 80%, 100% 임계값에서만 알림 발송
+    /// - Note: 30%, 50%, 70%, 100% 임계값에서만 알림 발송 (WarningLevel + 한계 도달)
     func sendMEDWarning(percentage: Double)
     
     /// MED 경고 발송 이력 초기화
@@ -93,8 +94,9 @@ protocol NotificationManagerProtocol: AnyObject {
 /// 알림 식별자
 enum NotificationIdentifier {
     static let reapply = "stopsun.notification.reapply"
+    static let med30 = "stopsun.notification.med.30"
     static let med50 = "stopsun.notification.med.50"
-    static let med80 = "stopsun.notification.med.80"
+    static let med70 = "stopsun.notification.med.70"
     static let med100 = "stopsun.notification.med.100"
 }
 

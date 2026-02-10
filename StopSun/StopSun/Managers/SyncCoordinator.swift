@@ -499,17 +499,18 @@ private extension SyncCoordinator {
     }
     
     func checkWarningLevelAndNotify() {
+        // 푸시 알림은 항상 호출 (NotificationManager가 자체 중복 방지)
+        notification.sendMEDWarning(percentage: todaySEDProgress)
+        
+        // UI/Watch 갱신은 레벨 변경 시에만
         let newLevel = warningLevel
         
-        // 레벨이 올라갔을 때만 알림 (중복 방지)
         guard newLevel.notificationPriority > lastNotifiedWarningLevel.notificationPriority else {
             return
         }
         
         guard newLevel.shouldNotify else { return }
         
-        // 알림 전송
-        notification.sendMEDWarning(percentage: todaySEDProgress)
         lastNotifiedWarningLevel = newLevel
         
         // Watch에 상태 전송
@@ -520,7 +521,7 @@ private extension SyncCoordinator {
             )
         }
         
-        Log.info("경고 레벨 알림: \(newLevel.title)")
+        Log.info("경고 레벨 변경: \(newLevel.title)")
         
         NotificationCenter.default.post(
             name: .warningLevelDidChange,

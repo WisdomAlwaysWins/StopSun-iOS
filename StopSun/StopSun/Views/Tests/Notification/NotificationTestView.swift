@@ -53,12 +53,16 @@ struct NotificationTestView: View {
 
             Divider()
 
+            Button("MED 30% (10초 후)") {
+                scheduleMEDDebug(threshold: 30)
+            }
+
             Button("MED 50% (10초 후)") {
                 scheduleMEDDebug(threshold: 50)
             }
 
-            Button("MED 80% (10초 후)") {
-                scheduleMEDDebug(threshold: 80)
+            Button("MED 70% (10초 후)") {
+                scheduleMEDDebug(threshold: 70)
             }
 
             Button("MED 100% (10초 후)") {
@@ -94,12 +98,15 @@ struct NotificationTestView: View {
         content.categoryIdentifier = NotificationCategory.medWarning
 
         switch threshold {
+        case 30:
+            content.title = L10n.Notification.MED.title30
+            content.body = L10n.Notification.MED.body30
         case 50:
             content.title = L10n.Notification.MED.title50
             content.body = L10n.Notification.MED.body50
-        case 80:
-            content.title = L10n.Notification.MED.title80
-            content.body = L10n.Notification.MED.body80
+        case 70:
+            content.title = L10n.Notification.MED.title70
+            content.body = L10n.Notification.MED.body70
         case 100:
             content.title = L10n.Notification.MED.title100
             content.body = L10n.Notification.MED.body100

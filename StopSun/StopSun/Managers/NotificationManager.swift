@@ -195,10 +195,12 @@ final class NotificationManager: NSObject, NotificationManagerProtocol {
         let threshold: Int
         if percentage >= 1.0 {
             threshold = 100
-        } else if percentage >= 0.8 {
-            threshold = 80
+        } else if percentage >= 0.7 {
+            threshold = 70
         } else if percentage >= 0.5 {
             threshold = 50
+        } else if percentage >= 0.3 {
+            threshold = 30
         } else {
             return
         }
@@ -212,20 +214,25 @@ final class NotificationManager: NSObject, NotificationManagerProtocol {
         content.sound = .default
         
         switch threshold {
+        case 30:
+            content.title = L10n.Notification.MED.title30
+            content.body = L10n.Notification.MED.body30
+            content.interruptionLevel = .active
+            
         case 50:
             content.title = L10n.Notification.MED.title50
             content.body = L10n.Notification.MED.body50
-            content.interruptionLevel = .active
+            content.interruptionLevel = .timeSensitive
             
-        case 80:
-            content.title = L10n.Notification.MED.title80
-            content.body = L10n.Notification.MED.body80
+        case 70:
+            content.title = L10n.Notification.MED.title70
+            content.body = L10n.Notification.MED.body70
             content.interruptionLevel = .timeSensitive
             
         case 100:
             content.title = L10n.Notification.MED.title100
             content.body = L10n.Notification.MED.body100
-            content.interruptionLevel = .timeSensitive
+            content.interruptionLevel = .critical
             
         default:
             return
