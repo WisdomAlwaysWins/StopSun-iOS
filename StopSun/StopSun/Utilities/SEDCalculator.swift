@@ -179,14 +179,7 @@ struct SEDCalculator {
     /// // → 4.0
     /// ```
     static func maxSED(for skinType: SkinType) -> Double {
-        switch skinType {
-        case .type1: 1.5
-        case .type2: 3.0
-        case .type3: 4.0
-        case .type4: 5.0
-        case .type5: 7.0
-        case .type6: 12.0
-        }
+        skinType.maxDailyMEDinSED
     }
     
     /// SED 진행률 계산
