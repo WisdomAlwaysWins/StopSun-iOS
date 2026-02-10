@@ -33,6 +33,13 @@ extension Notification.Name {
     /// 선크림 효과 만료됨
     static let sunscreenDidExpire = Notification.Name("sunscreenDidExpire")
     
+    // MARK: - Push Notification Actions
+    
+    /// 푸시 알림에서 "바르기" 버튼 탭
+    ///
+    /// NotificationManager delegate에서 apply 액션 수신 시 발송
+    static let didTapApplySunscreenNotification = Notification.Name("didTapApplySunscreenNotification")
+    
     // MARK: - User Profile
     
     /// 사용자 프로필 변경됨

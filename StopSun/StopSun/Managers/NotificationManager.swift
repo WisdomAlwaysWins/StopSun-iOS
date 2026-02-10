@@ -291,7 +291,7 @@ extension NotificationManager: UNUserNotificationCenterDelegate {
         
         switch actionIdentifier {
         case NotificationAction.apply:
-            // 선크림 바르기 → 앱에서 처리
+            // 선크림 바르기 → SyncCoordinator에서 처리
             NotificationCenter.default.post(
                 name: .didTapApplySunscreenNotification,
                 object: nil
@@ -312,11 +312,4 @@ extension NotificationManager: UNUserNotificationCenterDelegate {
             break
         }
     }
-}
-
-// MARK: - Notification Names
-
-extension Notification.Name {
-    /// 선크림 바르기 알림 액션 탭
-    static let didTapApplySunscreenNotification = Notification.Name("didTapApplySunscreenNotification")
 }
