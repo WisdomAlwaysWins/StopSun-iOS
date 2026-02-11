@@ -103,14 +103,13 @@ struct IntroductionView: View {
                 SSButton(L10n.Button.next, style: .primary) {
                     onNext()
                 }
-            }
-            
-            Button {
-                onSkip()
-            } label: {
-                Text(L10n.Button.skip)
-                    .font(.ssFont(.R2))
-                    .foregroundStyle(Color.text01)
+                Button {
+                    onSkip()
+                } label: {
+                    Text(L10n.Button.skip)
+                        .font(.ssFont(.R2))
+                        .foregroundStyle(Color.text01)
+                }
             }
         }
     }
@@ -153,7 +152,7 @@ private struct IntroductionPageView: View {
     }
     
     // MARK: - Image
-
+    
     @ViewBuilder
     private var imageSection: some View {
         if page == .personalRecommend {
@@ -166,7 +165,7 @@ private struct IntroductionPageView: View {
                 .frame(maxWidth: .infinity)
         }
     }
-
+    
 }
 
 // MARK: - IntroductionPage Extension
