@@ -162,7 +162,8 @@ private struct IntroductionPageView: View {
         } else {
             Image(page.imageResource)
                 .resizable()
-                .scaledToFit()
+                .aspectRatio(contentMode: .fit)
+                .frame(maxWidth: .infinity)
         }
     }
 

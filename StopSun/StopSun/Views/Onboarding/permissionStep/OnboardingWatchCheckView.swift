@@ -31,20 +31,22 @@ struct OnboardingWatchCheckView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            
-            Spacer()
-            
             titleSection
+                .padding(.top, 32)
+                .padding(.horizontal, 20)
             
             Spacer()
             
             Image(.imgOnboardingWatch)
-            
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(maxWidth: .infinity)
+                
             Spacer()
             
             buttonSection
+                .padding(.horizontal, 20)
         }
-        .padding(.horizontal, 20)
         .padding(.bottom, 40)
         .alert(isPresented: $showAlert) {
             watchAlert
@@ -54,7 +56,7 @@ struct OnboardingWatchCheckView: View {
     // MARK: - Title Section
     
     private var titleSection: some View {
-        VStack(spacing: 8) {
+        VStack(alignment: .leading, spacing: 8) {
             Text(L10n.Onboarding.Watch.title)
                 .font(.ssFont(.B2))
                 .foregroundStyle(Color.text00)
@@ -63,7 +65,9 @@ struct OnboardingWatchCheckView: View {
             Text(L10n.Onboarding.Watch.subtitle)
                 .font(.ssFont(.R3))
                 .foregroundStyle(Color.text01)
+                .multilineTextAlignment(.leading)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
     
     // MARK: - Buttons

@@ -14,8 +14,8 @@ import SwiftUI
 ///
 /// ## 권한 요청 정책
 /// - 허용/거부 무관하게 Step 3으로 이동합니다.
-/// - HealthKit만 실제 시스템 팝업이 표시됩니다. (구현 완료)
-/// - Location, Notification은 현재 TODO(no-op)입니다.
+/// - HealthKit, Notification만 실제 시스템 팝업이 표시됩니다. (구현 완료)
+/// - Location은 현재 TODO(no-op)입니다.
 ///
 struct OnboardingPermissionView: View {
     
