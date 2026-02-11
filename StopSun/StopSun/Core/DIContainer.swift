@@ -43,6 +43,7 @@ final class DIContainer {
         let location = LocationManager()
         let notification = NotificationManager()
         let watchConnectivity = WatchConnectivityManager()
+        let errorHandler = ErrorHandler()
         
         let syncCoordinator = SyncCoordinator(
             healthKit: healthKit,
@@ -60,7 +61,8 @@ final class DIContainer {
             localStorage: localStorage,
             notification: notification,
             watchConnectivity: watchConnectivity,
-            syncCoordinator: syncCoordinator
+            syncCoordinator: syncCoordinator,
+            errorHandler: errorHandler
         )
     }()
     
@@ -74,6 +76,7 @@ final class DIContainer {
         let location = MockLocationManager()
         let notification = MockNotificationManager()
         let watchConnectivity = MockWatchConnectivityManager()
+        let errorHandler = ErrorHandler()
         
         let syncCoordinator = SyncCoordinator(
             healthKit: healthKit,
@@ -91,7 +94,8 @@ final class DIContainer {
             localStorage: localStorage,
             notification: notification,
             watchConnectivity: watchConnectivity,
-            syncCoordinator: syncCoordinator
+            syncCoordinator: syncCoordinator,
+            errorHandler: errorHandler
         )
     }()
     
@@ -106,6 +110,7 @@ final class DIContainer {
     
     /// `@EnvironmentObject`로 사용하기 위해 concrete 타입으로 노출
     let syncCoordinator: SyncCoordinator
+    let errorHandler: ErrorHandler
     
     // MARK: - Initializer
     
@@ -116,7 +121,8 @@ final class DIContainer {
         localStorage: any LocalStorageManagerProtocol,
         notification: any NotificationManagerProtocol,
         watchConnectivity: any WatchConnectivityManagerProtocol,
-        syncCoordinator: SyncCoordinator
+        syncCoordinator: SyncCoordinator,
+        errorHandler: ErrorHandler
     ) {
         self.healthKit = healthKit
         self.weather = weather
@@ -125,5 +131,6 @@ final class DIContainer {
         self.notification = notification
         self.watchConnectivity = watchConnectivity
         self.syncCoordinator = syncCoordinator
+        self.errorHandler = errorHandler
     }
 }

@@ -6,21 +6,103 @@
 //
 
 import Foundation
+import Moya
 
 /// 날씨 API 관리자
+///
+/// WeatherAPI를 통해 현재 및 과거 UV Index를 조회합니다.
+///
 final class WeatherManager: WeatherManagerProtocol {
     
-    func fetchCurrentWeather(for location: LocationInfo) async throws -> LocationWeather {
-        // TODO: 구현
-        return LocationWeather(
-            location: location,
-            currentUVIndex: 0,
-            currentTemperature: 0
+    // MARK: - Properties
+    
+    private let apiClient: WeatherAPIClient
+    
+    // MARK: Init
+    
+    init(apiClient: WeatherAPIClient = WeatherAPIClient()) {
+        self.apiClient = apiClient
+    }
+
+    func fetchCurrentUVIndex(for location: LocationInfo) async throws -> Double {
+        let response = try await apiClient.request(
+            WeatherAPI.current(
+                lat: location.latitude,
+                lon: location.longitude
+            )
         )
+        
+        return response.current?.uv ?? 0.0
+    }
+    
+    func fetchCurrentWeather(for location: LocationInfo) async throws -> LocationWeather {
+        let response = try await apiClient.request(
+            WeatherAPI.forecast(
+                lat: location.latitude,
+                lon: location.longitude,
+                days: 1
+            )
+        )
+        
+        return mapToLocationWeather(response: response, location: location)
     }
     
     func fetchUVIndex(for location: LocationInfo, at date: Date) async throws -> Double {
-        // TODO: 구현
-        return 0
+        let response = try await apiClient.request(
+            WeatherAPI.history(
+                lat: location.latitude,
+                lon: location.longitude,
+                date: date.toAPIDateString
+            )
+        )
+        
+        // 해당 시간대의 UV Index 찾기
+        let hour = Calendar.current.component(.hour, from: date)
+        
+        if let forecastDay = response.forecast?.forecastday.first,
+           let hourData = forecastDay.hour.first(where: { $0.time.toHour == hour }) {
+            return hourData.uv
+        }
+        
+        // 못 찾으면 현재 UV 반환
+        return response.current?.uv ?? 0.0
+    }
+    
+    // MARK: - Private Methods
+    
+    private func mapToLocationWeather(response: WeatherAPIResponse, location: LocationInfo) -> LocationWeather {
+        let hourlyForecasts: [HourlyForecast] = response.forecast?.forecastday.first?.hour.compactMap { hour in
+            guard let hourInt = hour.time.toHour, let timestamp = hour.time.toDate else {
+                return nil
+            }
+            
+            return HourlyForecast(hour: hourInt, uvIndex: hour.uv, temperature: hour.tempC, timestamp: timestamp)
+        } ?? []
+        
+        return LocationWeather(
+            location: location,
+            currentUVIndex: response.current?.uv ?? 0.0,
+            currentTemperature: response.current?.tempC ?? 0.0,
+            hourlyForecasts: hourlyForecasts
+        )
+    }
+}
+
+// MARK: - Errors
+
+enum WeatherError: LocalizedError { // TODO: - 에러 파일 분리
+    case networkFailed(String)
+    case decodingFailed
+    case noData
+    
+    var errorDescription: String? {
+        switch self {
+        case .networkFailed(let message):
+            return "Network error: \(message)"
+        case .decodingFailed:
+            return "Failed to decode weather data"
+        case .noData:
+            return "No weather data available"
+        }
     }
 }
