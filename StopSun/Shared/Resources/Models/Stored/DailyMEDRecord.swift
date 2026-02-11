@@ -25,7 +25,7 @@ import Foundation
 /// record.addExposure(0.5)
 ///
 /// // MED 비율 계산 (Type II)
-/// let ratio = record.medRatio(for: .type2)  // 0.5 / 2.5 = 20%
+/// let ratio = record.medRatio(for: .type2)  // 0.5 / 3.0 = 16.7%
 /// ```
 ///
 struct DailyMEDRecord: Codable, Identifiable {

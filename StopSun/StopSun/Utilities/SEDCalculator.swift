@@ -179,14 +179,7 @@ struct SEDCalculator {
     /// // → 4.0
     /// ```
     static func maxSED(for skinType: SkinType) -> Double {
-        switch skinType {
-        case .type1: 1.5
-        case .type2: 3.0
-        case .type3: 4.0
-        case .type4: 5.0
-        case .type5: 7.0
-        case .type6: 12.0
-        }
+        skinType.maxDailyMEDinSED
     }
     
     /// SED 진행률 계산
@@ -279,4 +272,74 @@ struct SEDCalculator {
         
         return remaining / sedPerMinute
     }
+    
+    // MARK: - Sunscreen Overlap
+        
+        /// TimeInDaylight를 선크림 적용 구간으로 분할
+        static func splitExposure(
+            start: Date,
+            end: Date,
+            sunscreenHistory: [SunscreenApplication]
+        ) -> [ExposureSegment] {
+            
+            guard start < end else { return [] }
+            
+            let overlapping = sunscreenHistory
+                .filter { $0.appliedAt < end && $0.nextReapplyTime > start }
+                .sorted { $0.appliedAt < $1.appliedAt }
+            
+            guard !overlapping.isEmpty else {
+                return [ExposureSegment(startDate: start, endDate: end, spfLevel: nil)]
+            }
+            
+            var timePoints: Set<Date> = [start, end]
+            
+            for sunscreen in overlapping {
+                if sunscreen.appliedAt > start && sunscreen.appliedAt < end {
+                    timePoints.insert(sunscreen.appliedAt)
+                }
+                if sunscreen.nextReapplyTime > start && sunscreen.nextReapplyTime < end {
+                    timePoints.insert(sunscreen.nextReapplyTime)
+                }
+            }
+            
+            let sorted = timePoints.sorted()
+            var segments: [ExposureSegment] = []
+            
+            for i in 0..<(sorted.count - 1) {
+                let segmentStart = sorted[i]
+                let segmentEnd = sorted[i + 1]
+                let midPoint = segmentStart.addingTimeInterval(
+                    segmentEnd.timeIntervalSince(segmentStart) / 2
+                )
+                
+                let activeSunscreen = overlapping.first { $0.isActive(at: midPoint) }
+                
+                segments.append(ExposureSegment(
+                    startDate: segmentStart,
+                    endDate: segmentEnd,
+                    spfLevel: activeSunscreen?.spfLevel
+                ))
+            }
+            
+            return segments
+        }
+        
+        /// 선크림 기록을 고려한 SED 계산
+        static func calculateWithSunscreenHistory(
+            start: Date,
+            end: Date,
+            uvIndex: Double,
+            sunscreenHistory: [SunscreenApplication]
+        ) -> Double {
+            
+            splitExposure(start: start, end: end, sunscreenHistory: sunscreenHistory)
+                .reduce(0) { total, segment in
+                    total + calculate(
+                        uvIndex: uvIndex,
+                        durationMinutes: segment.durationMinutes,
+                        spf: segment.spfLevel?.protectionFactor
+                    )
+                }
+        }
 }

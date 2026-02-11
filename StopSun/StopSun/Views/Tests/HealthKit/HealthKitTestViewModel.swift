@@ -73,7 +73,7 @@ final class HealthKitTestViewModel: ObservableObject {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(handleBackgroundDelivery),
-            name: .newTimeInDaylightAvailable,
+            name: .healthKitDataDidUpdate,
             object: nil
         )
     }
