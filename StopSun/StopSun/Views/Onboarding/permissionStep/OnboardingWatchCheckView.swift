@@ -73,13 +73,12 @@ struct OnboardingWatchCheckView: View {
     // MARK: - Buttons
     
     private var buttonSection: some View {
-        VStack(spacing: 12) {
+        HStack(spacing: 12) {
+            SSButton(L10n.Onboarding.Watch.noWatch, style: .notAllowed) {
+                onNoWatch()
+            }
             SSButton(L10n.Onboarding.Watch.hasWatch, style: .primary) {
                 onHasWatch()
-            }
-            
-            SSButton(L10n.Onboarding.Watch.noWatch, style: .secondary) {
-                onNoWatch()
             }
         }
     }
