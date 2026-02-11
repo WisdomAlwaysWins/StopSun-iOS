@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Combine
 
 /// 선크림 관련 View를 위한 ViewModel
 /// - ViewModel은 Manager를 통해 데이터에 접근

@@ -94,7 +94,7 @@ protocol LocalStorageManagerProtocol {
     /// 특정 시점의 위치 조회
     ///
     /// - Parameter date: 조회할 시점
-    /// - Returns: ±30분 이내 가장 가까운 위치 기록
+    /// - Returns: ±10분 이내 가장 마지막 위치 기록
     func getLocation(at date: Date) -> LocationRecord?
     
     // MARK: - UVExposureRecord

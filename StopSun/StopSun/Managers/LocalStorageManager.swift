@@ -12,7 +12,7 @@ final class LocalStorageManager: LocalStorageManagerProtocol {
 
     // MARK: - Notification Names
 
-    static let userProfileDidChangeNotification = Notification.Name("UserProfileDidChange")
+    static let userProfileDidChangeNotification = Notification.Name("userProfileDidChange")
 
     // MARK: - Properties
 
@@ -150,6 +150,11 @@ final class LocalStorageManager: LocalStorageManagerProtocol {
         var history = loadSunscreenHistory()
         history.append(application)
 
+        // 메모리 관리: 최근 1000개만 유지
+        if history.count > 1000 {
+            history.removeFirst(history.count - 1000)
+        }
+
         do {
             let encoded = try JSONEncoder().encode(history)
             userDefaults.set(encoded, forKey: sunscreenHistoryKey)
@@ -282,8 +287,14 @@ final class LocalStorageManager: LocalStorageManagerProtocol {
         let calendar = Calendar.current
         let today = Date()
 
-        // 최근 30일만 검색 (UVExposureRecord 보관 기간)
-        for dayOffset in 0...30 {
+        // 1. 당일 데이터 먼저 확인 (대부분의 케이스)
+        let todayRecords = loadExposureRecords(for: today)
+        if todayRecords.contains(where: { $0.healthKitID == healthKitID }) {
+            return true
+        }
+
+        // 2. 당일에 없으면 과거 검색 (지연 도착 케이스)
+        for dayOffset in 1...30 {
             guard let date = calendar.date(byAdding: .day, value: -dayOffset, to: today) else { continue }
             let records = loadExposureRecords(for: date)
 
@@ -358,17 +369,20 @@ final class LocalStorageManager: LocalStorageManagerProtocol {
 
     // MARK: - Private Methods
 
-    /// 날짜별 UVExposure 키 생성
-    private func exposureKey(for date: Date) -> String {
+    /// 날짜 포맷터 (yyyyMMdd)
+    private static let dateKeyFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMdd"
-        return "exposures.\(formatter.string(from: date))"
+        return formatter
+    }()
+
+    /// 날짜별 UVExposure 키 생성
+    private func exposureKey(for date: Date) -> String {
+        return "exposures.\(Self.dateKeyFormatter.string(from: date))"
     }
 
     /// 날짜별 DailyMED 키 생성
     private func dailyMEDKey(for date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyyMMdd"
-        return "dailyMED.\(formatter.string(from: date))"
+        return "dailyMED.\(Self.dateKeyFormatter.string(from: date))"
     }
 }
