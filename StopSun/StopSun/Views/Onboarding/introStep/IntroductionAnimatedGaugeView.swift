@@ -45,7 +45,7 @@ struct IntroductionAnimatedGaugeView: View {
             }
         }
         .onAppear {
-            currentLevel = .safe
+            resetLevel()
             startAnimationLoop()
         }
         .onDisappear {
@@ -67,8 +67,12 @@ private extension IntroductionAnimatedGaugeView {
     }
     
     func stopAnimationLoop() {
-        currentLevel = .safe
         timer?.invalidate()
         timer = nil
+    }
+    
+    func resetLevel(){
+        currentLevel = .safe
+        animatedPercentage = MEDLevel.safe.percentage
     }
 }

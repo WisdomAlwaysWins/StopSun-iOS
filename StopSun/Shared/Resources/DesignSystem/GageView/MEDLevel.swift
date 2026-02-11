@@ -21,7 +21,7 @@ import SwiftUI
 /// let level = MEDLevel.fromPercentage(97.0)  // .danger
 /// print(level.message)  // "위험"
 /// ```
-enum MEDLevel: CaseIterable {
+enum MEDLevel: CaseIterable, Equatable {
     
     /// MED 0-30%: 안전
     case safe
@@ -42,19 +42,19 @@ enum MEDLevel: CaseIterable {
     var percentage: Double {
         switch self {
         case .safe: return 10
-        case .caution: return 31
-        case .danger: return 71
-        case .critical: return 100
+        case .caution: return 56
+        case .danger: return 73
+        case .critical: return 120
         }
     }
     
     /// 레벨별 색상
     var color: Color {
         switch self {
-        case .safe: return .gage00      // 10% - 안전 (파랑)
-        case .caution: return .gage01   // 31% - 주의 (주황)
-        case .danger: return .gage02    // 71% - 위험 (빨강)
-        case .critical: return .gage03    // 100% - 나쁨 (빨강)
+        case .safe: return .gage00      // 안전 (파랑)
+        case .caution: return .gage01   // 주의 (주황)
+        case .danger: return .gage02    // 위험 (빨강)
+        case .critical: return .gage03    // 나쁨 (짙은 빨강)
         }
     }
     
