@@ -28,6 +28,10 @@ struct MEDGaugeView: View {
     
     private let lineWidth: CGFloat = 12
     
+    private var clampedPercentage: Double {
+        min(max(percentage, 0), 100) // 0 이상, 100 이하로 고정
+    }
+    
     var body: some View {
         ZStack {
             
@@ -42,7 +46,7 @@ struct MEDGaugeView: View {
                 )
             
             // 진행 반원
-            HalfArcShape(progress: percentage / 100)
+            HalfArcShape(progress: clampedPercentage / 100)
                 .strokeBorder(
                     color,
                     style: StrokeStyle(
