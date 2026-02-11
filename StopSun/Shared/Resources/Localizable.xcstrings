@@ -1007,7 +1007,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "현재 UV 노출량은 위험 수준입니다."
+            "value" : "현재 UV 노출량은 나쁨 수준입니다."
           }
         }
       }

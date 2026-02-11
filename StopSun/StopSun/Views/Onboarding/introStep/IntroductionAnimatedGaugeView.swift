@@ -12,6 +12,7 @@ struct IntroductionAnimatedGaugeView: View {
     
     @State private var currentLevel: MEDLevel = .safe
     @State private var animatedPercentage: Double = MEDLevel.safe.percentage
+    @State private var timer: Timer? = nil
     
     /// 레벨 전환 간격
     private let transitionInterval: TimeInterval = 1.5
@@ -44,7 +45,11 @@ struct IntroductionAnimatedGaugeView: View {
             }
         }
         .onAppear {
+            currentLevel = .safe
             startAnimationLoop()
+        }
+        .onDisappear {
+            stopAnimationLoop()
         }
     }
 }
@@ -52,14 +57,18 @@ struct IntroductionAnimatedGaugeView: View {
 private extension IntroductionAnimatedGaugeView {
     
     func startAnimationLoop() {
-        Timer.scheduledTimer(withTimeInterval: transitionInterval, repeats: true) { _ in
-            
+        timer = Timer.scheduledTimer(withTimeInterval: transitionInterval, repeats: true) { _ in
             let nextLevel = currentLevel.next
-            
             withAnimation(.easeInOut(duration: 0.5)) {
                 currentLevel = nextLevel
                 animatedPercentage = nextLevel.percentage
             }
         }
+    }
+    
+    func stopAnimationLoop() {
+        currentLevel = .safe
+        timer?.invalidate()
+        timer = nil
     }
 }
