@@ -21,19 +21,19 @@ final class UserProfileViewModel: ObservableObject {
     @Published var isOnboardingCompleted: Bool = false
 
     // MARK: - Dependencies
-    private let profileManager: UserProfileManager
+    private let localStorage: LocalStorageManagerProtocol
 
     // MARK: - Initialization
 
-    init(profileManager: UserProfileManager = .shared) {
-        self.profileManager = profileManager
+    init(localStorage: LocalStorageManagerProtocol) {
+        self.localStorage = localStorage
 
-        let profile = profileManager.fetchProfileOrDefault()
+        let profile = localStorage.loadUserProfileOrDefault()
         self.userProfile = profile
         self.skinType = profile.skinType
         self.spfLevel = profile.spfLevel
         self.maxMED = profile.skinType.maxMED
-        self.isOnboardingCompleted = profileManager.fetchOnboardingCompleted()
+        self.isOnboardingCompleted = localStorage.loadOnboardingCompleted()
 
         Log.debug("UserProfileViewModel initialized")
     }
@@ -43,30 +43,20 @@ final class UserProfileViewModel: ObservableObject {
     /// 피부 타입 변경
     /// - Parameter skinType: 새로운 피부 타입
     func updateSkinType(_ skinType: SkinType) {
-        let success = profileManager.updateSkinType(skinType)
-
-        if success {
-            self.skinType = skinType
-            self.maxMED = skinType.maxMED
-            self.userProfile.skinType = skinType
-            Log.info("Skin type updated to: \(skinType.title)")
-        } else {
-            Log.error("Failed to update skin type")
-        }
+        localStorage.updateSkinType(skinType)
+        self.skinType = skinType
+        self.maxMED = skinType.maxMED
+        self.userProfile.skinType = skinType
+        Log.info("Skin type updated to: \(skinType.title)")
     }
 
     /// SPF 레벨 변경
     /// - Parameter spfLevel: 새로운 SPF 레벨
     func updateSPFLevel(_ spfLevel: SPFLevel) {
-        let success = profileManager.updateSPFLevel(spfLevel)
-
-        if success {
-            self.spfLevel = spfLevel
-            self.userProfile.spfLevel = spfLevel
-            Log.info("SPF level updated to: SPF \(spfLevel.rawValue)")
-        } else {
-            Log.error("Failed to update SPF level")
-        }
+        localStorage.updateSunscreenSPF(spfLevel)
+        self.spfLevel = spfLevel
+        self.userProfile.spfLevel = spfLevel
+        Log.info("SPF level updated to: SPF \(spfLevel.rawValue)")
     }
 
     /// 프로필 저장 (일괄 저장)
@@ -75,24 +65,19 @@ final class UserProfileViewModel: ObservableObject {
     ///   - spfLevel: SPF 레벨
     func saveProfile(skinType: SkinType, spfLevel: SPFLevel) {
         let newProfile = UserProfile(skinType: skinType, spfLevel: spfLevel)
-        let success = profileManager.saveProfile(newProfile)
-
-        if success {
-            self.userProfile = newProfile
-            self.skinType = skinType
-            self.spfLevel = spfLevel
-            self.maxMED = skinType.maxMED
-            self.isOnboardingCompleted = true
-            Log.info("User profile saved successfully")
-        } else {
-            Log.error("Failed to save user profile")
-        }
+        localStorage.saveUserProfile(newProfile)
+        self.userProfile = newProfile
+        self.skinType = skinType
+        self.spfLevel = spfLevel
+        self.maxMED = skinType.maxMED
+        self.isOnboardingCompleted = true
+        Log.info("User profile saved successfully")
     }
 
     /// 프로필 초기화
     func resetProfile() {
-        profileManager.deleteProfile()
-        profileManager.saveOnboardingCompleted(false)
+        localStorage.deleteUserProfile()
+        localStorage.saveOnboardingCompleted(false)
 
         let defaultProfile = UserProfile.defaultUser
         self.userProfile = defaultProfile
@@ -106,12 +91,12 @@ final class UserProfileViewModel: ObservableObject {
 
     /// 데이터 새로고침
     func refresh() {
-        let profile = profileManager.fetchProfileOrDefault()
+        let profile = localStorage.loadUserProfileOrDefault()
         self.userProfile = profile
         self.skinType = profile.skinType
         self.spfLevel = profile.spfLevel
         self.maxMED = profile.skinType.maxMED
-        self.isOnboardingCompleted = profileManager.fetchOnboardingCompleted()
+        self.isOnboardingCompleted = localStorage.loadOnboardingCompleted()
 
         Log.debug("User profile refreshed")
     }

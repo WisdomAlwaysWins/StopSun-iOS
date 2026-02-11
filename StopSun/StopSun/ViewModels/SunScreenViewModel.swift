@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Combine
 
 /// 선크림 관련 View를 위한 ViewModel
 /// - ViewModel은 Manager를 통해 데이터에 접근
@@ -22,19 +21,14 @@ final class SunScreenViewModel: ObservableObject {
     @Published var needsReapplication: Bool = false
 
     // MARK: - Dependencies
-    private let sunScreenManager: SunScreenManager
-    private let userProfileManager: UserProfileManager
+    private let localStorage: LocalStorageManagerProtocol
 
     // MARK: - Properties
     private var updateTimer: Timer?
 
     // MARK: - Initialization
-    init(
-        sunScreenManager: SunScreenManager = .shared,
-        userProfileManager: UserProfileManager = .shared
-    ) {
-        self.sunScreenManager = sunScreenManager
-        self.userProfileManager = userProfileManager
+    init(localStorage: LocalStorageManagerProtocol) {
+        self.localStorage = localStorage
         Log.debug("SunScreenViewModel initialized")
 
         setupTimer()
@@ -50,36 +44,26 @@ final class SunScreenViewModel: ObservableObject {
 
     /// 선크림 발림 처리
     func applySunScreen() {
-        let profile = userProfileManager.fetchProfileOrDefault()
+        let profile = localStorage.loadUserProfileOrDefault()
         let spfLevel = profile.spfLevel
         let sunScreen = SunscreenApplication(spfLevel: spfLevel, appliedAt: Date())
-        let success = sunScreenManager.saveSunScreen(sunScreen)
-
-        if success {
-            Log.info("Sunscreen applied successfully")
-            refresh()
-        } else {
-            Log.error("Failed to apply sunscreen")
-        }
+        localStorage.saveSunscreenApplication(sunScreen)
+        Log.info("Sunscreen applied successfully")
+        refresh()
     }
 
     /// 커스텀 SPF로 선크림 발림
     /// - Parameter spfLevel: SPF 레벨
     func applySunScreen(withSPF spfLevel: SPFLevel) {
         let sunScreen = SunscreenApplication(spfLevel: spfLevel, appliedAt: Date())
-        let success = sunScreenManager.saveSunScreen(sunScreen)
-
-        if success {
-            Log.info("Sunscreen applied with SPF \(spfLevel.rawValue)")
-            refresh()
-        } else {
-            Log.error("Failed to apply sunscreen with SPF \(spfLevel.rawValue)")
-        }
+        localStorage.saveSunscreenApplication(sunScreen)
+        Log.info("Sunscreen applied with SPF \(spfLevel.rawValue)")
+        refresh()
     }
 
     /// 선크림 기록 삭제
     func removeSunScreen() {
-        sunScreenManager.deleteSunScreen()
+        localStorage.deleteSunscreen()
         Log.info("Sunscreen removed")
         refresh()
     }
@@ -147,8 +131,8 @@ final class SunScreenViewModel: ObservableObject {
 
     /// 상태 업데이트
     private func updateState() {
-        isActive = sunScreenManager.isActive()
-        remainingMinutes = sunScreenManager.fetchRemainingMinutes()
+        isActive = localStorage.isSunscreenActive()
+        remainingMinutes = localStorage.loadSunscreenRemainingMinutes()
         progressRate = fetchProgressRate()
         effectiveness = fetchEffectivenessPercentage()
         applicationTime = fetchFormattedApplicationTime()
@@ -157,7 +141,7 @@ final class SunScreenViewModel: ObservableObject {
 
     /// 선크림 발림 후 진행률 (0.0 ~ 1.0)
     private func fetchProgressRate() -> Double {
-        guard let sunScreen = sunScreenManager.fetchSunScreen() else {
+        guard let sunScreen = localStorage.loadCurrentSunscreen() else {
             return 1.0 // 없으면 만료로 간주
         }
 
@@ -177,7 +161,7 @@ final class SunScreenViewModel: ObservableObject {
 
     /// 선크림 발림 시각 포맷팅
     private func fetchFormattedApplicationTime() -> String {
-        guard let sunScreen = sunScreenManager.fetchSunScreen() else {
+        guard let sunScreen = localStorage.loadCurrentSunscreen() else {
             return ""
         }
 
