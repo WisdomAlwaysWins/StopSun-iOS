@@ -14,7 +14,7 @@ import SwiftUI
 ///
 /// ```swift
 /// let user = UserProfile(skinType: .type2)
-/// let limit = user.skinType.maxDailyMEDinSED // 2.5 SED
+/// let limit = SEDCalculator.maxSED(for: user.skinType) // 4.0 SED
 /// ```
 ///
 enum SkinType: Int, Codable, CaseIterable, Identifiable, Sendable {
@@ -76,14 +76,17 @@ enum SkinType: Int, Codable, CaseIterable, Identifiable, Sendable {
     }
     
     /// 일일 최대 허용 자외선량 (SED 단위)
+    ///
+    /// Fitzpatrick 피부 타입별 일일 권장 최대 SED입니다.
+    /// 이 값을 초과하면 피부 손상 위험이 있습니다.
     var maxDailyMEDinSED: Double {
         switch self {
-        case .type1: return 2.0
-        case .type2: return 2.5
-        case .type3: return 3.0
-        case .type4: return 4.5
-        case .type5: return 6.0
-        case .type6: return 9.0
+        case .type1: 1.5
+        case .type2: 3.0
+        case .type3: 4.0
+        case .type4: 5.0
+        case .type5: 7.0
+        case .type6: 12.0
         }
     }
 

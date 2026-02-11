@@ -77,10 +77,12 @@ enum L10n {
         
         /// MED 경고 알림
         enum MED {
+            static var title30: String { .localized("notification.med.title30") }
+            static var body30: String { .localized("notification.med.body30") }
             static var title50: String { .localized("notification.med.title50") }
             static var body50: String { .localized("notification.med.body50") }
-            static var title80: String { .localized("notification.med.title80") }
-            static var body80: String { .localized("notification.med.body80") }
+            static var title70: String { .localized("notification.med.title70") }
+            static var body70: String { .localized("notification.med.body70") }
             static var title100: String { .localized("notification.med.title100") }
             static var body100: String { .localized("notification.med.body100") }
         }
