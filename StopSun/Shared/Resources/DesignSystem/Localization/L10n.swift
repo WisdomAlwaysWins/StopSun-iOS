@@ -168,6 +168,11 @@ enum L10n {
                 static var title: String { .localized("med.status.danger.title") }
                 static var description: String { .localized("med.status.danger.desc") }
             }
+            
+            enum Critical {
+                static var title: String { .localized("med.status.critical.title") }
+                static var description: String { .localized("med.status.critical.desc") }
+            }
         }
     }
     

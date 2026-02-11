@@ -23,14 +23,17 @@ import SwiftUI
 /// ```
 enum MEDLevel: CaseIterable {
     
-    /// MED 0-40%: 안전
+    /// MED 0-30%: 안전
     case safe
     
-    /// MED 41-80%: 주의
+    /// MED 31-51%: 주의
     case caution
     
-    /// MED 81-100%: 위험
+    /// MED 71-100%: 위험
     case danger
+    
+    /// MED 100% ~ : 나쁨
+    case critical
     
     // MARK: - Properties
     
@@ -38,27 +41,30 @@ enum MEDLevel: CaseIterable {
     /// 각 레벨의 대표 퍼센트 값
     var percentage: Double {
         switch self {
-        case .safe: return 31
-        case .caution: return 73
-        case .danger: return 97
+        case .safe: return 10
+        case .caution: return 31
+        case .danger: return 71
+        case .critical: return 100
         }
     }
     
     /// 레벨별 색상
     var color: Color {
         switch self {
-        case .safe: return .gage00      // 31% - 안전 (파랑)
-        case .caution: return .gage01   // 73% - 주의 (주황)
-        case .danger: return .gage02    // 97% - 위험 (빨강)
+        case .safe: return .gage00      // 10% - 안전 (파랑)
+        case .caution: return .gage01   // 31% - 주의 (주황)
+        case .danger: return .gage02    // 71% - 위험 (빨강)
+        case .critical: return .gage03    // 100% - 나쁨 (빨강)
         }
     }
     
     /// 레벨별 메시지
     var message: String {
         switch self {
-        case .danger: return "위험"
-        case .caution: return "주의"
         case .safe: return "안전"
+        case .caution: return "주의"
+        case .danger: return "위험"
+        case .critical: return "나쁨"
         }
     }
     
@@ -66,9 +72,10 @@ enum MEDLevel: CaseIterable {
     /// 다음 레벨
     var next: MEDLevel {
         switch self {
-        case .danger: return .safe
-        case .caution: return .danger
         case .safe: return .caution
+        case .caution: return .danger
+        case .danger: return .critical
+        case .critical: return .safe
         }
     }
     
@@ -80,8 +87,9 @@ enum MEDLevel: CaseIterable {
     /// - Returns: 해당하는 MEDLevel
     static func fromPercentage(_ percentage: Double) -> MEDLevel {
         switch percentage {
-        case ...40: return .safe
-        case ...80: return .caution
+        case ...30: return .safe
+        case ...50: return .caution
+        case ...100: return .danger
         default: return .danger
         }
     }
@@ -94,6 +102,8 @@ enum MEDLevel: CaseIterable {
             return L10n.MED.Status.Caution.title
         case .danger:
             return L10n.MED.Status.Danger.title
+        case .critical:
+            return L10n.MED.Status.Danger.title
         }
     }
 
@@ -105,6 +115,8 @@ enum MEDLevel: CaseIterable {
             return L10n.MED.Status.Caution.description
         case .danger:
             return L10n.MED.Status.Danger.description
+        case .critical:
+            return L10n.MED.Status.Critical.description
         }
     }
 }
