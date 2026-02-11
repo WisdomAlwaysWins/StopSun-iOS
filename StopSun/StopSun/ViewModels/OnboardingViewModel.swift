@@ -104,17 +104,13 @@ final class OnboardingViewModel {
     /// Introduction 이전 페이지로 이동
     func moveToPreviousIntroPage() {
         guard let prev = IntroductionPage(rawValue: currentIntroPage.rawValue - 1) else { return }
-        withAnimation(.easeInOut(duration: 0.3)) {
-            currentIntroPage = prev
-        }
+        currentIntroPage = prev
     }
     
     /// Introduction 다음 페이지로 이동
     func moveToNextIntroPage() {
         guard let next = IntroductionPage(rawValue: currentIntroPage.rawValue + 1) else { return }
-        withAnimation(.easeInOut(duration: 0.3)) {
-            currentIntroPage = next
-        }
+        currentIntroPage = next
     }
     
     /// Introduction → Setup Phase로 이동 ("기본 설정하기" 또는 "건너뛰기")
@@ -126,6 +122,20 @@ final class OnboardingViewModel {
     }
     
     // MARK: - Setup Navigation
+    
+    /// Setup에서 뒤로가기 처리
+    /// - 첫 번째 단계(watchCheck)면 → Introduction 마지막 페이지로
+    /// - 그 외 단계면 → 이전 Setup 단계로
+    func backFromSetup() {
+        if currentSetupStep == .watchCheck {
+            withAnimation(.easeInOut(duration: 0.3)) {
+                currentPhase = .introduction
+                currentIntroPage = .personalRecommend
+            }
+        } else {
+            moveToPreviousSetupStep()
+        }
+    }
     
     /// Setup 이전 단계로 이동
     func moveToPreviousSetupStep() {

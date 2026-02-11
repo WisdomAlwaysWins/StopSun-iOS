@@ -6,16 +6,16 @@
 //
 
 import SwiftUI
+import Combine
 
 /// 온보딩 전용 MED 게이지 애니메이션 뷰
 struct IntroductionAnimatedGaugeView: View {
     
     @State private var currentLevel: MEDLevel = .safe
     @State private var animatedPercentage: Double = MEDLevel.safe.percentage
-    @State private var timer: Timer? = nil
     
-    /// 레벨 전환 간격
-    private let transitionInterval: TimeInterval = 1.5
+    /// .common RunLoop → TabView 스와이프 중에도 타이머 동작 보장
+    private let timerPublisher = Timer.publish(every: 1.5, on: .main, in: .common).autoconnect()
     
     var body: some View {
         VStack(spacing: 32) {
@@ -45,34 +45,15 @@ struct IntroductionAnimatedGaugeView: View {
             }
         }
         .onAppear {
-            resetLevel()
-            startAnimationLoop()
+            currentLevel = .safe
+            animatedPercentage = MEDLevel.safe.percentage
         }
-        .onDisappear {
-            stopAnimationLoop()
-        }
-    }
-}
-
-private extension IntroductionAnimatedGaugeView {
-    
-    func startAnimationLoop() {
-        timer = Timer.scheduledTimer(withTimeInterval: transitionInterval, repeats: true) { _ in
+        .onReceive(timerPublisher) { _ in
             let nextLevel = currentLevel.next
             withAnimation(.easeInOut(duration: 0.5)) {
                 currentLevel = nextLevel
                 animatedPercentage = nextLevel.percentage
             }
         }
-    }
-    
-    func stopAnimationLoop() {
-        timer?.invalidate()
-        timer = nil
-    }
-    
-    func resetLevel(){
-        currentLevel = .safe
-        animatedPercentage = MEDLevel.safe.percentage
     }
 }

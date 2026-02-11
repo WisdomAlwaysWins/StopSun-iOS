@@ -22,8 +22,8 @@ struct StopSunApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(container.permissionManager)
                 .environmentObject(container.syncCoordinator)
-                .environmentObject(container.permissionManager)
                 .environmentObject(container.errorHandler)
                 .onChange(of: scenePhase) { _, newPhase in
                     handleScenePhaseChange(newPhase)

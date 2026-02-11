@@ -13,6 +13,11 @@ struct HalfArcShape: InsettableShape {
     var progress: Double        // 0.0 ~ 1.0
     var insetAmount: CGFloat = 0
     
+    var animatableData: Double {
+        get { progress }
+        set { progress = newValue }
+    }
+    
     func path(in rect: CGRect) -> Path {
         let rect = rect.insetBy(dx: insetAmount, dy: insetAmount)
         

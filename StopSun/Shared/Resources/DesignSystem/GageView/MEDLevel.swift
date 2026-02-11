@@ -11,11 +11,6 @@ import SwiftUI
 ///
 /// 자외선 노출로 인한 홍반(피부 발적) 발생 위험도를 나타냅니다.
 ///
-/// | 퍼센트 | 레벨 | 색상 | 메시지 |
-/// |--------|------|------|--------|
-/// | 0-40% | 안전 | 파랑 | 안전해요 |
-/// | 41-80% | 주의 | 주황 | 주의해요 |
-/// | 81-100% | 위험 | 빨강 | 위험해요 |
 ///
 /// ```swift
 /// let level = MEDLevel.fromPercentage(97.0)  // .danger
@@ -26,27 +21,16 @@ enum MEDLevel: CaseIterable, Equatable {
     /// MED 0-30%: 안전
     case safe
     
-    /// MED 31-51%: 주의
+    /// MED 31-50%: 주의
     case caution
     
-    /// MED 71-100%: 위험
+    /// MED 51-100%: 위험
     case danger
     
-    /// MED 100% ~ : 나쁨
+    /// MED 100% 초과: 나쁨
     case critical
     
     // MARK: - Properties
-    
-    /// onboarding 용
-    /// 각 레벨의 대표 퍼센트 값
-    var percentage: Double {
-        switch self {
-        case .safe: return 10
-        case .caution: return 56
-        case .danger: return 73
-        case .critical: return 120
-        }
-    }
     
     /// 레벨별 색상
     var color: Color {
@@ -58,13 +42,19 @@ enum MEDLevel: CaseIterable, Equatable {
         }
     }
     
-    /// 레벨별 메시지
+    /// 레벨별 메시지 (L10n 기반)
     var message: String {
+        statusTitle
+    }
+    
+    /// onboarding 용
+    /// 각 레벨의 대표 퍼센트 값
+    var percentage: Double {
         switch self {
-        case .safe: return "안전"
-        case .caution: return "주의"
-        case .danger: return "위험"
-        case .critical: return "나쁨"
+        case .safe: return 10
+        case .caution: return 56
+        case .danger: return 73
+        case .critical: return 120
         }
     }
     
@@ -83,14 +73,14 @@ enum MEDLevel: CaseIterable, Equatable {
     
     /// 퍼센트 값으로부터 레벨 생성
     ///
-    /// - Parameter percentage: MED 누적 퍼센트 (0-100)
+    /// - Parameter percentage: MED 누적 퍼센트 (0~)
     /// - Returns: 해당하는 MEDLevel
     static func fromPercentage(_ percentage: Double) -> MEDLevel {
         switch percentage {
         case ...30: return .safe
         case ...50: return .caution
         case ...100: return .danger
-        default: return .danger
+        default: return .critical
         }
     }
 
@@ -103,7 +93,7 @@ enum MEDLevel: CaseIterable, Equatable {
         case .danger:
             return L10n.MED.Status.Danger.title
         case .critical:
-            return L10n.MED.Status.Danger.title
+            return L10n.MED.Status.Critical.title
         }
     }
 

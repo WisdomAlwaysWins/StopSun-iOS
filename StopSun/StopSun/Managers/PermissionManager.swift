@@ -32,13 +32,14 @@ enum PermissionStatus: String, Equatable, Sendable {
 /// - 서비스 초기화: 권한 상태에 따라 HealthKit/Location 서비스 활성화
 ///
 @MainActor
-final class PermissionManager: ObservableObject {
+@Observable
+final class PermissionManager {
     
-    // MARK: - Published Properties
+    // MARK: - Properties
     
-    @Published private(set) var notificationStatus: PermissionStatus = .notDetermined
-    @Published private(set) var healthKitStatus: PermissionStatus = .notDetermined
-    @Published private(set) var locationStatus: PermissionStatus = .notDetermined
+    private(set) var notificationStatus: PermissionStatus = .notDetermined
+    private(set) var healthKitStatus: PermissionStatus = .notDetermined
+    private(set) var locationStatus: PermissionStatus = .notDetermined
     
     // MARK: - Dependencies
     

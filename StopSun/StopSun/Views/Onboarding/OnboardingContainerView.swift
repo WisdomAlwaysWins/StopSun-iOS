@@ -29,9 +29,9 @@ struct OnboardingContainerView: View {
         _viewModel = State(wrappedValue: DIContainer.shared.makeOnboardingViewModel())
     }
     
-    /// Preview / 테스트용 생성자
-    init(container: DIContainer) {
-        _viewModel = State(wrappedValue: container.makeOnboardingViewModel())
+    /// Preview / 테스트용 생성자 — ViewModel 직접 주입
+    init(viewModel: OnboardingViewModel) {
+        _viewModel = State(wrappedValue: viewModel)
     }
     
     // MARK: - Body
@@ -66,6 +66,7 @@ struct OnboardingContainerView: View {
             setupNavigationBar
             setupProgressBar
             setupStepContent(vm: vm)
+                .animation(.easeInOut(duration: 0.3), value: viewModel.currentSetupStep)
         }
     }
     
@@ -74,7 +75,7 @@ struct OnboardingContainerView: View {
     private var setupNavigationBar: some View {
         HStack {
             Button {
-                handleSetupBackAction()
+                viewModel.backFromSetup()
             } label: {
                 Image(systemName: "chevron.left")
                     .font(.system(size: 20, weight: .medium))
@@ -85,22 +86,6 @@ struct OnboardingContainerView: View {
             Spacer()
         }
         .frame(height: 44)
-    }
-    
-    // MARK: - Back Action Handler
-    
-    /// Setup 단계에서 뒤로가기 처리
-    /// - 첫 번째 단계(watchCheck)면 → Introduction 마지막 페이지로
-    /// - 그 외 단계면 → 이전 Setup 단계로
-    private func handleSetupBackAction() {
-        if viewModel.currentSetupStep == .watchCheck {
-            // Setup 첫 단계 → Introduction 마지막 페이지로 복귀
-            viewModel.currentPhase = .introduction
-            viewModel.currentIntroPage = .personalRecommend
-        } else {
-            // 이전 Setup 단계로 이동
-            viewModel.moveToPreviousSetupStep()
-        }
     }
     
     // MARK: - Setup Progress Bar
@@ -167,13 +152,12 @@ struct OnboardingContainerView: View {
 // MARK: - Preview
 
 #Preview("Onboarding - Introduction") {
-    OnboardingContainerView(container: .preview)
+    let vm = DIContainer.preview.makeOnboardingViewModel()
+    OnboardingContainerView(viewModel: vm)
 }
 
 #Preview("Onboarding - Setup") {
-    let container = DIContainer.preview
-    let vm = container.makeOnboardingViewModel()
+    let vm = DIContainer.preview.makeOnboardingViewModel()
     vm.currentPhase = .setup
-    
-    return OnboardingContainerView(container: container)
+    return OnboardingContainerView(viewModel: vm)
 }

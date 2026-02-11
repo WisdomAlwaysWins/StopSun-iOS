@@ -28,8 +28,11 @@ struct ContentView: View {
                 }
             }
         }
-        .onAppear {
-            startSplash()
+        .task {
+            try? await Task.sleep(for: .seconds(1.5))
+            withAnimation(.easeInOut(duration: 0.4)) {
+                showSplash = false
+            }
         }
         .onReceive(
             NotificationCenter.default.publisher(
@@ -38,17 +41,6 @@ struct ContentView: View {
         ) { _ in
             isOnboardingCompleted =
                 UserProfileManager.shared.fetchOnboardingCompleted()
-        }
-    }
-}
-
-private extension ContentView {
-    
-    func startSplash() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            withAnimation(.easeInOut(duration: 0.4)) {
-                showSplash = false
-            }
         }
     }
 }
