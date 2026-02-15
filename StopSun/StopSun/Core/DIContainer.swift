@@ -54,6 +54,8 @@ final class DIContainer {
             watchConnectivity: watchConnectivity
         )
         
+        let router = Router()
+        
         return DIContainer(
             healthKit: healthKit,
             weather: weather,
@@ -62,6 +64,7 @@ final class DIContainer {
             notification: notification,
             watchConnectivity: watchConnectivity,
             syncCoordinator: syncCoordinator,
+            router: router,
             errorHandler: errorHandler
         )
     }()
@@ -87,6 +90,8 @@ final class DIContainer {
             watchConnectivity: watchConnectivity
         )
         
+        let router = Router()
+        
         return DIContainer(
             healthKit: healthKit,
             weather: weather,
@@ -95,6 +100,7 @@ final class DIContainer {
             notification: notification,
             watchConnectivity: watchConnectivity,
             syncCoordinator: syncCoordinator,
+            router: router,
             errorHandler: errorHandler
         )
     }()
@@ -111,6 +117,7 @@ final class DIContainer {
     /// `@EnvironmentObject`로 사용하기 위해 concrete 타입으로 노출
     let syncCoordinator: SyncCoordinator
     let errorHandler: ErrorHandler
+    let router: Router
     
     // MARK: - Initializer
     
@@ -122,6 +129,7 @@ final class DIContainer {
         notification: any NotificationManagerProtocol,
         watchConnectivity: any WatchConnectivityManagerProtocol,
         syncCoordinator: SyncCoordinator,
+        router: Router,
         errorHandler: ErrorHandler
     ) {
         self.healthKit = healthKit
@@ -131,6 +139,7 @@ final class DIContainer {
         self.notification = notification
         self.watchConnectivity = watchConnectivity
         self.syncCoordinator = syncCoordinator
+        self.router = router
         self.errorHandler = errorHandler
     }
 }
