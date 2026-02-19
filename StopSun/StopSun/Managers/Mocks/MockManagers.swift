@@ -51,6 +51,7 @@ final class MockWeatherManager: WeatherManagerProtocol {
 
 final class MockLocationManager: LocationManagerProtocol {
     var isAuthorized: Bool { true }
+    var isDenied: Bool { false }
     
     func requestAuthorization() async {}
     
