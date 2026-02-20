@@ -13,7 +13,7 @@ import SwiftUI
 struct UserProfileExampleView: View {
 
     // MARK: - ViewModel
-    @StateObject private var viewModel = UserProfileViewModel()
+    @StateObject private var viewModel = UserProfileViewModel(localStorage: DIContainer.shared.localStorage)
 
     var body: some View {
         NavigationView {
