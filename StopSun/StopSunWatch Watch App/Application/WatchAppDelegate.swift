@@ -22,6 +22,9 @@ class WatchAppDelegate: NSObject, WKExtensionDelegate {
         // WatchNotificationDelegate를 알림 델리게이트로 설정
         UNUserNotificationCenter.current().delegate = WatchNotificationDelegate.shared
 
+        // WatchSessionManager 싱글톤 초기화 (init에서 WCSession 자동 활성화)
+        _ = WatchSessionManager.shared
+
         requestNotificationPermission()
         registerNotificationCategories()
     }

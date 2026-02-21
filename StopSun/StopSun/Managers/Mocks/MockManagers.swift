@@ -206,9 +206,21 @@ final class MockNotificationManager: NotificationManagerProtocol {
 
 final class MockWatchConnectivityManager: WatchConnectivityManagerProtocol {
     var isReachable: Bool { false }
-    
+
+    var onMessageReceived: (([String: Any]) -> Void)?
+    var onUserInfoReceived: (([String: Any]) -> Void)?
+
     func activate() {}
     func sendUserProfile(_ profile: UserProfile) {}
     func sendSunscreenApplication(_ application: SunscreenApplication) {}
     func sendMEDStatus(totalSED: Double, maxMED: Double) {}
+
+    func sendMessage(
+        _ message: [String: Any],
+        replyHandler: (([String: Any]) -> Void)?,
+        errorHandler: ((Error) -> Void)?
+    ) {}
+
+    func transferUserInfo(_ userInfo: [String: Any]) {}
+    func updateApplicationContext(_ context: [String: Any]) throws {}
 }
