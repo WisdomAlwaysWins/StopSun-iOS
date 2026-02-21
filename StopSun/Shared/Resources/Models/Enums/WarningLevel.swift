@@ -105,6 +105,20 @@ enum WarningLevel: String, CaseIterable, Sendable, Equatable {
         }
     }
     
+    /// 경고 레벨명 (대시보드 색상 분리용)
+    var levelName: String {
+        switch self {
+        case .safe:
+            return L10n.MED.Status.Safe.level
+        case .caution:
+            return L10n.MED.Status.Caution.level
+        case .warning:
+            return L10n.MED.Status.Warning.level
+        case .danger:
+            return L10n.MED.Status.Danger.level
+        }
+    }
+    
     /// 경고 레벨 설명 (L10n 기반)
     var statusDescription: String {
         switch self {
