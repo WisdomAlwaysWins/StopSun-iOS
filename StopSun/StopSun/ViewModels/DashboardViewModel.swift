@@ -21,14 +21,21 @@ final class DashboardViewModel {
     
     var currentPage: Int = 0
     
+    /// 캐싱된 날짜 문자열 (하루에 한 번만 갱신)
+    private(set) var formattedDate: String = ""
+    
     // MARK: - Dependencies
     
     private let syncCoordinator: SyncCoordinator
+    
+    /// 재sync 판단 기준 (15분)
+    private let resyncInterval: TimeInterval = 15 * 60
     
     // MARK: - Initializer
     
     init(syncCoordinator: SyncCoordinator) {
         self.syncCoordinator = syncCoordinator
+        self.formattedDate = Date().toDayWithWeekdayString
     }
     
     // MARK: - MED Data (J/m² 단위로 표시)
@@ -95,24 +102,30 @@ final class DashboardViewModel {
         }
     }
     
-    // MARK: - Formatted
-
-    var formattedDate: String {
-        Date().toDayWithWeekdayString
-    }
-    
     // MARK: - Actions
     
+    /// 최초 진입 또는 포그라운드 복귀 시 호출
     func onAppear() async {
-        guard syncCoordinator.lastSyncTime == nil else { return }
-        await syncCoordinator.startSync()
+        // 날짜 갱신 (자정 지났을 때 대비)
+        formattedDate = Date().toDayWithWeekdayString
+        
+        // 한 번도 sync 안 했으면 바로 시작
+        guard let lastSync = syncCoordinator.lastSyncTime else {
+            await syncCoordinator.startSync()
+            return
+        }
+        
+        // 마지막 sync로부터 15분 이상 경과했으면 재sync
+        if Date().timeIntervalSince(lastSync) > resyncInterval {
+            await syncCoordinator.startSync()
+        }
     }
     
     // MARK: - Debug
-
-    #if DEBUG
+    
+#if DEBUG
     var debugSyncCoordinator: SyncCoordinator {
         syncCoordinator
     }
-    #endif
+#endif
 }

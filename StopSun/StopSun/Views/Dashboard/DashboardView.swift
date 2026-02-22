@@ -10,6 +10,7 @@ import SwiftUI
 struct DashboardView: View {
     
     @State private var viewModel: DashboardViewModel
+    @Environment(\.scenePhase) private var scenePhase
 #if DEBUG
     @State private var showDebugSheet = false
 #endif
@@ -41,6 +42,11 @@ struct DashboardView: View {
         }
         .task {
             await viewModel.onAppear()
+        }
+        .onChange(of: scenePhase) { _, newPhase in
+            if newPhase == .active {
+                Task { await viewModel.onAppear() }
+            }
         }
 #if DEBUG
         .safeAreaInset(edge: .bottom) {
