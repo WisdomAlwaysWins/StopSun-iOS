@@ -151,6 +151,9 @@ enum L10n {
             static var high: String { .localized("uv.level.high") }
             static var veryHigh: String { .localized("uv.level.veryHigh") }
             static var extreme: String { .localized("uv.level.extreme") }
+        }
+    }
+    
     // MARK: - Dashboard
     
     enum Dashboard {
