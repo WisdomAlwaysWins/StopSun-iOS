@@ -8,28 +8,99 @@
 import Foundation
 
 /// 로컬 저장소 관리자
+///
+/// 내부적으로 `UserProfileManager`, `SunScreenManager`에 위임하고,
+/// 히스토리/기록 등 추가 저장소를 직접 관리합니다.
+///
 final class LocalStorageManager: LocalStorageManagerProtocol {
     
-    // MARK: - UserProfile
+    // MARK: - Internal Managers
+    
+    private let profileManager: UserProfileManager
+    private let sunScreenManager: SunScreenManager
+    
+    // MARK: - Initialization
+    
+    init(
+        profileManager: UserProfileManager = UserProfileManager(),
+        sunScreenManager: SunScreenManager = SunScreenManager()
+    ) {
+        self.profileManager = profileManager
+        self.sunScreenManager = sunScreenManager
+        Log.debug("LocalStorageManager initialized")
+    }
+    
+    // MARK: - UserProfile (→ UserProfileManager)
     
     func loadUserProfile() -> UserProfile? {
-        // TODO: 구현
-        return nil
+        profileManager.fetchProfile()
     }
     
     func saveUserProfile(_ profile: UserProfile) {
-        // TODO: 구현
+        profileManager.saveProfile(profile)
+    }
+    
+    func loadUserProfileOrDefault() -> UserProfile {
+        profileManager.fetchProfileOrDefault()
     }
     
     func updateSkinType(_ skinType: SkinType) {
-        // TODO: 구현
+        profileManager.updateSkinType(skinType)
     }
     
     func updateSunscreenSPF(_ spfLevel: SPFLevel) {
-        // TODO: 구현
+        profileManager.updateSPFLevel(spfLevel)
     }
     
-    // MARK: - SunscreenApplication
+    func deleteUserProfile() {
+        profileManager.deleteProfile()
+    }
+    
+    func hasUserProfile() -> Bool {
+        profileManager.hasProfile()
+    }
+    
+    // MARK: - Onboarding (→ UserProfileManager)
+    
+    func saveOnboardingCompleted(_ isCompleted: Bool) {
+        profileManager.saveOnboardingCompleted(isCompleted)
+    }
+    
+    func loadOnboardingCompleted() -> Bool {
+        profileManager.fetchOnboardingCompleted()
+    }
+    
+    func checkIsFirstLaunch() -> Bool {
+        profileManager.checkIsFirstLaunch()
+    }
+    
+    // MARK: - Active Sunscreen (→ SunScreenManager)
+    
+    func saveActiveSunscreen(_ sunscreen: SunscreenApplication) {
+        sunScreenManager.saveSunScreen(sunscreen)
+    }
+    
+    func loadActiveSunscreen() -> SunscreenApplication? {
+        sunScreenManager.fetchSunScreen()
+    }
+    
+    func loadActiveValidSunscreen() -> SunscreenApplication? {
+        sunScreenManager.fetchActiveSunScreen()
+    }
+    
+    func deleteActiveSunscreen() {
+        sunScreenManager.deleteSunScreen()
+    }
+    
+    func hasActiveSunscreen() -> Bool {
+        sunScreenManager.hasSunScreen()
+    }
+    
+    func fetchRemainingMinutes() -> Int {
+        sunScreenManager.fetchRemainingMinutes()
+    }
+    
+    // MARK: - Sunscreen History
     
     func loadSunscreenHistory() -> [SunscreenApplication] {
         // TODO: 구현
