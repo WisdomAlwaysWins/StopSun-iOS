@@ -12,29 +12,36 @@ import SwiftUI
 /// - Manager/Service에 직접 접근하지 않음
 struct UserProfileExampleView: View {
 
-    @State private var viewModel = UserProfileViewModel(
-        localStorage: MockLocalStorageManager()
-    )
+    // MARK: - ViewModel
+    @StateObject private var viewModel = UserProfileViewModel(localStorage: DIContainer.shared.localStorage)
 
     var body: some View {
         NavigationView {
             Form {
+                // 피부 타입 섹션
                 skinTypeSection
+
+                // SPF 레벨 섹션
                 spfLevelSection
+
+                // 프로필 정보 섹션
                 profileInfoSection
+
+                // 액션 섹션
                 actionSection
             }
             .navigationTitle("프로필 설정")
-            .onAppear { viewModel.refresh() }
+            .onAppear {
+                viewModel.refresh()
+            }
         }
     }
 
+    // MARK: - Sections
+
     private var skinTypeSection: some View {
         Section {
-            Picker("피부 타입", selection: Binding(
-                get: { viewModel.skinType },
-                set: { viewModel.updateSkinType($0) }
-            )) {
+            Picker("피부 타입", selection: $viewModel.skinType) {
                 ForEach(viewModel.allSkinTypes) { skinType in
                     VStack(alignment: .leading) {
                         Text(skinType.title)
@@ -45,17 +52,28 @@ struct UserProfileExampleView: View {
                     .tag(skinType)
                 }
             }
+            .onChange(of: viewModel.skinType) { _, newValue in
+                viewModel.updateSkinType(newValue)
+            }
 
             VStack(alignment: .leading, spacing: 8) {
-                Text("피부 타입 설명").font(.caption).foregroundColor(.gray)
-                Text(viewModel.skinTypeDescription).font(.subheadline)
+                Text("피부 타입 설명")
+                    .font(.caption)
+                    .foregroundColor(.gray)
+
+                Text(viewModel.skinTypeDescription)
+                    .font(.subheadline)
+
                 HStack {
-                    Text("최대 MED:").font(.caption)
+                    Text("최대 MED:")
+                        .font(.caption)
                     Text("\(String(format: "%.0f", viewModel.maxMED))")
-                        .font(.caption).fontWeight(.bold)
+                        .font(.caption)
+                        .fontWeight(.bold)
                 }
             }
             .padding(.vertical, 4)
+
         } header: {
             Text("피부 타입")
         } footer: {
@@ -65,29 +83,40 @@ struct UserProfileExampleView: View {
 
     private var spfLevelSection: some View {
         Section {
-            Picker("SPF 레벨", selection: Binding(
-                get: { viewModel.spfLevel },
-                set: { viewModel.updateSPFLevel($0) }
-            )) {
+            Picker("SPF 레벨", selection: $viewModel.spfLevel) {
                 ForEach(viewModel.allSPFLevels) { spfLevel in
-                    Text(spfLevel.displayTitle).tag(spfLevel)
+                    Text(spfLevel.displayTitle)
+                        .tag(spfLevel)
+                }
+            }
+            .onChange(of: viewModel.spfLevel) { _, newValue in
+                viewModel.updateSPFLevel(newValue)
+            }
+
+            HStack {
+                Text("권장 SPF")
+                    .foregroundColor(.gray)
+                Spacer()
+                Text(viewModel.recommendedSPFLevel.displayTitle)
+                    .fontWeight(.medium)
+            }
+
+            if !viewModel.isUsingSufficientSPF {
+                HStack {
+                    Image(systemName: "exclamationmark.triangle.fill")
+                        .foregroundColor(.orange)
+                    Text("권장 SPF보다 낮습니다")
+                        .font(.caption)
+                }
+            } else {
+                HStack {
+                    Image(systemName: "checkmark.circle.fill")
+                        .foregroundColor(.green)
+                    Text("적절한 SPF를 사용 중입니다")
+                        .font(.caption)
                 }
             }
 
-            HStack {
-                Text("권장 SPF").foregroundColor(.gray)
-                Spacer()
-                Text(viewModel.recommendedSPFLevel.displayTitle).fontWeight(.medium)
-            }
-
-            HStack {
-                Image(systemName: viewModel.isUsingSufficientSPF
-                      ? "checkmark.circle.fill" : "exclamationmark.triangle.fill")
-                    .foregroundColor(viewModel.isUsingSufficientSPF ? .green : .orange)
-                Text(viewModel.isUsingSufficientSPF
-                     ? "적절한 SPF를 사용 중입니다" : "권장 SPF보다 낮습니다")
-                    .font(.caption)
-            }
         } header: {
             Text("SPF 레벨")
         }
@@ -98,24 +127,34 @@ struct UserProfileExampleView: View {
             HStack {
                 Text("온보딩 완료")
                 Spacer()
-                Image(systemName: viewModel.isOnboardingCompleted
-                      ? "checkmark.circle.fill" : "xmark.circle")
+                Image(systemName: viewModel.isOnboardingCompleted ? "checkmark.circle.fill" : "xmark.circle")
                     .foregroundColor(viewModel.isOnboardingCompleted ? .green : .gray)
             }
 
             VStack(alignment: .leading, spacing: 8) {
-                Text("안전 노출 시간 예시").font(.caption).foregroundColor(.gray)
+                Text("안전 노출 시간 예시")
+                    .font(.caption)
+                    .foregroundColor(.gray)
+
                 ForEach([3.0, 7.0, 11.0], id: \.self) { uvIndex in
                     HStack {
-                        Text("UV \(Int(uvIndex)):").font(.caption)
+                        Text("UV \(Int(uvIndex)):")
+                            .font(.caption)
+
                         Spacer()
-                        let safeTime = viewModel.calculateSafeExposureTime(
-                            uvIndex: uvIndex, usingSunscreen: false)
-                        Text("\(safeTime)분").font(.caption).fontWeight(.medium)
-                        Text("(선크림 미사용)").font(.caption2).foregroundColor(.gray)
+
+                        let safeTime = viewModel.calculateSafeExposureTime(uvIndex: uvIndex, usingSunscreen: false)
+                        Text("\(safeTime)분")
+                            .font(.caption)
+                            .fontWeight(.medium)
+
+                        Text("(선크림 미사용)")
+                            .font(.caption2)
+                            .foregroundColor(.gray)
                     }
                 }
             }
+
         } header: {
             Text("프로필 정보")
         }
@@ -123,11 +162,22 @@ struct UserProfileExampleView: View {
 
     private var actionSection: some View {
         Section {
-            Button { viewModel.refresh() } label: {
-                Label("프로필 새로고침", systemImage: "arrow.clockwise")
+            Button(action: {
+                viewModel.refresh()
+            }) {
+                HStack {
+                    Image(systemName: "arrow.clockwise")
+                    Text("프로필 새로고침")
+                }
             }
-            Button(role: .destructive) { viewModel.resetProfile() } label: {
-                Label("프로필 초기화", systemImage: "trash")
+
+            Button(role: .destructive, action: {
+                viewModel.resetProfile()
+            }) {
+                HStack {
+                    Image(systemName: "trash")
+                    Text("프로필 초기화")
+                }
             }
         } header: {
             Text("관리")
@@ -135,4 +185,6 @@ struct UserProfileExampleView: View {
     }
 }
 
-#Preview { UserProfileExampleView() }
+#Preview {
+    UserProfileExampleView()
+}
