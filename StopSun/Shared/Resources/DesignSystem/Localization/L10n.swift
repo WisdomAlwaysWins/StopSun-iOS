@@ -133,6 +133,24 @@ enum L10n {
         }
     }
     
+    // MARK: - SPF
+    
+    enum SPF {
+        static var none: String { .localized("spf.none") }
+        static var spf15: String { .localized("spf.15") }
+        static var spf30: String { .localized("spf.30") }
+        static var spf50: String { .localized("spf.50") }
+    }
+    
+    // MARK: - UV
+    
+    enum UV {
+        enum Level {
+            static var low: String { .localized("uv.level.low") }
+            static var moderate: String { .localized("uv.level.moderate") }
+            static var high: String { .localized("uv.level.high") }
+            static var veryHigh: String { .localized("uv.level.veryHigh") }
+            static var extreme: String { .localized("uv.level.extreme") }
     // MARK: - Dashboard
     
     enum Dashboard {
@@ -195,8 +213,15 @@ enum L10n {
                 static var description: String { .localized("med.status.danger.desc") }
                 static var level: String { .localized("med.status.danger.level") }
             }
+            
+            // TODO: 100% 이상에서 다르게 보여줄건지 검토
+            enum Critical {
+                static var title: String { .localized("med.status.critical.title") }
+                static var description: String { .localized("med.status.critical.desc") }
+            }
         }
     }
+    
     
     // MARK: - Notification
     
