@@ -12,14 +12,6 @@ import Foundation
 /// - 비즈니스 로직은 Service 레이어에서 처리
 final class UserProfileManager {
 
-    // MARK: - Singleton
-
-    static let shared = UserProfileManager()
-
-    // MARK: - Notifications
-
-    static let userProfileDidChangeNotification = Notification.Name("UserProfileDidChange")
-
     // MARK: - Properties
 
     private let userDefaults: UserDefaults
@@ -29,7 +21,7 @@ final class UserProfileManager {
 
     // MARK: - Initialization
 
-    private init(userDefaults: UserDefaults = .standard) {
+    init(userDefaults: UserDefaults = .standard) {
         self.userDefaults = userDefaults
         Log.debug("UserProfileManager initialized")
     }
@@ -47,7 +39,7 @@ final class UserProfileManager {
             Log.info("UserProfile saved successfully: \(profile)")
 
             NotificationCenter.default.post(
-                name: Self.userProfileDidChangeNotification,
+                name: .userProfileDidChange,
                 object: profile
             )
 
@@ -121,7 +113,7 @@ final class UserProfileManager {
         Log.info("UserProfile deleted")
 
         NotificationCenter.default.post(
-            name: Self.userProfileDidChangeNotification,
+            name: .userProfileDidChange,
             object: nil
         )
     }
