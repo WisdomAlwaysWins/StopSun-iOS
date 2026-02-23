@@ -38,7 +38,7 @@ import SwiftUI
 final class Router {
 
     // MARK: - Properties
-
+    
     /// NavigationStack에 바인딩할 path
     var path = NavigationPath()
 

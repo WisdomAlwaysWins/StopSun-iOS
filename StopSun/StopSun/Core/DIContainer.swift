@@ -101,6 +101,7 @@ final class DIContainer {
             healthKit: healthKit,
             location: location
         )
+        
         let router = Router()
         
         return DIContainer(
