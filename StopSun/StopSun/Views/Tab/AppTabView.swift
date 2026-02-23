@@ -45,6 +45,13 @@ struct AppTabView: View {
             .tag(AppTab.settings)
         }
          .tint(.text00)
+         .onAppear {
+             let appearance = UITabBarAppearance()
+             appearance.backgroundColor = UIColor(.white00)
+             appearance.shadowColor = UIColor(.gray01)
+             UITabBar.appearance().standardAppearance = appearance
+             UITabBar.appearance().scrollEdgeAppearance = appearance
+         }
     }
     
     // MARK: - Tab Label
