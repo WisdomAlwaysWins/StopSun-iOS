@@ -190,4 +190,9 @@ final class DIContainer {
 //            permissionManager: permissionManager
 //        )
 //    }
+    
+    @MainActor
+    func makeDashboardViewModel() -> DashboardViewModel {
+        DashboardViewModel(syncCoordinator: syncCoordinator)
+    }
 }
