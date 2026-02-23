@@ -22,6 +22,8 @@ protocol LocationManagerProtocol {
     /// 권한 허용 여부
     var isAuthorized: Bool { get }
     
+    var isDenied: Bool { get }
+    
     /// 위치 권한 요청
     func requestAuthorization() async
     
