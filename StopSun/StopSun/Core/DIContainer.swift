@@ -54,6 +54,11 @@ final class DIContainer {
             watchConnectivity: watchConnectivity
         )
         
+        let permissionManager = PermissionManager(
+            notification: notification,
+            healthKit: healthKit,
+            location: location
+        )
         let router = Router()
         
         return DIContainer(
@@ -64,6 +69,7 @@ final class DIContainer {
             notification: notification,
             watchConnectivity: watchConnectivity,
             syncCoordinator: syncCoordinator,
+            permissionManager: permissionManager,
             router: router,
             errorHandler: errorHandler
         )
@@ -90,6 +96,11 @@ final class DIContainer {
             watchConnectivity: watchConnectivity
         )
         
+        let permissionManager = PermissionManager(
+            notification: notification,
+            healthKit: healthKit,
+            location: location
+        )
         let router = Router()
         
         return DIContainer(
@@ -100,6 +111,7 @@ final class DIContainer {
             notification: notification,
             watchConnectivity: watchConnectivity,
             syncCoordinator: syncCoordinator,
+            permissionManager: permissionManager,
             router: router,
             errorHandler: errorHandler
         )
@@ -114,8 +126,8 @@ final class DIContainer {
     let notification: any NotificationManagerProtocol
     let watchConnectivity: any WatchConnectivityManagerProtocol
     
-    /// `@EnvironmentObject`로 사용하기 위해 concrete 타입으로 노출
     let syncCoordinator: SyncCoordinator
+    let permissionManager: PermissionManager
     let errorHandler: ErrorHandler
     let router: Router
     
@@ -129,6 +141,7 @@ final class DIContainer {
         notification: any NotificationManagerProtocol,
         watchConnectivity: any WatchConnectivityManagerProtocol,
         syncCoordinator: SyncCoordinator,
+        permissionManager: PermissionManager,
         router: Router,
         errorHandler: ErrorHandler
     ) {
@@ -139,7 +152,41 @@ final class DIContainer {
         self.notification = notification
         self.watchConnectivity = watchConnectivity
         self.syncCoordinator = syncCoordinator
+        self.permissionManager = permissionManager
         self.router = router
         self.errorHandler = errorHandler
     }
+    
+    // MARK: - Factory
+    
+    @MainActor
+    func makeOnboardingViewModel() -> OnboardingViewModel {
+        OnboardingViewModel(
+            healthKit: healthKit,
+            location: location,
+            notification: notification,
+            watchConnectivity: watchConnectivity,
+            permissionManager: permissionManager,
+            localStorage: localStorage
+        )
+    }
+    
+    @MainActor
+    func makeUserProfileViewModel() -> UserProfileViewModel {
+        UserProfileViewModel(localStorage: localStorage)
+    }
+    
+    @MainActor
+    func makeSunScreenViewModel() -> SunScreenViewModel {
+        SunScreenViewModel(localStorage: localStorage)
+    }
+    
+    // 설정화면 구현시 사용
+//    @MainActor
+//    func makeSettingsViewModel() -> SettingsViewModel {
+//        SettingsViewModel(
+//            localStorage: localStorage,
+//            permissionManager: permissionManager
+//        )
+//    }
 }
