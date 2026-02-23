@@ -107,6 +107,20 @@ struct SettingsPlaceholderView: View {
                 Text("앱 설정이 여기에 표시됩니다")
                     .font(.ssFont(.R3))
                     .foregroundStyle(.text04)
+                
+                NavigationLink(value: Route.skinTypeSettings) {
+                    Text("스킨타입 설정")
+                }
+                
+                NavigationLink("스킨타입 설정(라우터없이)") {
+                    EmptyView()
+                }
+            }
+        }
+        .navigationDestination(for: Route.self) { route in
+            switch route {
+            case .skinTypeSettings:
+                EmptyView()
             }
         }
     }
