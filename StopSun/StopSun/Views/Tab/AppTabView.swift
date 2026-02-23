@@ -24,15 +24,15 @@ struct AppTabView: View {
             }
             .tag(AppTab.dashboard)
             
-            // MARK: - 기록
+            // MARK: - 정보
             
             NavigationStack {
-                RecordsPlaceholderView()
+                InfoPlaceholderView()
             }
             .tabItem {
-                tabLabel(for: .records)
+                tabLabel(for: .info)
             }
-            .tag(AppTab.records)
+            .tag(AppTab.info)
             
             // MARK: - 설정
             
@@ -66,22 +66,22 @@ struct AppTabView: View {
 
 // MARK: - Placeholder Views
 
-/// 기록 탭 placeholder (추후 실제 화면으로 교체)
-struct RecordsPlaceholderView: View {
+/// 정보 탭 placeholder (추후 실제 화면으로 교체)
+struct InfoPlaceholderView: View {
     var body: some View {
         ZStack {
             Color.white01.ignoresSafeArea()
             
             VStack(spacing: 12) {
-                Image(systemName: "chart.bar.fill")
+                Image(systemName: "info.fill")
                     .font(.system(size: 48))
                     .foregroundStyle(.text04)
                 
-                Text("기록")
+                Text("정보")
                     .font(.ssFont(.SB4))
                     .foregroundStyle(.text00)
                 
-                Text("UV 노출 기록이 여기에 표시됩니다")
+                Text("자외선 정보성 글이 여기 표시됩니다.")
                     .font(.ssFont(.R3))
                     .foregroundStyle(.text04)
             }

@@ -18,7 +18,8 @@ import Foundation
 ///
 enum AppTab: String, CaseIterable, Hashable {
     case dashboard
-    case records
+//    case records
+    case info
     case settings
     
     // MARK: - Display
@@ -28,7 +29,8 @@ enum AppTab: String, CaseIterable, Hashable {
     var title: String {
         switch self {
         case .dashboard: "대시보드"
-        case .records: "기록"
+//        case .records: "기록"
+        case .info: "정보"
         case .settings: "설정"
         }
     }
@@ -37,7 +39,8 @@ enum AppTab: String, CaseIterable, Hashable {
     var iconName: String {
         switch self {
         case .dashboard: "clipboard"
-        case .records: "bar-chart"
+//        case .records: "bar-chart"
+        case .info: "info"
         case .settings: "settings"
         }
     }
@@ -45,7 +48,8 @@ enum AppTab: String, CaseIterable, Hashable {
     var selectedIconName: String {
         switch self {
         case .dashboard: "clipboard-tint"
-        case .records: "bar-chart-tint"
+//        case .records: "bar-chart-tint"
+        case .info: "info-tint"
         case .settings: "settings-tint"
         }
     }
