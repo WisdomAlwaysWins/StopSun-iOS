@@ -12,9 +12,8 @@ import SwiftUI
 /// - Manager/Service에 직접 접근하지 않음
 struct SunScreenExampleView: View {
 
-    @State private var viewModel = SunScreenViewModel(
-        localStorage: MockLocalStorageManager()
-    )
+    // MARK: - ViewModel
+    @StateObject private var viewModel = SunScreenViewModel(localStorage: DIContainer.shared.localStorage)
 
     var body: some View {
         NavigationView {
