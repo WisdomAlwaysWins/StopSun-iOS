@@ -621,16 +621,16 @@ private extension SyncCoordinator {
 
     /// Watch에서 수신한 즉시 메시지 처리
     func handleWatchMessage(_ message: [String: Any]) {
-        Log.debug("Watch 메시지 수신: \(message["type"] as? String ?? "unknown")")
+        Log.debug("Watch 메시지 수신: \(message[WatchMessageKey.type] as? String ?? "unknown")")
 
-        if message["request_dashboard_sync"] as? Bool == true {
+        if message[WatchMessageKey.requestDashboardSync] as? Bool == true {
             sendDashboardToWatch()
         }
     }
 
     /// Watch에서 수신한 백그라운드 UserInfo 처리
     func handleUserInfoFromWatch(_ userInfo: [String: Any]) {
-        Log.debug("Watch UserInfo 수신: \(userInfo["type"] as? String ?? "unknown")")
+        Log.debug("Watch UserInfo 수신: \(userInfo[WatchMessageKey.type] as? String ?? "unknown")")
 
         // 향후 Watch → iPhone 백그라운드 데이터 처리
         // 예: 운동 데이터, Watch에서 선크림 도포 확인 등
@@ -639,40 +639,40 @@ private extension SyncCoordinator {
     /// Watch에 대시보드 데이터 전송 및 Application Context 업데이트
     func sendDashboardToWatch() {
         var data: [String: Any] = [
-            "type": "dashboard_data",
-            "uvIndex": currentUVIndex,
-            "totalSED": todayTotalSED,
-            "warningLevel": warningLevel.rawValue,
-            "timestamp": Date().timeIntervalSince1970
+            WatchMessageKey.type: WatchMessageKey.TypeValue.dashboardData,
+            WatchMessageKey.uvIndex: currentUVIndex,
+            WatchMessageKey.totalSED: todayTotalSED,
+            WatchMessageKey.warningLevel: warningLevel.rawValue,
+            WatchMessageKey.timestamp: Date().timeIntervalSince1970
         ]
 
         if let weather = currentWeather {
-            data["cityName"] = weather.location.cityName
-            data["temperature"] = weather.currentTemperature
+            data[WatchMessageKey.cityName] = weather.location.cityName
+            data[WatchMessageKey.temperature] = weather.currentTemperature
         }
 
         if let skinType = userProfile?.skinType {
-            data["maxSED"] = SEDCalculator.maxSED(for: skinType)
+            data[WatchMessageKey.maxSED] = SEDCalculator.maxSED(for: skinType)
         }
 
         if let sunscreen = activeSunscreen {
-            data["sunscreenSPF"] = sunscreen.spfLevel.rawValue
-            data["sunscreenAppliedAt"] = sunscreen.appliedAt.timeIntervalSince1970
+            data[WatchMessageKey.sunscreenSPF] = sunscreen.spfLevel.rawValue
+            data[WatchMessageKey.sunscreenAppliedAt] = sunscreen.appliedAt.timeIntervalSince1970
         }
 
-        // 1. 즉시 메시지 전송 (Watch가 실행 중일 때)
-        watchConnectivity.sendMessage(data, replyHandler: { reply in
-            Log.debug("Watch 대시보드 응답: \(reply)")
-        }, errorHandler: { error in
-            Log.debug("Watch 즉시 전송 불가 - Application Context로 대체됨")
-        })
-
-        // 2. Application Context 업데이트 (Watch 앱 다음 실행 시 최신 상태 제공)
+        // 1. Application Context 업데이트 (보장된 전달 — 먼저 실행)
         do {
             try watchConnectivity.updateApplicationContext(data)
         } catch {
             Log.error("Application Context 업데이트 실패: \(error.localizedDescription)")
         }
+
+        // 2. 즉시 메시지 전송 (Watch가 실행 중일 때 — 실패 가능)
+        watchConnectivity.sendMessage(data, replyHandler: { reply in
+            Log.debug("Watch 대시보드 응답: \(reply)")
+        }, errorHandler: { _ in
+            Log.debug("Watch 즉시 전송 불가 - Application Context로 대체됨")
+        })
 
         Log.info("Watch 대시보드 데이터 전송")
     }

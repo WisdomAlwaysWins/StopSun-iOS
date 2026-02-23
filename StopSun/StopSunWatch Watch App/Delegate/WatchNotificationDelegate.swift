@@ -65,12 +65,12 @@ final class WatchNotificationDelegate: NSObject, UNUserNotificationCenterDelegat
 
         // 알림 액션에 따른 처리
         switch actionIdentifier {
-        case "SUNSCREEN_YES":
+        case WatchNotificationIdentifier.Action.sunscreenYes:
             print("[Watch] 사용자가 자외선 차단제를 발랐습니다.")
             // TODO: ViewModel/Coordinator를 통한 비즈니스 로직 처리
             // 예: viewModel.recordSunscreenApplication()
 
-        case "SUNSCREEN_NO":
+        case WatchNotificationIdentifier.Action.sunscreenNo:
             print("[Watch] 사용자가 자외선 차단제를 바르지 않았습니다.")
             // TODO: ViewModel/Coordinator를 통한 비즈니스 로직 처리
             // 예: viewModel.recordSunscreenSkip()

@@ -48,17 +48,17 @@ class WatchAppDelegate: NSObject, WKExtensionDelegate {
     private func registerNotificationCategories() {
         // 자외선 차단제 확인 카테고리
         let yesAction = UNNotificationAction(
-            identifier: "SUNSCREEN_YES",
+            identifier: WatchNotificationIdentifier.Action.sunscreenYes,
             title: "예",
             options: []
         )
         let noAction = UNNotificationAction(
-            identifier: "SUNSCREEN_NO",
+            identifier: WatchNotificationIdentifier.Action.sunscreenNo,
             title: "아니오",
             options: []
         )
         let sunscreenCategory = UNNotificationCategory(
-            identifier: "SUNSCREEN_CATEGORY",
+            identifier: WatchNotificationIdentifier.Category.sunscreen,
             actions: [yesAction, noAction],
             intentIdentifiers: [],
             options: []
@@ -66,7 +66,7 @@ class WatchAppDelegate: NSObject, WKExtensionDelegate {
 
         // 타이머 완료 카테고리
         let timerCategory = UNNotificationCategory(
-            identifier: "TIMER_COMPLETION",
+            identifier: WatchNotificationIdentifier.Category.timerCompletion,
             actions: [],
             intentIdentifiers: [],
             options: [.customDismissAction]

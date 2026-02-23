@@ -14,21 +14,6 @@ import WatchKit
 /// - 타이머 완료 알림의 스케줄링, 취소, 즉시 표시 등의 기능을 제공합니다.
 final class WatchTimerNotificationManager {
 
-    // MARK: - Constants
-
-    /// 알림 식별자를 관리하는 열거형
-    /// - 문자열 하드코딩으로 인한 오타를 방지하고 일관성을 보장합니다.
-    private enum NotificationIdentifier {
-        static let timerCompletion = "watchTimerCompletion"
-        static let immediateTimerCompletion = "immediateTimerCompletion"
-    }
-
-    /// 알림 카테고리 식별자를 관리하는 열거형
-    /// - StopSunWatchApp에서 등록한 카테고리와 매칭되어야 합니다.
-    private enum CategoryIdentifier {
-        static let timerCompletion = "TIMER_COMPLETION"
-    }
-
     // MARK: - Initializer
 
     /// DIContainer에서 주입받아 사용하는 생성자
@@ -82,7 +67,7 @@ final class WatchTimerNotificationManager {
 
         // 알림 요청 생성
         let request = UNNotificationRequest(
-            identifier: NotificationIdentifier.timerCompletion,
+            identifier: WatchNotificationIdentifier.Request.timerCompletion,
             content: content,
             trigger: trigger
         )
@@ -102,7 +87,7 @@ final class WatchTimerNotificationManager {
     /// - 이미 전달된 알림은 취소할 수 없으며, 대기 중인 알림만 취소됩니다.
     func cancelTimerNotification() {
         UNUserNotificationCenter.current().removePendingNotificationRequests(
-            withIdentifiers: [NotificationIdentifier.timerCompletion]
+            withIdentifiers: [WatchNotificationIdentifier.Request.timerCompletion]
         )
         print("[Watch] 타이머 알림 취소됨")
     }
@@ -124,7 +109,7 @@ final class WatchTimerNotificationManager {
 
         // 알림 요청 생성 (즉시 알림은 별도 identifier 사용)
         let request = UNNotificationRequest(
-            identifier: NotificationIdentifier.immediateTimerCompletion,
+            identifier: WatchNotificationIdentifier.Request.immediateTimerCompletion,
             content: content,
             trigger: trigger
         )
@@ -152,7 +137,7 @@ final class WatchTimerNotificationManager {
         content.title = "타이머 완료"
         content.body = "설정한 시간이 완료되었습니다."
         content.sound = UNNotificationSound.default
-        content.categoryIdentifier = CategoryIdentifier.timerCompletion
+        content.categoryIdentifier = WatchNotificationIdentifier.Category.timerCompletion
 
         return content
     }

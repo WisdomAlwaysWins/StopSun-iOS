@@ -51,29 +51,32 @@ class WatchSessionManager: NSObject, ObservableObject {
         super.init()
 
         guard WCSession.isSupported() else {
-            print("[Watch] WCSession을 지원하지 않는 기기입니다")
+            Log.warning("WCSession을 지원하지 않는 기기입니다")
             return
         }
 
         session = WCSession.default
         session?.delegate = self
         session?.activate()
-        print("[Watch] WCSession 활성화 요청")
+        Log.info("WCSession 활성화 요청")
     }
 
     // MARK: - Public Methods
 
     /// iPhone에 대시보드 동기화 요청
-    func requestDashboardSync() {
+    ///
+    /// - Parameter onError: 전송 실패 시 호출되는 콜백
+    func requestDashboardSync(onError: (() -> Void)? = nil) {
         let message: [String: Any] = [
-            "request_dashboard_sync": true,
-            "timestamp": Date().timeIntervalSince1970
+            WatchMessageKey.requestDashboardSync: true,
+            WatchMessageKey.timestamp: Date().timeIntervalSince1970
         ]
 
         sendMessage(message, replyHandler: { reply in
-            print("[Watch] iPhone 응답 수신: \(reply)")
+            Log.debug("iPhone 응답 수신: \(reply)")
         }, errorHandler: { error in
-            print("[Watch] 대시보드 동기화 요청 실패: \(error.localizedDescription)")
+            Log.error("대시보드 동기화 요청 실패: \(error.localizedDescription)")
+            onError?()
         })
     }
 
@@ -84,7 +87,7 @@ class WatchSessionManager: NSObject, ObservableObject {
         errorHandler: ((Error) -> Void)? = nil
     ) {
         guard let session = session, session.isReachable else {
-            print("[Watch] WCSession 연결 불가 - 메시지 전송 실패")
+            Log.warning("WCSession 연결 불가 - 메시지 전송 실패")
             errorHandler?(NSError(
                 domain: "WatchConnectivity",
                 code: -1,
@@ -94,22 +97,22 @@ class WatchSessionManager: NSObject, ObservableObject {
         }
 
         session.sendMessage(message, replyHandler: replyHandler) { error in
-            print("[Watch] 메시지 전송 실패: \(error.localizedDescription)")
+            Log.error("메시지 전송 실패: \(error.localizedDescription)")
             errorHandler?(error)
         }
 
-        print("[Watch] 메시지 전송: \(message["type"] as? String ?? message.keys.first ?? "unknown")")
+        Log.debug("메시지 전송: \(message[WatchMessageKey.type] as? String ?? message.keys.first ?? "unknown")")
     }
 
     /// iPhone에 백그라운드 데이터 전송
     func transferUserInfo(_ userInfo: [String: Any]) {
         guard let session = session else {
-            print("[Watch] WCSession 없음 - UserInfo 전송 실패")
+            Log.warning("WCSession 없음 - UserInfo 전송 실패")
             return
         }
 
         session.transferUserInfo(userInfo)
-        print("[Watch] UserInfo 전송: \(userInfo["type"] as? String ?? "unknown")")
+        Log.debug("UserInfo 전송: \(userInfo[WatchMessageKey.type] as? String ?? "unknown")")
     }
 
     /// 마지막으로 수신한 Application Context 조회
@@ -121,7 +124,7 @@ class WatchSessionManager: NSObject, ObservableObject {
         let context = session.receivedApplicationContext
         guard !context.isEmpty else { return nil }
 
-        print("[Watch] 캐시된 Application Context 로드: \(context["type"] as? String ?? "unknown")")
+        Log.debug("캐시된 Application Context 로드: \(context[WatchMessageKey.type] as? String ?? "unknown")")
         return context
     }
 }
@@ -139,22 +142,22 @@ extension WatchSessionManager: WCSessionDelegate {
     ) {
         DispatchQueue.main.async { [weak self] in
             if let error = error {
-                print("[Watch] WCSession 활성화 실패: \(error.localizedDescription)")
+                Log.error("WCSession 활성화 실패: \(error.localizedDescription)")
                 return
             }
 
             switch activationState {
             case .activated:
-                print("[Watch] WCSession 활성화 완료")
+                Log.info("WCSession 활성화 완료")
                 self?.isReachable = session.isReachable
             case .inactive:
-                print("[Watch] WCSession 비활성 상태")
+                Log.warning("WCSession 비활성 상태")
                 self?.isReachable = false
             case .notActivated:
-                print("[Watch] WCSession 미활성화 상태")
+                Log.warning("WCSession 미활성화 상태")
                 self?.isReachable = false
             @unknown default:
-                print("[Watch] WCSession 알 수 없는 상태")
+                Log.warning("WCSession 알 수 없는 상태")
                 self?.isReachable = false
             }
         }
@@ -163,7 +166,7 @@ extension WatchSessionManager: WCSessionDelegate {
     func sessionReachabilityDidChange(_ session: WCSession) {
         DispatchQueue.main.async { [weak self] in
             self?.isReachable = session.isReachable
-            print("[Watch] iPhone 연결 상태 변경: \(session.isReachable)")
+            Log.info("iPhone 연결 상태 변경: \(session.isReachable)")
         }
     }
 
@@ -175,12 +178,12 @@ extension WatchSessionManager: WCSessionDelegate {
         replyHandler: @escaping ([String: Any]) -> Void
     ) {
         DispatchQueue.main.async { [weak self] in
-            print("[Watch] 메시지 수신 (reply 포함): \(message["type"] as? String ?? "unknown")")
+            Log.debug("메시지 수신 (reply 포함): \(message[WatchMessageKey.type] as? String ?? "unknown")")
             self?.onMessageReceived?(message)
 
             let reply: [String: Any] = [
                 "status": "received",
-                "timestamp": Date().timeIntervalSince1970
+                WatchMessageKey.timestamp: Date().timeIntervalSince1970
             ]
             replyHandler(reply)
         }
@@ -188,7 +191,7 @@ extension WatchSessionManager: WCSessionDelegate {
 
     func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
         DispatchQueue.main.async { [weak self] in
-            print("[Watch] 메시지 수신: \(message["type"] as? String ?? "unknown")")
+            Log.debug("메시지 수신: \(message[WatchMessageKey.type] as? String ?? "unknown")")
             self?.onMessageReceived?(message)
         }
     }
@@ -197,7 +200,7 @@ extension WatchSessionManager: WCSessionDelegate {
 
     func session(_ session: WCSession, didReceiveUserInfo userInfo: [String: Any] = [:]) {
         DispatchQueue.main.async { [weak self] in
-            print("[Watch] UserInfo 수신: \(userInfo["type"] as? String ?? "unknown")")
+            Log.debug("UserInfo 수신: \(userInfo[WatchMessageKey.type] as? String ?? "unknown")")
             self?.onUserInfoReceived?(userInfo)
         }
     }
@@ -206,7 +209,7 @@ extension WatchSessionManager: WCSessionDelegate {
 
     func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
         DispatchQueue.main.async { [weak self] in
-            print("[Watch] Application Context 수신: \(applicationContext["type"] as? String ?? "unknown")")
+            Log.debug("Application Context 수신: \(applicationContext[WatchMessageKey.type] as? String ?? "unknown")")
             self?.onApplicationContextReceived?(applicationContext)
         }
     }

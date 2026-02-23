@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject private var viewModel = WatchViewModel()
+    @StateObject private var viewModel: WatchViewModel
+
+    init(viewModel: WatchViewModel = WatchViewModel()) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
 
     var body: some View {
         ScrollView {
@@ -96,6 +100,8 @@ struct ContentView: View {
     }
 }
 
+#if DEBUG
 #Preview {
-    ContentView()
+    ContentView(viewModel: .preview)
 }
+#endif

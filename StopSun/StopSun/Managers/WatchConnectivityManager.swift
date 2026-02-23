@@ -57,9 +57,9 @@ final class WatchConnectivityManager: NSObject, ObservableObject, WatchConnectiv
 
     func sendUserProfile(_ profile: UserProfile) {
         let userInfo: [String: Any] = [
-            "type": "user_profile",
-            "skinType": profile.skinType.rawValue,
-            "spfLevel": profile.spfLevel.rawValue
+            WatchMessageKey.type: WatchMessageKey.TypeValue.userProfile,
+            WatchMessageKey.skinType: profile.skinType.rawValue,
+            WatchMessageKey.spfLevel: profile.spfLevel.rawValue
         ]
 
         transferUserInfo(userInfo)
@@ -68,10 +68,10 @@ final class WatchConnectivityManager: NSObject, ObservableObject, WatchConnectiv
 
     func sendSunscreenApplication(_ application: SunscreenApplication) {
         let message: [String: Any] = [
-            "type": "sunscreen_application",
-            "spfLevel": application.spfLevel.rawValue,
-            "appliedAt": application.appliedAt.timeIntervalSince1970,
-            "reapplyMinutes": application.reapplyIntervalMinutes
+            WatchMessageKey.type: WatchMessageKey.TypeValue.sunscreenApplication,
+            WatchMessageKey.sunscreenSPF: application.spfLevel.rawValue,
+            WatchMessageKey.sunscreenAppliedAt: application.appliedAt.timeIntervalSince1970,
+            WatchMessageKey.reapplyMinutes: application.reapplyIntervalMinutes
         ]
 
         sendMessage(message, replyHandler: nil, errorHandler: nil)
@@ -80,9 +80,9 @@ final class WatchConnectivityManager: NSObject, ObservableObject, WatchConnectiv
 
     func sendMEDStatus(totalSED: Double, maxMED: Double) {
         let message: [String: Any] = [
-            "type": "med_status",
-            "totalSED": totalSED,
-            "maxMED": maxMED
+            WatchMessageKey.type: WatchMessageKey.TypeValue.medStatus,
+            WatchMessageKey.totalSED: totalSED,
+            WatchMessageKey.maxSED: maxMED
         ]
 
         sendMessage(message, replyHandler: nil, errorHandler: nil)

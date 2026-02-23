@@ -28,8 +28,8 @@ class WatchViewModel: ObservableObject {
     @Published var cityName: String = "대기 중..."
     @Published var todayTotalSED: Double = 0.0
     @Published var maxSED: Double = 0.0
-    @Published var warningLevel: String = "safe"
-    @Published var sunscreenSPF: Int?
+    @Published var warningLevel: WarningLevel = .safe
+    @Published var sunscreenSPF: SPFLevel?
     @Published var sunscreenAppliedAt: Date?
 
     /// 마지막 동기화 성공 시각 (nil이면 아직 동기화 안 됨)
@@ -65,12 +65,17 @@ class WatchViewModel: ObservableObject {
         String(format: "%.1f", maxSED)
     }
 
+    /// DateFormatter 재사용 (Watch 리소스 절약)
+    private static let timeFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        return formatter
+    }()
+
     /// 마지막 동기화 시각 표시
     var lastSyncText: String {
         guard let time = lastSyncTime else { return "동기화 안 됨" }
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
-        return "마지막 동기화 \(formatter.string(from: time))"
+        return "마지막 동기화 \(Self.timeFormatter.string(from: time))"
     }
 
     // MARK: - Computed Properties
@@ -81,32 +86,20 @@ class WatchViewModel: ObservableObject {
         return todayTotalSED / maxSED
     }
 
-    /// 경고 레벨 한글 표시
+    /// 경고 레벨 한글 표시 (WarningLevel.title 활용)
     var warningLevelTitle: String {
-        switch warningLevel {
-        case "safe": return "안전"
-        case "caution": return "주의"
-        case "warning": return "경고"
-        case "danger": return "위험"
-        default: return "알 수 없음"
-        }
+        warningLevel.title
     }
 
-    /// 경고 레벨 색상
+    /// 경고 레벨 색상 (WarningLevel.color 활용)
     var warningLevelColor: Color {
-        switch warningLevel {
-        case "safe": return .green
-        case "caution": return .yellow
-        case "warning": return .orange
-        case "danger": return .red
-        default: return .gray
-        }
+        warningLevel.color
     }
 
-    /// 선크림 도포 상태 텍스트
+    /// 선크림 도포 상태 텍스트 (SPFLevel.displayTitle 활용)
     var sunscreenStatusText: String {
         guard let spf = sunscreenSPF else { return "미도포" }
-        return "SPF \(spf)"
+        return spf.displayTitle
     }
 
     // MARK: - Initialization
@@ -141,7 +134,7 @@ class WatchViewModel: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] isReachable in
                 self?.isPhoneConnected = isReachable
-                print("[Watch] iPhone 연결 상태: \(isReachable)")
+                Log.debug("[Watch] iPhone 연결 상태: \(isReachable)")
             }
             .store(in: &cancellables)
     }
@@ -149,115 +142,138 @@ class WatchViewModel: ObservableObject {
     /// 캐시된 Application Context에서 초기 데이터 로드
     private func loadCachedData() {
         guard let cached = sessionManager.loadCachedApplicationContext() else { return }
-        handleDashboardData(cached)
-        print("[Watch] 캐시 데이터로 초기 화면 구성 완료")
+        handleDashboardData(cached, isFromCache: true)
+        Log.debug("[Watch] 캐시 데이터로 초기 화면 구성 완료")
     }
 
     // MARK: - Public Methods
 
     /// iPhone에 대시보드 동기화 요청
+    ///
+    /// 성공 여부는 `handleDashboardData()`에서 `lastSyncTime` 갱신으로 확인됩니다.
+    /// 전송 실패 시 `syncFailed`가 true로 설정됩니다.
     func requestDashboardSync() {
         syncFailed = false
-
-        sessionManager.sendMessage(
-            ["request_dashboard_sync": true, "timestamp": Date().timeIntervalSince1970],
-            replyHandler: { [weak self] _ in
-                DispatchQueue.main.async {
-                    self?.syncFailed = false
-                    print("[Watch] 동기화 요청 전달 완료")
-                }
-            },
-            errorHandler: { [weak self] error in
-                DispatchQueue.main.async {
-                    self?.syncFailed = true
-                    print("[Watch] 동기화 요청 실패: \(error.localizedDescription)")
-                }
+        sessionManager.requestDashboardSync(onError: { [weak self] in
+            DispatchQueue.main.async {
+                self?.syncFailed = true
             }
-        )
+        })
     }
 
     // MARK: - Message Handling
 
     private func handleMessageFromPhone(_ message: [String: Any]) {
-        print("[Watch] iPhone 메시지 처리: \(message["type"] as? String ?? "unknown")")
+        let type = message[WatchMessageKey.type] as? String
+        Log.debug("[Watch] iPhone 메시지 처리: \(type ?? "unknown")")
 
-        if message["type"] as? String == "dashboard_data" {
+        switch type {
+        case WatchMessageKey.TypeValue.dashboardData:
             handleDashboardData(message)
-        }
-
-        if message["type"] as? String == "sunscreen_application" {
+        case WatchMessageKey.TypeValue.sunscreenApplication:
             handleSunscreenData(message)
-        }
-
-        if message["type"] as? String == "med_status" {
+        case WatchMessageKey.TypeValue.medStatus:
             handleMEDStatus(message)
+        default:
+            break
         }
     }
 
     private func handleUserInfoFromPhone(_ userInfo: [String: Any]) {
-        print("[Watch] iPhone UserInfo 처리: \(userInfo["type"] as? String ?? "unknown")")
+        let type = userInfo[WatchMessageKey.type] as? String
+        Log.debug("[Watch] iPhone UserInfo 처리: \(type ?? "unknown")")
 
-        if userInfo["type"] as? String == "user_profile" {
+        switch type {
+        case WatchMessageKey.TypeValue.userProfile:
             handleUserProfile(userInfo)
+        default:
+            break
         }
     }
 
     // MARK: - Data Parsing
 
-    private func handleDashboardData(_ data: [String: Any]) {
-        if let uvIndex = data["uvIndex"] as? Double {
+    private func handleDashboardData(_ data: [String: Any], isFromCache: Bool = false) {
+        if let uvIndex = data[WatchMessageKey.uvIndex] as? Double {
             currentUVIndex = uvIndex
         }
-        if let temp = data["temperature"] as? Double {
+        if let temp = data[WatchMessageKey.temperature] as? Double {
             temperature = temp
         }
-        if let city = data["cityName"] as? String {
+        if let city = data[WatchMessageKey.cityName] as? String {
             cityName = city
         }
-        if let sed = data["totalSED"] as? Double {
+        if let sed = data[WatchMessageKey.totalSED] as? Double {
             todayTotalSED = sed
         }
-        if let max = data["maxSED"] as? Double {
+        if let max = data[WatchMessageKey.maxSED] as? Double {
             maxSED = max
         }
-        if let level = data["warningLevel"] as? String {
+        if let levelString = data[WatchMessageKey.warningLevel] as? String,
+           let level = WarningLevel(rawValue: levelString) {
             warningLevel = level
         }
 
-        sunscreenSPF = data["sunscreenSPF"] as? Int
-        if let appliedAt = data["sunscreenAppliedAt"] as? Double {
+        if let spfRaw = data[WatchMessageKey.sunscreenSPF] as? Int {
+            sunscreenSPF = SPFLevel(rawValue: spfRaw)
+        } else {
+            sunscreenSPF = nil
+        }
+        if let appliedAt = data[WatchMessageKey.sunscreenAppliedAt] as? Double {
             sunscreenAppliedAt = Date(timeIntervalSince1970: appliedAt)
         } else {
             sunscreenAppliedAt = nil
         }
 
-        // 동기화 성공 시각 기록
-        lastSyncTime = Date()
-        syncFailed = false
+        // 캐시 로드 시에는 동기화 시각을 갱신하지 않음
+        if !isFromCache {
+            lastSyncTime = Date()
+            syncFailed = false
+        }
     }
 
     private func handleSunscreenData(_ data: [String: Any]) {
-        if let spf = data["spfLevel"] as? Int {
-            sunscreenSPF = spf
+        if let spfRaw = data[WatchMessageKey.sunscreenSPF] as? Int {
+            sunscreenSPF = SPFLevel(rawValue: spfRaw)
         }
-        if let appliedAt = data["appliedAt"] as? Double {
+        if let appliedAt = data[WatchMessageKey.sunscreenAppliedAt] as? Double {
             sunscreenAppliedAt = Date(timeIntervalSince1970: appliedAt)
         }
     }
 
     private func handleMEDStatus(_ data: [String: Any]) {
-        if let sed = data["totalSED"] as? Double {
+        if let sed = data[WatchMessageKey.totalSED] as? Double {
             todayTotalSED = sed
         }
-        if let max = data["maxMED"] as? Double {
+        if let max = data[WatchMessageKey.maxSED] as? Double {
             maxSED = max
         }
     }
 
     private func handleUserProfile(_ data: [String: Any]) {
         // 향후 피부 타입 표시 등에 활용
-        if let skinType = data["skinType"] as? Int {
-            print("[Watch] 사용자 피부 타입 수신: \(skinType)")
+        if let skinType = data[WatchMessageKey.skinType] as? Int {
+            Log.debug("[Watch] 사용자 피부 타입 수신: \(skinType)")
         }
     }
+
+    // MARK: - Preview
+
+    #if DEBUG
+    /// Preview용 샘플 데이터가 설정된 ViewModel
+    static var preview: WatchViewModel {
+        let vm = WatchViewModel()
+        vm.isPhoneConnected = true
+        vm.currentUVIndex = 6.3
+        vm.temperature = 28.5
+        vm.cityName = "서울"
+        vm.todayTotalSED = 0.75
+        vm.maxSED = 1.5
+        vm.warningLevel = .caution
+        vm.sunscreenSPF = .spf50
+        vm.sunscreenAppliedAt = Date()
+        vm.lastSyncTime = Date()
+        return vm
+    }
+    #endif
 }
