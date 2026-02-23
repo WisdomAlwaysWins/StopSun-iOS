@@ -20,4 +20,5 @@ import Foundation
 ///
 enum Route: Hashable {
     // TODO: 탭 내부 push 화면 추가 시 여기에 정의
+    case skinTypeSettings
 }
