@@ -119,7 +119,7 @@ struct SkinTypeSettingView: View {
             onComplete(selected)
             dismiss()
         }
-        .disabled(selectedSkinType == nil || selectedSkinType == currentSkinType)
+        .disabled(selectedSkinType == currentSkinType)
     }
 }
 
