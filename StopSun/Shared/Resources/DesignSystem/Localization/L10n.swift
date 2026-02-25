@@ -37,6 +37,8 @@ enum L10n {
         static var confirm: String { .localized("common.button.confirm") }
         static var retry: String { .localized("common.button.retry") }
         static var openSettings: String { .localized("common.button.openSettings") }
+        static var setting: String { .localized("common.button.setting") }
+        static var guide: String { .localized("common.button.guide") }
     }
     
     // MARK: - Onboarding
@@ -137,9 +139,10 @@ enum L10n {
     
     enum SPF {
         static var none: String { .localized("spf.none") }
-        static var spf15: String { .localized("spf.15") }
-        static var spf30: String { .localized("spf.30") }
-        static var spf50: String { .localized("spf.50") }
+        static var fiftyPlus: String { .localized("spf.50plus") } // 55이상은 +로 표시
+        static func level(_ value: Int) -> String {
+            .localized("spf.level.format", arguments: value)
+        }
     }
     
     // MARK: - UV
@@ -333,6 +336,55 @@ enum L10n {
                 .localized("sunscreen.time.minutes", arguments: minutes)
             }
             static var expired: String { .localized("sunscreen.time.expired") }
+        }
+    }
+    
+    // MARK: - Settings
+    
+    enum Settings {
+        static var title: String { .localized("settings.title") }
+        
+        enum Section {
+            static var service: String { .localized("settings.section.service") }
+            static var skin: String { .localized("settings.section.skin") }
+            static var appInfo: String { .localized("settings.section.appInfo") }
+        }
+        
+        enum Permission {
+            static var title: String { .localized("settings.permission.title") }
+            static var desc: String { .localized("settings.permission.desc") }
+        }
+        
+        enum HealthKit {
+            static var title: String { .localized("settings.healthKit.title") }
+            static var desc: String { .localized("settings.healthKit.desc") }
+            static var guide: String { .localized("settings.healthKit.guide") }
+            
+            enum Guide {
+                static var step1: String { .localized("settings.healthKit.guide.step1") }
+                static var step2: String { .localized("settings.healthKit.guide.step2") }
+                static var step3: String { .localized("settings.healthKit.guide.step3") }
+                static var step4: String { .localized("settings.healthKit.guide.step4") }
+                static var step5: String { .localized("settings.healthKit.guide.step5") }
+            }
+        }
+        
+        enum SkinTypeSetting {
+            static var title: String { .localized("settings.skinType.title") }
+            static var desc: String { .localized("settings.skinType.desc") }
+            static var navTitle: String { .localized("settings.skinType.nav.title") }
+            static var heading: String { .localized("settings.skinType.heading") }
+            static var subtitle: String { .localized("settings.skinType.subtitle") }
+        }
+        
+        enum SPFSetting {
+            static var title: String { .localized("settings.spf.title") }
+            static var desc: String { .localized("settings.spf.desc") }
+        }
+        
+        enum AppInfo {
+            static var privacy: String { .localized("settings.appInfo.privacy") }
+            static var support: String { .localized("settings.appInfo.support") }
         }
     }
 }
