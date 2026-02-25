@@ -50,10 +50,46 @@ struct UVIndexView: View {
 
 // MARK: - Preview
 
-#Preview("UV 2 낮음") {
-    UVIndexView(viewModel: .safe)
-}
+#Preview("낮음 · UV 2") { UVIndexView(viewModel: .safe) }
 
-#Preview("UV 8 높음") {
-    UVIndexView(viewModel: .warning)
-}
+#Preview("보통 · UV 5") { UVIndexView(viewModel: .caution) }
+
+#Preview("높음 · UV 8") { UVIndexView(viewModel: .warning) }
+
+#Preview("위험 · UV 11") { UVIndexView(viewModel: .danger) }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
