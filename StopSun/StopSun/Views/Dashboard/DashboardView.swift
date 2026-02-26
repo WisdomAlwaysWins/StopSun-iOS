@@ -80,7 +80,7 @@ struct DashboardView: View {
                 (
                     Text(L10n.MED.Status.prefix)
                         .foregroundStyle(.text00) +
-                    Text(viewModel.warningLevel.levelName)
+                    Text(viewModel.warningLevel.title)
                         .foregroundStyle(viewModel.warningLevel.color) +
                     Text(L10n.MED.Status.suffix)
                         .foregroundStyle(viewModel.warningLevel.color)
