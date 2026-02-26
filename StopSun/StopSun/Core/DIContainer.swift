@@ -174,14 +174,13 @@ final class DIContainer {
         SunScreenViewModel(localStorage: localStorage)
     }
     
-    // 설정화면 구현시 사용
-//    @MainActor
-//    func makeSettingsViewModel() -> SettingsViewModel {
-//        SettingsViewModel(
-//            localStorage: localStorage,
-//            permissionManager: permissionManager
-//        )
-//    }
+    @MainActor
+    func makeSettingsViewModel() -> SettingsViewModel {
+        SettingsViewModel(
+            localStorage: localStorage,
+            permissionManager: permissionManager
+        )
+    }
     
     @MainActor
     func makeDashboardViewModel() -> DashboardViewModel {
