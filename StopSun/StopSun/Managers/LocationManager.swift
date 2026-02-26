@@ -34,7 +34,16 @@ final class LocationManager: NSObject, LocationManagerProtocol {
     /// 한 번에 하나의 위치 요청만 처리합니다.
     private var locationContinuation: CheckedContinuation<CLLocation, Error>?
     
-    // MARK: - Protocol Conformance
+    // MARK: - Init
+    
+    override init() {
+        super.init()
+        clLocationManager.delegate = self
+        clLocationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+        clLocationManager.allowsBackgroundLocationUpdates = true
+    }
+    
+    // MARK: - Authorization
     
     var isAuthorized: Bool {
         switch clLocationManager.authorizationStatus {
@@ -48,19 +57,6 @@ final class LocationManager: NSObject, LocationManagerProtocol {
     var isDenied: Bool {
         clLocationManager.authorizationStatus == .denied
     }
-    
-    // MARK: - Init
-    
-    override init() {
-        super.init()
-        clLocationManager.delegate = self
-        clLocationManager.desiredAccuracy = kCLLocationAccuracyKilometer
-        clLocationManager.allowsBackgroundLocationUpdates = true
-    }
-    
-    // MARK: - Authorization
-    
-    var isDenied: Bool { false }
     
     func requestAuthorization() async {
         let status = clLocationManager.authorizationStatus
