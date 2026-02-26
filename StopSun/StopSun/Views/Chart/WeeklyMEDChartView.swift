@@ -53,8 +53,6 @@ struct WeeklyMEDChartView: View {
         .padding(.vertical, ChartLayout.verticalPadding)
         .background(.white00)
         .clipShape(RoundedRectangle(cornerRadius: ChartLayout.cardCornerRadius))
-        .accessibilityElement(children: .contain)
-        .accessibilityLabel("주간 자외선 노출 차트")
     }
 }
 
@@ -123,9 +121,6 @@ private struct ChartBarColumn: View {
             overLabel
             barShape
         }
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel("\(item.dayLabel)요일")
-        .accessibilityValue(accessibilityDescription)
     }
     
     @ViewBuilder
@@ -133,7 +128,7 @@ private struct ChartBarColumn: View {
         if let percent = item.percent {
             Text("\(Int(percent))%")
                 .font(.ssFont(.M1))
-                .foregroundStyle(isOver ? .text00 : .chart02)
+                .foregroundStyle(isOver ? .text00 : .text04)
         } else {
             Text(" ")
                 .font(.ssFont(.M1))
@@ -161,19 +156,6 @@ private struct ChartBarColumn: View {
         guard let percent = item.percent, percent > 0 else { return 0 }
         let ratio = min(percent / maxPercent, 1.0)
         return max(ratio * totalHeight, ChartLayout.minBarHeight)
-    }
-    
-    private var accessibilityDescription: String {
-        guard let percent = item.percent else {
-            return "데이터 없음"
-        }
-        if percent == 0 {
-            return "자외선 노출 없음"
-        }
-        if isOver {
-            return "허용량의 \(Int(percent))퍼센트, 초과"
-        }
-        return "허용량의 \(Int(percent))퍼센트"
     }
 }
 
