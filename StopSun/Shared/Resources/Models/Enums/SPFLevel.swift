@@ -1,6 +1,6 @@
 //
 //  SPFLevel.swift
-//  TarTanning
+//  StopSun
 //
 //  Created by J on 7/22/25.
 //
@@ -36,13 +36,13 @@ enum SPFLevel: Int, CaseIterable, Identifiable, Codable {
 
     // MARK: - Display
     
-    /// 화면 표시용 이름
+    /// 화면 표시용 이름 (Localized)
     var displayTitle: String {
         switch self {
-        case .none: return "미사용"
-        case .spf15: return "SPF 15"
-        case .spf30: return "SPF 30"
-        case .spf50: return "SPF 50+"
+        case .none: return L10n.SPF.none
+        case .spf15: return L10n.SPF.spf15
+        case .spf30: return L10n.SPF.spf30
+        case .spf50: return L10n.SPF.spf50
         }
     }
     
