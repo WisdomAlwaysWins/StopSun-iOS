@@ -201,9 +201,7 @@ struct SettingsView: View {
                 showSPFPicker = false
             }
             .padding(.horizontal, 20)
-            .padding(.bottom, 40)
         }
-        .background(Color.white)
     }
     
     // MARK: - HealthKit Guide Bottom Sheet
@@ -272,7 +270,6 @@ struct SettingsView: View {
             }
             .padding(.horizontal, 20)
         }
-        .background(Color.white)
     }
     
     // MARK: - App Version
