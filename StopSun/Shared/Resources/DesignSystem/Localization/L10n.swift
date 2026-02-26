@@ -199,25 +199,21 @@ enum L10n {
             enum Safe {
                 static var title: String { .localized("med.status.safe.title") }
                 static var description: String { .localized("med.status.safe.desc") }
-                static var level: String { .localized("med.status.safe.level") }
             }
             
             enum Caution {
                 static var title: String { .localized("med.status.caution.title") }
                 static var description: String { .localized("med.status.caution.desc") }
-                static var level: String { .localized("med.status.caution.level") }
             }
             
             enum Warning {
                 static var title: String { .localized("med.status.warning.title") }
                 static var description: String { .localized("med.status.warning.desc") }
-                static var level: String { .localized("med.status.warning.level") }
             }
             
             enum Danger {
                 static var title: String { .localized("med.status.danger.title") }
                 static var description: String { .localized("med.status.danger.desc") }
-                static var level: String { .localized("med.status.danger.level") }
             }
             
             // TODO: 100% 이상에서 다르게 보여줄건지 검토
