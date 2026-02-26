@@ -157,6 +157,22 @@ enum L10n {
         }
     }
     
+    // MARK: - Dashboard
+    
+    enum Dashboard {
+        
+        enum Weather {
+            /// "%@ 날씨 정보" / "%@ Weather"
+            static func title(_ location: String) -> String {
+                .localized("dashboard.weather.title", arguments: location)
+            }
+            /// "UV 지수" / "UV Index"
+            static var uvIndex: String { .localized("dashboard.weather.uvIndex") }
+            /// "현재 기온" / "Temperature"
+            static var temperature: String { .localized("dashboard.weather.temperature") }
+        }
+    }
+    
     // MARK: - MED
     
     enum MED {
@@ -177,25 +193,31 @@ enum L10n {
         // MARK: - Status
         
         enum Status {
+            static var prefix: String { .localized("med.status.prefix") }
+            static var suffix: String { .localized("med.status.suffix") }
             
             enum Safe {
                 static var title: String { .localized("med.status.safe.title") }
                 static var description: String { .localized("med.status.safe.desc") }
+                static var level: String { .localized("med.status.safe.level") }
             }
             
             enum Caution {
                 static var title: String { .localized("med.status.caution.title") }
                 static var description: String { .localized("med.status.caution.desc") }
+                static var level: String { .localized("med.status.caution.level") }
             }
             
             enum Warning {
                 static var title: String { .localized("med.status.warning.title") }
                 static var description: String { .localized("med.status.warning.desc") }
+                static var level: String { .localized("med.status.warning.level") }
             }
             
             enum Danger {
                 static var title: String { .localized("med.status.danger.title") }
                 static var description: String { .localized("med.status.danger.desc") }
+                static var level: String { .localized("med.status.danger.level") }
             }
             
             // TODO: 100% 이상에서 다르게 보여줄건지 검토
