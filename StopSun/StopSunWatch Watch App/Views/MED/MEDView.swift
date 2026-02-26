@@ -20,9 +20,9 @@ struct MEDView: View {
             
             // 퍼센트 + 상태
             VStack {
-                HStack(alignment: .firstTextBaseline, spacing: 0) {
+                HStack(alignment: .firstTextBaseline, spacing: 2) {
                     Text("\(viewModel.medPercentage)")
-                        .font(.system(size: 72, weight: .bold))
+                        .font(.system(size: 64, weight: .bold))
                     Text("%")
                         .font(.system(size: 48, weight: .bold))
                 }
@@ -38,7 +38,7 @@ struct MEDView: View {
             VStack {
                 Spacer()
                 
-                Text(level.description)
+                Text(level.statusDescription)
                     .font(.system(size: 12))
                     .foregroundStyle(.white.opacity(0.35))
                     .multilineTextAlignment(.center)

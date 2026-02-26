@@ -46,7 +46,7 @@ private extension SunscreenTimerView {
             VStack {
                 Spacer()
                 
-                Text("선크림 타이머를\n시작하시겠습니까?")
+                Text(L10n.Timer.startPrompt)
                     .font(.system(size: 16, weight: .medium))
                     .foregroundStyle(.white.opacity(0.9))
                     .multilineTextAlignment(.center)
@@ -58,7 +58,7 @@ private extension SunscreenTimerView {
 //                    .padding(.top, 12)
                 
                 Spacer()
-                SunscreenActionButton("시작", action: onStart)
+                SunscreenActionButton(L10n.Timer.start, action: onStart)
             }
         }
     }
@@ -72,17 +72,17 @@ private extension SunscreenTimerView {
             VStack {
                 Spacer()
                 
-                Text("재도포까지")
+                Text(L10n.Timer.untilReapply)
                     .font(.system(size: 14, weight: .medium))
                     .foregroundStyle(.white00)
                 
                 Text(timerText)
-                    .font(.system(size: 52, weight: .bold))
+                    .font(.system(size: 42, weight: .bold))
                     .foregroundStyle(.white00)
                     .monospacedDigit()
                 
                 Spacer()
-                SunscreenActionButton("갱신", action: onRefresh)
+                SunscreenActionButton(L10n.Timer.refresh, action: onRefresh)
             }
         }
     }
@@ -95,7 +95,7 @@ private extension SunscreenTimerView {
             VStack {
                 Spacer()
                 
-                Text("재도포해야할 시간!")
+                Text(L10n.Timer.Alert.reapply)
                     .font(.system(size: 15, weight: .semibold))
                     .foregroundStyle(.white00)
                 
@@ -105,7 +105,7 @@ private extension SunscreenTimerView {
                     .monospacedDigit()
                 
                 Spacer()
-                SunscreenActionButton("재시작", action: onRestart)
+                SunscreenActionButton(L10n.Timer.restart, action: onRestart)
             }
         }
     }

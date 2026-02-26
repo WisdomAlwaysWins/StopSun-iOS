@@ -34,7 +34,7 @@ struct UVIndexView: View {
             VStack {
                 Spacer()
                 
-                Text(level.rawValue)
+                Text(level.displayTitle)
                     .font(.system(size: 12))
                     .foregroundStyle(.white00)
                     .multilineTextAlignment(.center)
