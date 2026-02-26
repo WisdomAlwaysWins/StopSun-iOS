@@ -52,8 +52,7 @@ final class DashboardViewModel {
     
     /// MED 진행률 (0~100+)
     var medPercentage: Double {
-        guard maxMED > 0 else { return 0 }
-        return (currentMED / maxMED) * 100
+        syncCoordinator.todaySEDProgress * 100
     }
     
     var warningLevel: WarningLevel {
