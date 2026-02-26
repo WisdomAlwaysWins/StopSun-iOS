@@ -7,6 +7,7 @@
 
 import Foundation
 import WatchConnectivity
+import SwiftUI
 
 /// Watch 전용 WCSession 관리자
 ///
@@ -214,3 +215,4 @@ extension WatchSessionManager: WCSessionDelegate {
         }
     }
 }
+
