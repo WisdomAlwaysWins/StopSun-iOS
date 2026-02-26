@@ -60,6 +60,8 @@ final class LocationManager: NSObject, LocationManagerProtocol {
     
     // MARK: - Authorization
     
+    var isDenied: Bool { false }
+    
     func requestAuthorization() async {
         let status = clLocationManager.authorizationStatus
         
