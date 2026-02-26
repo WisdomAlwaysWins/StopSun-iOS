@@ -56,6 +56,13 @@
 			);
 			target = 058BD66F2E793E2C00AAF08B /* StopSun */;
 		};
+		808969282F503520006A40E7 /* Exceptions for "Shared" folder in "StopSunWatch Watch App" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Resources/Models/Response/WeeklyBarItem.swift,
+			);
+			target = 058BD6812E793E3A00AAF08B /* StopSunWatch Watch App */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -74,6 +81,9 @@
 		};
 		058BD6AD2E793EC000AAF08B /* Shared */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				808969282F503520006A40E7 /* Exceptions for "Shared" folder in "StopSunWatch Watch App" target */,
+			);
 			path = Shared;
 			sourceTree = "<group>";
 		};
