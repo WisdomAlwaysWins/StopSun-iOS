@@ -113,6 +113,50 @@ final class SyncCoordinator: SyncCoordinatorProtocol {
         )
     }
     
+    // MARK: - Weekly Chart Data
+    
+    /// 최근 7일간 MED 차트 데이터 조회
+    ///
+    /// LocalStorage에서 DailyMEDRecord를 읽어 WeeklyBarItem 배열로 변환합니다.
+    /// 오늘 데이터는 실시간 를 사용합니다.
+    func loadWeeklyChartItems() -> [WeeklyBarItem] {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+        let daySymbols = ["일", "월", "화", "수", "목", "금", "토"]
+        
+        guard let skinType = userProfile?.skinType else {
+            // 프로필 없으면 빈 7일
+            return (0..<7).map { offset in
+                let date = calendar.date(byAdding: .day, value: offset - 6, to: today)!
+                let weekday = calendar.component(.weekday, from: date) - 1
+                return WeeklyBarItem(dayLabel: daySymbols[weekday], percent: nil, isToday: offset == 6)
+            }
+        }
+        
+        let maxSED = skinType.maxDailyMEDinSED
+        
+        return (0..<7).map { offset in
+            let date = calendar.date(byAdding: .day, value: offset - 6, to: today)!
+            let weekday = calendar.component(.weekday, from: date) - 1
+            let isToday = offset == 6
+            let label = daySymbols[weekday]
+            
+            if isToday {
+                // 오늘은 실시간 데이터 사용
+                let percent = maxSED > 0 ? (todayTotalSED / maxSED) * 100 : 0
+                return WeeklyBarItem(dayLabel: label, percent: percent, isToday: true)
+            }
+            
+            // 과거 데이터는 LocalStorage에서
+            if let record = localStorage.loadDailyMEDRecord(for: date) {
+                let percent = maxSED > 0 ? (record.totalSED / maxSED) * 100 : 0
+                return WeeklyBarItem(dayLabel: label, percent: percent, isToday: false)
+            }
+            
+            return WeeklyBarItem(dayLabel: label, percent: nil, isToday: false)
+        }
+    }
+    
     // MARK: - Setup Observers
     
     private func setupObservers() {

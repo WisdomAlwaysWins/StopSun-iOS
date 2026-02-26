@@ -1,3 +1,10 @@
+//
+//  WeeklyMEDChartView.swift
+//  StopSun
+//
+//  Created by J on 2/26/26.
+//
+
 import SwiftUI
 
 // MARK: - Constants
@@ -26,10 +33,6 @@ private enum ChartLayout {
 /// - `chart01`: 기본 바 (#CDCED3)
 /// - `chart02`: 초과 바 (#636366)
 ///
-/// ## 사용 예시
-/// ```swift
-/// WeeklyMEDChartView(items: viewModel.weeklyChartItems)
-/// ```
 struct WeeklyMEDChartView: View {
     
     let items: [WeeklyBarItem]
@@ -127,10 +130,10 @@ private struct ChartBarColumn: View {
     
     @ViewBuilder
     private var overLabel: some View {
-        if let percent = item.percent, isOver {
-            Text("\(Int(percent))")
+        if let percent = item.percent {
+            Text("\(Int(percent))%")
                 .font(.ssFont(.M1))
-                .foregroundStyle(.chart02)
+                .foregroundStyle(isOver ? .text00 : .chart02)
         } else {
             Text(" ")
                 .font(.ssFont(.M1))
@@ -213,20 +216,6 @@ private struct ChartBarColumn: View {
         .init(dayLabel: "화", percent: nil, isToday: false),
         .init(dayLabel: "수", percent: nil, isToday: false),
         .init(dayLabel: "목", percent: 18, isToday: true),
-    ])
-    .padding()
-    .background(.white01)
-}
-
-#Preview("중간 빠진 날") {
-    WeeklyMEDChartView(items: [
-        .init(dayLabel: "금", percent: 88, isToday: false),
-        .init(dayLabel: "토", percent: 0, isToday: false),
-        .init(dayLabel: "일", percent: 45, isToday: false),
-        .init(dayLabel: "월", percent: nil, isToday: false),
-        .init(dayLabel: "화", percent: 120, isToday: false),
-        .init(dayLabel: "수", percent: 0, isToday: false),
-        .init(dayLabel: "목", percent: 55, isToday: true),
     ])
     .padding()
     .background(.white01)
