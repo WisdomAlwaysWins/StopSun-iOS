@@ -37,33 +37,175 @@ enum L10n {
         static var confirm: String { .localized("common.button.confirm") }
         static var retry: String { .localized("common.button.retry") }
         static var openSettings: String { .localized("common.button.openSettings") }
+        static var setting: String { .localized("common.button.setting") }
+        static var guide: String { .localized("common.button.guide") }
     }
     
     // MARK: - Onboarding
     
     enum Onboarding {
         static var title: String { .localized("onboarding.title") }
+        
+        // MARK: Introduction Phase — 서비스 설명
+        
+        enum Introduction {
+            static var startSetup: String { .localized("onboarding.introduction.startSetup") }
+            
+            enum TrackExposure {
+                static var title: String { .localized("onboarding.introduction.trackExposure.title") }
+                static var subtitle: String { .localized("onboarding.introduction.trackExposure.subtitle") }
+            }
+            
+            enum RealTimeAlert {
+                static var title: String { .localized("onboarding.introduction.realTimeAlert.title") }
+                static var subtitle: String { .localized("onboarding.introduction.realTimeAlert.subtitle") }
+            }
+            
+            enum PersonalRecommend {
+                static var title: String { .localized("onboarding.introduction.personalRecommend.title") }
+                static var subtitle: String { .localized("onboarding.introduction.personalRecommend.subtitle") }
+            }
+        }
+        
+        // MARK: Step 1 — Watch Check
+        
+        enum Watch {
+            static var title: String { .localized("onboarding.watch.title") }
+            static var subtitle: String { .localized("onboarding.watch.subtitle") }
+            static var hasWatch: String { .localized("onboarding.watch.button.yes") }
+            static var noWatch: String { .localized("onboarding.watch.button.no") }
+            
+            enum Alert {
+                static var noWatchTitle: String { .localized("onboarding.watch.alert.noWatch.title") }
+                static var noWatchMessage: String { .localized("onboarding.watch.alert.noWatch.message") }
+                static var notPairedTitle: String { .localized("onboarding.watch.alert.notPaired.title") }
+                static var notPairedMessage: String { .localized("onboarding.watch.alert.notPaired.message") }
+            }
+        }
+        
+        // MARK: Step 2 — Permission
+        
+        enum Permission {
+            static var title: String { .localized("onboarding.permission.title") }
+            static var subtitle: String { .localized("onboarding.permission.subtitle") }
+            static var continueButton: String { .localized("onboarding.permission.button.continue") }
+            
+            enum HealthKit {
+                static var title: String { .localized("onboarding.permission.healthKit.title") }
+                static var description: String { .localized("onboarding.permission.healthKit.description") }
+            }
+            
+            enum Location {
+                static var title: String { .localized("onboarding.permission.location.title") }
+                static var description: String { .localized("onboarding.permission.location.description") }
+            }
+            
+            enum Notification {
+                static var title: String { .localized("onboarding.permission.notification.title") }
+                static var description: String { .localized("onboarding.permission.notification.description") }
+            }
+        }
+        
+        // MARK: Step 3 — Skin Type
+        
+        enum SkinTypeStep {
+            static var title: String { .localized("onboarding.skinType.title") }
+            static var subtitle: String { .localized("onboarding.skinType.subtitle") }
+            static var startButton: String { .localized("onboarding.skinType.button.start") }
+        }
     }
     
     // MARK: - Skin Type
-
+    
     enum SkinType {
         static func title(_ type: Int) -> String {
             .localized("skin.type\(type).title")
         }
-
+        
         static func summary(_ type: Int) -> String {
             .localized("skin.type\(type).summary")
         }
-
+        
         static func description(_ type: Int) -> String {
             .localized("skin.type\(type).description")
         }
-
+        
         static func maxMED(_ value: Double) -> String {
             .localized("skin.maxMED.format", arguments: value)
         }
     }
+    
+    // MARK: - SPF
+    
+    enum SPF {
+        static var none: String { .localized("spf.none") }
+        static var fiftyPlus: String { .localized("spf.50plus") } // 55이상은 +로 표시
+        static func level(_ value: Int) -> String {
+            .localized("spf.level.format", arguments: value)
+        }
+    }
+    
+    // MARK: - UV
+    
+    enum UV {
+        enum Level {
+            static var low: String { .localized("uv.level.low") }
+            static var moderate: String { .localized("uv.level.moderate") }
+            static var high: String { .localized("uv.level.high") }
+            static var veryHigh: String { .localized("uv.level.veryHigh") }
+            static var extreme: String { .localized("uv.level.extreme") }
+        }
+    }
+    
+    // MARK: - MED
+    
+    enum MED {
+        
+        // MARK: - Gauge
+        
+        enum Gauge {
+            static var title: String { .localized("med.gauge.title") }
+            static var todayUV: String { .localized("med.today.uv") }
+            static var maxUV: String { .localized("med.max.uv") }
+            static var unitJoule: String { .localized("med.unit.joule") }
+            
+            static func percentage(_ value: Int) -> String {
+                "\(value)%"
+            }
+        }
+        
+        // MARK: - Status
+        
+        enum Status {
+            
+            enum Safe {
+                static var title: String { .localized("med.status.safe.title") }
+                static var description: String { .localized("med.status.safe.desc") }
+            }
+            
+            enum Caution {
+                static var title: String { .localized("med.status.caution.title") }
+                static var description: String { .localized("med.status.caution.desc") }
+            }
+            
+            enum Warning {
+                static var title: String { .localized("med.status.warning.title") }
+                static var description: String { .localized("med.status.warning.desc") }
+            }
+            
+            enum Danger {
+                static var title: String { .localized("med.status.danger.title") }
+                static var description: String { .localized("med.status.danger.desc") }
+            }
+            
+            // TODO: 100% 이상에서 다르게 보여줄건지 검토
+            enum Critical {
+                static var title: String { .localized("med.status.critical.title") }
+                static var description: String { .localized("med.status.critical.desc") }
+            }
+        }
+    }
+    
     
     // MARK: - Notification
     
@@ -171,9 +313,9 @@ enum L10n {
     }
     
     // MARK: - Sunscreen
-
+    
     enum Sunscreen {
-
+        
         /// 선크림 효과 상태
         enum Effectiveness {
             static var excellent: String { .localized("sunscreen.effectiveness.excellent") }
@@ -181,7 +323,7 @@ enum L10n {
             static var weak: String { .localized("sunscreen.effectiveness.weak") }
             static var reapply: String { .localized("sunscreen.effectiveness.reapply") }
         }
-
+        
         /// 남은 시간 포맷
         enum Time {
             static func hoursMinutes(_ hours: Int, _ minutes: Int) -> String {
@@ -194,6 +336,55 @@ enum L10n {
                 .localized("sunscreen.time.minutes", arguments: minutes)
             }
             static var expired: String { .localized("sunscreen.time.expired") }
+        }
+    }
+    
+    // MARK: - Settings
+    
+    enum Settings {
+        static var title: String { .localized("settings.title") }
+        
+        enum Section {
+            static var service: String { .localized("settings.section.service") }
+            static var skin: String { .localized("settings.section.skin") }
+            static var appInfo: String { .localized("settings.section.appInfo") }
+        }
+        
+        enum Permission {
+            static var title: String { .localized("settings.permission.title") }
+            static var desc: String { .localized("settings.permission.desc") }
+        }
+        
+        enum HealthKit {
+            static var title: String { .localized("settings.healthKit.title") }
+            static var desc: String { .localized("settings.healthKit.desc") }
+            static var guide: String { .localized("settings.healthKit.guide") }
+            
+            enum Guide {
+                static var step1: String { .localized("settings.healthKit.guide.step1") }
+                static var step2: String { .localized("settings.healthKit.guide.step2") }
+                static var step3: String { .localized("settings.healthKit.guide.step3") }
+                static var step4: String { .localized("settings.healthKit.guide.step4") }
+                static var step5: String { .localized("settings.healthKit.guide.step5") }
+            }
+        }
+        
+        enum SkinTypeSetting {
+            static var title: String { .localized("settings.skinType.title") }
+            static var desc: String { .localized("settings.skinType.desc") }
+            static var navTitle: String { .localized("settings.skinType.nav.title") }
+            static var heading: String { .localized("settings.skinType.heading") }
+            static var subtitle: String { .localized("settings.skinType.subtitle") }
+        }
+        
+        enum SPFSetting {
+            static var title: String { .localized("settings.spf.title") }
+            static var desc: String { .localized("settings.spf.desc") }
+        }
+        
+        enum AppInfo {
+            static var privacy: String { .localized("settings.appInfo.privacy") }
+            static var support: String { .localized("settings.appInfo.support") }
         }
     }
 }

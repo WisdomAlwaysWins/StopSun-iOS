@@ -8,17 +8,44 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    // MARK: - Dependencies
+    
+    @Environment(\.localStorage) private var localStorage
+    
+    // MARK: - State
+    
+    @State private var showSplash = true
+    @State private var isOnboardingCompleted = false
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ZStack {
+            if showSplash {
+                SplashView()
+                    .transition(.opacity)
+            } else {
+                if isOnboardingCompleted {
+                    DashboardView()
+                } else {
+                    OnboardingContainerView()
+                }
+            }
         }
-        .padding()
+        .onAppear {
+            isOnboardingCompleted = localStorage.loadOnboardingCompleted()
+        }
+        .task {
+            try? await Task.sleep(for: .seconds(1.5))
+            withAnimation(.easeInOut(duration: 0.4)) {
+                showSplash = false
+            }
+        }
+        .onReceive(
+            NotificationCenter.default.publisher(
+                for: .userProfileDidChange
+            )
+        ) { _ in
+            isOnboardingCompleted = localStorage.loadOnboardingCompleted()
+        }
     }
-}
-
-#Preview {
-    ContentView()
 }
