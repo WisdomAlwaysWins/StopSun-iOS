@@ -157,7 +157,7 @@ final class WatchMainViewModel: ObservableObject {
     func applySunscreen() {
         sunscreenAppliedAt = Date()
         sunscreenSPF = sunscreenSPF ?? 50
-        updateRemainingTime()
+        startTimer()
         
         // iPhone에 전송
         let message: [String: Any] = [

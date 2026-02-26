@@ -11,13 +11,15 @@ import SwiftUI
 ///
 /// Digital Crown으로 MED/UVI에서 전환하여 접근합니다.
 ///
+/// ## Active 상태 인터랙션 (피트니스 앱 패턴)
+/// - 기본: 카운트다운 타이머만 표시
+/// - 좌로 스와이프: 컨트롤 패널 (중단 / 갱신)
+///
 /// 시안: 타이머_1(미도포), 타이머_2(진행 중), 타이머_3(만료)
 ///
 struct SunscreenTimerView: View {
     
     @ObservedObject var viewModel: WatchMainViewModel
-    @State private var remainingSeconds: Int = 0
-    @State private var timerUpdater: Timer?
     
     var body: some View {
         ZStack {
@@ -25,7 +27,7 @@ struct SunscreenTimerView: View {
             
             switch viewModel.timerState {
             case .idle:    IdleContent(onStart: viewModel.applySunscreen)
-            case .active:  ActiveContent(timerText: viewModel.timerText, onRefresh: viewModel.applySunscreen)
+            case .active:  ActivePager(viewModel: viewModel)
             case .expired: ExpiredContent(onRestart: viewModel.applySunscreen)
             }
         }
@@ -34,39 +36,72 @@ struct SunscreenTimerView: View {
     }
 }
 
-// MARK: - Sub Views
+// MARK: - Active Pager (피트니스 앱 패턴)
 
 private extension SunscreenTimerView {
     
-    /// 미도포 (시안: 타이머_1)
-    struct IdleContent: View {
-        let onStart: () -> Void
+    /// 스와이프 가능한 Active 상태
+    ///
+    /// Page 0: 컨트롤 (중단 + 갱신)
+    /// Page 1: 카운트다운 타이머 (기본)
+    ///
+    struct ActivePager: View {
+        @ObservedObject var viewModel: WatchMainViewModel
+        @State private var currentPage: Int = 1
         
         var body: some View {
-            VStack {
-                Spacer()
+            TabView(selection: $currentPage) {
+                ControlContent(
+                    onCancel: viewModel.cancelSunscreen,
+                    onRefresh: {
+                        viewModel.applySunscreen()
+                        currentPage = 1              // ← 타이머 페이지로 전환
+                    }
+                )
+                .tag(0)
                 
-                Text(L10n.Timer.startPrompt)
-                    .font(.system(size: 16, weight: .medium))
-                    .foregroundStyle(.white.opacity(0.9))
-                    .multilineTextAlignment(.center)
-                    .lineSpacing(3)
-                
-//                Text("마지막 기록 없음")
-//                    .font(.system(size: 12))
-//                    .foregroundStyle(.white.opacity(0.3))
-//                    .padding(.top, 12)
-                
-                Spacer()
-                SunscreenActionButton(L10n.Timer.start, action: onStart)
+                TimerContent(timerText: viewModel.timerText)
+                    .tag(1)
             }
+            .tabViewStyle(.page(indexDisplayMode: .automatic))
         }
     }
     
-    /// 타이머 진행 중 (시안: 타이머_2)
-    struct ActiveContent: View {
-        let timerText: String
+    /// 컨트롤 패널 (Page 0)
+    struct ControlContent: View {
+        let onCancel: () -> Void
         let onRefresh: () -> Void
+        
+        var body: some View {
+            VStack(spacing: 12) {
+                Spacer()
+                
+                Button(action: onCancel) {
+                    Label(L10n.Timer.stop, systemImage: "xmark")
+                        .font(.system(size: 15, weight: .semibold))
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(.black.opacity(0.12))
+                
+                Button(action: onRefresh) {
+                    Label(L10n.Timer.refresh, systemImage: "arrow.clockwise")
+                        .font(.system(size: 15, weight: .semibold))
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(.gage00)
+                
+                Spacer()
+            }
+            .padding(.horizontal, 20)
+            .padding(.bottom, 8)
+        }
+    }
+    
+    /// 카운트다운 (Page 1, 기본)
+    struct TimerContent: View {
+        let timerText: String
         
         var body: some View {
             VStack {
@@ -80,14 +115,39 @@ private extension SunscreenTimerView {
                     .font(.system(size: 42, weight: .bold))
                     .foregroundStyle(.white00)
                     .monospacedDigit()
+                    .padding(.bottom, 20)
                 
                 Spacer()
-                SunscreenActionButton(L10n.Timer.refresh, action: onRefresh)
+            }
+        }
+    }
+}
+
+// MARK: - Idle / Expired
+
+private extension SunscreenTimerView {
+    
+    /// 미도포
+    struct IdleContent: View {
+        let onStart: () -> Void
+        
+        var body: some View {
+            VStack {
+                Spacer()
+                
+                Text(L10n.Timer.startPrompt)
+                    .font(.system(size: 16, weight: .medium))
+                    .foregroundStyle(.white.opacity(0.9))
+                    .multilineTextAlignment(.center)
+                    .lineSpacing(3)
+                
+                Spacer()
+                SunscreenActionButton(L10n.Timer.start, action: onStart)
             }
         }
     }
     
-    /// 타이머 만료 (시안: 타이머_3)
+    /// 타이머 만료 
     struct ExpiredContent: View {
         let onRestart: () -> Void
         
