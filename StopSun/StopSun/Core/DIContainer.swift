@@ -173,16 +173,6 @@ final class DIContainer {
     }
     
     @MainActor
-    func makeUserProfileViewModel() -> UserProfileViewModel {
-        UserProfileViewModel(localStorage: localStorage)
-    }
-    
-    @MainActor
-    func makeSunScreenViewModel() -> SunScreenViewModel {
-        SunScreenViewModel(localStorage: localStorage)
-    }
-    
-    @MainActor
     func makeSettingsViewModel() -> SettingsViewModel {
         SettingsViewModel(
             localStorage: localStorage,
@@ -194,4 +184,18 @@ final class DIContainer {
     func makeDashboardViewModel() -> DashboardViewModel {
         DashboardViewModel(syncCoordinator: syncCoordinator)
     }
+    
+#if DEBUG
+    @MainActor
+    func makeUserProfileViewModel() -> UserProfileViewModel {
+        UserProfileViewModel(localStorage: localStorage)
+    }
+#endif
+    
+#if DEBUG
+    @MainActor
+    func makeSunScreenViewModel() -> SunScreenViewModel {
+        SunScreenViewModel(localStorage: localStorage)
+    }
+#endif
 }
