@@ -203,19 +203,19 @@ final class SyncCoordinator: SyncCoordinatorProtocol {
         // 2. 저장된 선크림 상태 로드
         loadActiveSunscreen()
         
-        // 3. HealthKit 권한 요청
-        do {
-            try await healthKit.requestAuthorization()
-            try await healthKit.enableBackgroundDelivery()
-            Log.info("HealthKit 권한 및 Background Delivery 설정 완료")
-        } catch {
-            Log.error("HealthKit 설정 실패: \(error.localizedDescription)")
-            self.error = .healthKit(.authorizationDenied)
+        // 3. HealthKit Background Delivery 설정 (권한은 온보딩에서 요청 완료)
+        if healthKit.isAuthorized {
+            do {
+                try await healthKit.enableBackgroundDelivery()
+                Log.info("HealthKit Background Delivery 설정 완료")
+            } catch {
+                Log.error("HealthKit Background Delivery 실패: \(error.localizedDescription)")
+            }
+        } else {
+            Log.warning("HealthKit 권한 없음 — Background Delivery 스킵")
         }
         
-        // 4. 위치 권한 요청 및 현재 위치 가져오기
-        await location.requestAuthorization()
-        
+        // 4. 현재 위치 및 날씨 조회 (권한은 온보딩에서 요청 완료)
         if location.isAuthorized {
             location.startMonitoringSignificantLocationChanges()
             await fetchCurrentLocationAndWeather()
@@ -224,13 +224,9 @@ final class SyncCoordinator: SyncCoordinatorProtocol {
             await fetchDefaultWeather()
         }
         
-        // 5. 알림 권한 요청
-        do {
-            try await notification.requestAuthorization()
-            Log.info("알림 권한 설정 완료")
-        } catch {
-            Log.error("알림 권한 실패: \(error.localizedDescription)")
-            self.error = .notification(.authorizationDenied)
+        // 5. 알림 — 권한 없어도 동기화에 영향 없음
+        if !notification.isAuthorized {
+            Log.warning("알림 권한 없음 — 알림 기능 제한")
         }
         
         // 6. 오늘 SED 계산
