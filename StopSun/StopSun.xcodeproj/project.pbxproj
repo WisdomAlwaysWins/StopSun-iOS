@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		058BD68C2E793E3B00AAF08B /* StopSunWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 058BD6822E793E3A00AAF08B /* StopSunWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		804E4B5A2F2C82E70019E4EE /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 804E4B592F2C82E70019E4EE /* Moya */; };
+		8C42B0EA2F51682600856B55 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C42B0E92F51682600856B55 /* WidgetKit.framework */; };
+		8C42B0EC2F51682600856B55 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C42B0EB2F51682600856B55 /* SwiftUI.framework */; };
+		8C42B0FD2F51682700856B55 /* StopSunWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8C42B0E72F51682600856B55 /* StopSunWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +29,13 @@
 			remoteGlobalIDString = 058BD66F2E793E2C00AAF08B;
 			remoteInfo = StopSun;
 		};
+		8C42B0FB2F51682700856B55 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 058BD6682E793E2C00AAF08B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8C42B0E62F51682600856B55;
+			remoteInfo = StopSunWidgetExtension;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,12 +50,26 @@
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8C42B0FE2F51682700856B55 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				8C42B0FD2F51682700856B55 /* StopSunWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		058BD6702E793E2C00AAF08B /* StopSun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StopSun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		058BD6822E793E3A00AAF08B /* StopSunWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "StopSunWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		804E4BDF2F309FE40019E4EE /* StopSunTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StopSunTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C42B0E72F51682600856B55 /* StopSunWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = StopSunWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C42B0E92F51682600856B55 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		8C42B0EB2F51682600856B55 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -55,6 +79,20 @@
 				Info.plist,
 			);
 			target = 058BD66F2E793E2C00AAF08B /* StopSun */;
+		};
+		8C42B1022F51682700856B55 /* Exceptions for "StopSunWidget" folder in "StopSunWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 8C42B0E62F51682600856B55 /* StopSunWidgetExtension */;
+		};
+		8C42B1062F5168A700856B55 /* Exceptions for "Shared" folder in "StopSunWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Resources/Models/Stored/SunscreenTimerAttributes.swift,
+			);
+			target = 8C42B0E62F51682600856B55 /* StopSunWidgetExtension */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -74,12 +112,23 @@
 		};
 		058BD6AD2E793EC000AAF08B /* Shared */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				8C42B1062F5168A700856B55 /* Exceptions for "Shared" folder in "StopSunWidgetExtension" target */,
+			);
 			path = Shared;
 			sourceTree = "<group>";
 		};
 		804E4BE02F309FE40019E4EE /* StopSunTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = StopSunTests;
+			sourceTree = "<group>";
+		};
+		8C42B0ED2F51682600856B55 /* StopSunWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				8C42B1022F51682700856B55 /* Exceptions for "StopSunWidget" folder in "StopSunWidgetExtension" target */,
+			);
+			path = StopSunWidget;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -107,6 +156,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8C42B0E42F51682600856B55 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C42B0EC2F51682600856B55 /* SwiftUI.framework in Frameworks */,
+				8C42B0EA2F51682600856B55 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -117,6 +175,8 @@
 				058BD6722E793E2C00AAF08B /* StopSun */,
 				058BD6832E793E3A00AAF08B /* StopSunWatch Watch App */,
 				804E4BE02F309FE40019E4EE /* StopSunTests */,
+				8C42B0ED2F51682600856B55 /* StopSunWidget */,
+				8C42B0E82F51682600856B55 /* Frameworks */,
 				058BD6712E793E2C00AAF08B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -127,8 +187,18 @@
 				058BD6702E793E2C00AAF08B /* StopSun.app */,
 				058BD6822E793E3A00AAF08B /* StopSunWatch Watch App.app */,
 				804E4BDF2F309FE40019E4EE /* StopSunTests.xctest */,
+				8C42B0E72F51682600856B55 /* StopSunWidgetExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		8C42B0E82F51682600856B55 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8C42B0E92F51682600856B55 /* WidgetKit.framework */,
+				8C42B0EB2F51682600856B55 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,11 +212,13 @@
 				058BD66D2E793E2C00AAF08B /* Frameworks */,
 				058BD66E2E793E2C00AAF08B /* Resources */,
 				058BD6902E793E3B00AAF08B /* Embed Watch Content */,
+				8C42B0FE2F51682700856B55 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				058BD68B2E793E3B00AAF08B /* PBXTargetDependency */,
+				8C42B0FC2F51682700856B55 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				058BD6722E793E2C00AAF08B /* StopSun */,
@@ -206,6 +278,28 @@
 			productReference = 804E4BDF2F309FE40019E4EE /* StopSunTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		8C42B0E62F51682600856B55 /* StopSunWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8C42B1012F51682700856B55 /* Build configuration list for PBXNativeTarget "StopSunWidgetExtension" */;
+			buildPhases = (
+				8C42B0E32F51682600856B55 /* Sources */,
+				8C42B0E42F51682600856B55 /* Frameworks */,
+				8C42B0E52F51682600856B55 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				8C42B0ED2F51682600856B55 /* StopSunWidget */,
+			);
+			name = StopSunWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = StopSunWidgetExtension;
+			productReference = 8C42B0E72F51682600856B55 /* StopSunWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -213,7 +307,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1640;
+				LastSwiftUpdateCheck = 2620;
 				LastUpgradeCheck = 1640;
 				TargetAttributes = {
 					058BD66F2E793E2C00AAF08B = {
@@ -225,6 +319,9 @@
 					804E4BDE2F309FE40019E4EE = {
 						CreatedOnToolsVersion = 16.4;
 						TestTargetID = 058BD66F2E793E2C00AAF08B;
+					};
+					8C42B0E62F51682600856B55 = {
+						CreatedOnToolsVersion = 26.2;
 					};
 				};
 			};
@@ -248,6 +345,7 @@
 				058BD66F2E793E2C00AAF08B /* StopSun */,
 				058BD6812E793E3A00AAF08B /* StopSunWatch Watch App */,
 				804E4BDE2F309FE40019E4EE /* StopSunTests */,
+				8C42B0E62F51682600856B55 /* StopSunWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -268,6 +366,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		804E4BDD2F309FE40019E4EE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C42B0E52F51682600856B55 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -298,6 +403,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8C42B0E32F51682600856B55 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -310,6 +422,11 @@
 			isa = PBXTargetDependency;
 			target = 058BD66F2E793E2C00AAF08B /* StopSun */;
 			targetProxy = 804E4BE32F309FE40019E4EE /* PBXContainerItemProxy */;
+		};
+		8C42B0FC2F51682700856B55 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8C42B0E62F51682600856B55 /* StopSunWidgetExtension */;
+			targetProxy = 8C42B0FB2F51682700856B55 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -583,12 +700,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xcodeblue.StopSunTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -600,16 +719,88 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xcodeblue.StopSunTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StopSun.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/StopSun";
+			};
+			name = Release;
+		};
+		8C42B0FF2F51682700856B55 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = TZ7845HC7Z;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StopSunWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = StopSunWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xcodeblue.StopSun.StopSunWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Xcode_blue_widget_profile;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8C42B1002F51682700856B55 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = TZ7845HC7Z;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StopSunWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = StopSunWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xcodeblue.StopSun.StopSunWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Xcode_blue_widget_profile;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -648,6 +839,15 @@
 			buildConfigurations = (
 				804E4BE62F309FE40019E4EE /* Debug */,
 				804E4BE72F309FE40019E4EE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8C42B1012F51682700856B55 /* Build configuration list for PBXNativeTarget "StopSunWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8C42B0FF2F51682700856B55 /* Debug */,
+				8C42B1002F51682700856B55 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

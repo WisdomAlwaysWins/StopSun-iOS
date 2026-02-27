@@ -51,16 +51,18 @@ final class SyncCoordinator: ObservableObject, SyncCoordinatorProtocol {
     private let localStorage: any LocalStorageManagerProtocol
     private let notification: any NotificationManagerProtocol
     private let watchConnectivity: any WatchConnectivityManagerProtocol
-    
+    private let liveActivity: any LiveActivityManagerProtocol
+
     // MARK: - Initializer
-    
+
     init(
         healthKit: any HealthKitManagerProtocol,
         weather: any WeatherManagerProtocol,
         location: any LocationManagerProtocol,
         localStorage: any LocalStorageManagerProtocol,
         notification: any NotificationManagerProtocol,
-        watchConnectivity: any WatchConnectivityManagerProtocol
+        watchConnectivity: any WatchConnectivityManagerProtocol,
+        liveActivity: any LiveActivityManagerProtocol
     ) {
         self.healthKit = healthKit
         self.weather = weather
@@ -68,6 +70,7 @@ final class SyncCoordinator: ObservableObject, SyncCoordinatorProtocol {
         self.localStorage = localStorage
         self.notification = notification
         self.watchConnectivity = watchConnectivity
+        self.liveActivity = liveActivity
         
         setupObservers()
         Log.info("SyncCoordinator 초기화 완료")
@@ -201,7 +204,20 @@ final class SyncCoordinator: ObservableObject, SyncCoordinatorProtocol {
         
         // 2. 저장된 선크림 상태 로드
         loadActiveSunscreen()
-        
+
+        // 2-1. 활성 선크림이 있고, 시간이 남았으며, Live Activity가 없으면 복원
+        if let sunscreen = activeSunscreen,
+           sunscreen.nextReapplyTime > .now,
+           !liveActivity.isActivityActive {
+            liveActivity.startActivity(
+                appliedAt: sunscreen.appliedAt,
+                reapplyAt: sunscreen.nextReapplyTime,
+                spfDisplayTitle: sunscreen.spfLevel.displayTitle,
+                warningLevel: warningLevel,
+                progress: todaySEDProgress
+            )
+        }
+
         // 3. HealthKit 권한 요청
         do {
             try await healthKit.requestAuthorization()
@@ -237,7 +253,10 @@ final class SyncCoordinator: ObservableObject, SyncCoordinatorProtocol {
         
         // 7. 선크림 만료 체크 및 알림 재예약
         checkSunscreenAndScheduleReminder()
-        
+
+        // 8. 경고 레벨 체크 (Live Activity 초기 warningLevel 갱신 포함)
+        checkWarningLevelAndNotify()
+
         Log.info("동기화 완료")
         NotificationCenter.default.post(name: .syncDidComplete, object: nil)
     }
@@ -300,8 +319,15 @@ final class SyncCoordinator: ObservableObject, SyncCoordinatorProtocol {
         watchConnectivity.sendSunscreenApplication(application)
         sendDashboardToWatch()
 
-        // 4. TODO: Live Activity 시작
-        
+        // 4. Live Activity 시작
+        liveActivity.startActivity(
+            appliedAt: application.appliedAt,
+            reapplyAt: reapplyTime,
+            spfDisplayTitle: spf.displayTitle,
+            warningLevel: warningLevel,
+            progress: todaySEDProgress
+        )
+
         Log.info("선크림 도포: SPF \(spf.rawValue), 재도포 알림: \(reapplyTime.formatted(date: .omitted, time: .shortened))")
     }
     
@@ -312,8 +338,9 @@ final class SyncCoordinator: ObservableObject, SyncCoordinatorProtocol {
         // 2. 재도포 알림 취소
         notification.cancelReapplyReminder()
         
-        // 3. TODO: Live Activity 종료
-        
+        // 3. Live Activity 종료
+        liveActivity.endActivity()
+
         Log.info("선크림 타이머 종료")
     }
     
@@ -510,18 +537,21 @@ private extension SyncCoordinator {
             }
         } else {
             // 만료됨
-            Log.info("선크림 효과 만료됨")
             activeSunscreen = nil
+            liveActivity.endActivity()
+            Log.info("선크림 효과 만료됨")
         }
     }
     
     func checkWarningLevelAndNotify() {
         // 푸시 알림은 항상 호출 (NotificationManager가 자체 중복 방지)
         notification.sendMEDWarning(percentage: todaySEDProgress)
-        
-        // UI/Watch 갱신은 레벨 변경 시에만
+
+        // Live Activity는 항상 현재 레벨 반영
         let newLevel = warningLevel
-        
+        liveActivity.updateWarningLevel(newLevel, progress: todaySEDProgress)
+
+        // UI/Watch 갱신은 레벨 변경 시에만
         guard newLevel.notificationPriority > lastNotifiedWarningLevel.notificationPriority else {
             return
         }
