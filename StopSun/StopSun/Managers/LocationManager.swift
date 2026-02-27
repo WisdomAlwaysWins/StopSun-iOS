@@ -29,10 +29,11 @@ final class LocationManager: NSObject, LocationManagerProtocol {
     private let clLocationManager = CLLocationManager()
     private let geocoder = CLGeocoder()
     
-    /// getCurrentLocation() 호출 시 사용하는 continuation
-    ///
-    /// 한 번에 하나의 위치 요청만 처리합니다.
-    private var locationContinuation: CheckedContinuation<CLLocation, Error>?
+    /// 위치 요청 continuation
+     private var locationContinuation: CheckedContinuation<CLLocation, Error>?
+     
+     /// 권한 요청 continuation
+     private var authContinuation: CheckedContinuation<Void, Never>?
     
     // MARK: - Init
     
@@ -62,13 +63,33 @@ final class LocationManager: NSObject, LocationManagerProtocol {
         let status = clLocationManager.authorizationStatus
         
         // 이미 결정된 상태면 바로 리턴
-        guard status == .notDetermined else { return }
+        guard status == .notDetermined else {
+            Log.debug("[Location] 권한 이미 결정됨: \(status.rawValue)")
+            return
+        }
         
-        clLocationManager.requestAlwaysAuthorization()
+        await withCheckedContinuation { continuation in
+            authContinuation = continuation
+            clLocationManager.requestWhenInUseAuthorization()
+        }
         
-        // 권한 다이얼로그 응답 대기
-        while clLocationManager.authorizationStatus == .notDetermined {
-            try? await Task.sleep(for: .milliseconds(200))
+        let newStatus = clLocationManager.authorizationStatus
+        
+        switch newStatus {
+        case .authorizedWhenInUse, .authorizedAlways:
+            Log.info("[Location] 권한 허용됨")
+            
+        case .denied:
+            Log.warning("[Location] 권한 거부됨 — 설정에서 위치 권한을 허용해주세요")
+            
+        case .restricted:
+            Log.warning("[Location] 권한 제한됨 — 기기 설정에 의해 위치 사용이 제한되어 있습니다")
+            
+        case .notDetermined:
+            Log.warning("[Location] 권한 미결정 — 예상하지 못한 상태")
+            
+        @unknown default:
+            Log.warning("[Location] 알 수 없는 권한 상태: \(newStatus.rawValue)")
         }
     }
     
@@ -92,6 +113,10 @@ final class LocationManager: NSObject, LocationManagerProtocol {
     // MARK: - Significant Location Changes
     
     func startMonitoringSignificantLocationChanges() {
+        guard isAuthorized else {
+            Log.warning("[Location] 권한 없음 — 위치 모니터링 불가")
+            return
+        }
         clLocationManager.startMonitoringSignificantLocationChanges()
         Log.info("Significant Location Changes 모니터링 시작")
     }
@@ -107,6 +132,7 @@ final class LocationManager: NSObject, LocationManagerProtocol {
     ///
     /// `requestLocation()`은 위치를 한 번 받고 자동으로 중지됩니다.
     /// 동시에 여러 요청이 들어오면 기존 요청을 취소합니다.
+    /// 10초 내 응답이 없으면 타임아웃 에러를 반환합니다.
     private func requestSingleLocation() async throws -> CLLocation {
         // 기존 요청이 있으면 취소
         if let existing = locationContinuation {
@@ -117,6 +143,16 @@ final class LocationManager: NSObject, LocationManagerProtocol {
         return try await withCheckedThrowingContinuation { continuation in
             locationContinuation = continuation
             clLocationManager.requestLocation()
+            
+            // 타임아웃: 응답 없으면 에러 반환
+            Task { [weak self] in
+                try? await Task.sleep(nanoseconds: 10 * 1_000_000_000)
+                
+                guard let self, let pending = self.locationContinuation else { return }
+                self.locationContinuation = nil
+                pending.resume(throwing: AppError.location(.locationUnavailable))
+                Log.warning("[Location] 위치 요청 타임아웃")
+            }
         }
     }
     
@@ -184,6 +220,12 @@ extension LocationManager: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         let status = manager.authorizationStatus
         Log.info("위치 권한 변경: \(status.debugDescription)")
+        
+        // 권한 요청 대기 중이면 완료
+        if status != .notDetermined {
+            authContinuation?.resume()
+            authContinuation = nil
+        }
     }
 }
 
