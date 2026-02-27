@@ -203,7 +203,7 @@ struct DashboardView: View {
 }
 
 // MARK: - Preview
-
+#if DEBUG
 #Preview("Safe (0~30%)") {
     DashboardView(viewModel: DashboardViewModel(
         syncCoordinator: .preview(totalSED: 0.8, uvIndex: 3)
@@ -237,3 +237,4 @@ struct DashboardView: View {
         )
     ))
 }
+#endif

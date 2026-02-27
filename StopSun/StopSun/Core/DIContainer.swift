@@ -76,7 +76,7 @@ final class DIContainer {
     }()
     
     // MARK: - Preview
-    
+#if DEBUG
     @MainActor
     static let preview: DIContainer = {
         let localStorage = MockLocalStorageManager()
@@ -117,6 +117,7 @@ final class DIContainer {
             errorHandler: errorHandler
         )
     }()
+#endif
     
     // MARK: - Managers
     
