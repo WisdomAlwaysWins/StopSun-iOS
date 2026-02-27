@@ -11,6 +11,7 @@ struct DashboardView: View {
     
     @State private var viewModel: DashboardViewModel
     @Environment(\.scenePhase) private var scenePhase
+    @EnvironmentObject private var errorHandler: ErrorHandler
 #if DEBUG
     @State private var showDebugSheet = false
 #endif
@@ -51,6 +52,11 @@ struct DashboardView: View {
         .onChange(of: scenePhase) { _, newPhase in
             if newPhase == .active {
                 Task { await viewModel.onAppear() }
+            }
+        }
+        .onChange(of: viewModel.syncError) { _, newError in
+            if let error = newError {
+                errorHandler.handle(error)
             }
         }
 #if DEBUG
