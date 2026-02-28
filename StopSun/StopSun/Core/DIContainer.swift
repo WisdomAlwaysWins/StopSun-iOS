@@ -72,6 +72,7 @@ final class DIContainer {
             liveActivity: liveActivity,
             syncCoordinator: syncCoordinator,
             permissionManager: permissionManager,
+            router: router,
             errorHandler: errorHandler
         )
     }()
@@ -115,6 +116,7 @@ final class DIContainer {
             liveActivity: liveActivity,
             syncCoordinator: syncCoordinator,
             permissionManager: permissionManager,
+            router: router,
             errorHandler: errorHandler
         )
     }()
@@ -144,6 +146,7 @@ final class DIContainer {
         liveActivity: any LiveActivityManagerProtocol,
         syncCoordinator: SyncCoordinator,
         permissionManager: PermissionManager,
+        router: Router,
         errorHandler: ErrorHandler
     ) {
         self.healthKit = healthKit
@@ -155,6 +158,7 @@ final class DIContainer {
         self.liveActivity = liveActivity
         self.syncCoordinator = syncCoordinator
         self.permissionManager = permissionManager
+        self.router = router
         self.errorHandler = errorHandler
     }
     
@@ -188,5 +192,10 @@ final class DIContainer {
             localStorage: localStorage,
             permissionManager: permissionManager
         )
+    }
+    
+    @MainActor
+    func makeDashboardViewModel() -> DashboardViewModel {
+        DashboardViewModel(syncCoordinator: syncCoordinator)
     }
 }
