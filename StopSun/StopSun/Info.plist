@@ -13,7 +13,7 @@
 	</array>
 	<key>WeatherAPIKey</key>
 	<string>$(WEATHER_API_KEY)</string>
-	<true/>
 	<key>NSSupportsLiveActivities</key>
+	<true/>
 </dict>
 </plist>

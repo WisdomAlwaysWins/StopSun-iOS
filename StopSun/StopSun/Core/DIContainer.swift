@@ -61,6 +61,7 @@ final class DIContainer {
             healthKit: healthKit,
             location: location
         )
+        let router = Router()
 
         return DIContainer(
             healthKit: healthKit,
@@ -106,6 +107,8 @@ final class DIContainer {
             location: location
         )
 
+        let router = Router()
+
         return DIContainer(
             healthKit: healthKit,
             weather: weather,
@@ -120,7 +123,7 @@ final class DIContainer {
             errorHandler: errorHandler
         )
     }()
-    
+
     // MARK: - Managers
     
     let healthKit: any HealthKitManagerProtocol
@@ -133,6 +136,7 @@ final class DIContainer {
     let syncCoordinator: SyncCoordinator
     let permissionManager: PermissionManager
     let errorHandler: ErrorHandler
+    let router: Router
 
     // MARK: - Initializer
 

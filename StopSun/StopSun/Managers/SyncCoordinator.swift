@@ -206,19 +206,6 @@ final class SyncCoordinator: SyncCoordinatorProtocol {
         // 2. 저장된 선크림 상태 로드
         loadActiveSunscreen()
 
-        // 2-1. 활성 선크림이 있고, 시간이 남았으며, Live Activity가 없으면 복원
-        if let sunscreen = activeSunscreen,
-           sunscreen.nextReapplyTime > .now,
-           !liveActivity.isActivityActive {
-            liveActivity.startActivity(
-                appliedAt: sunscreen.appliedAt,
-                reapplyAt: sunscreen.nextReapplyTime,
-                spfDisplayTitle: sunscreen.spfLevel.displayTitle,
-                warningLevel: warningLevel,
-                progress: todaySEDProgress
-            )
-        }
-        
         // 4. 위치 권한 요청 및 현재 위치 가져오기
         await location.requestAuthorization()
         // 3. HealthKit Background Delivery 설정 (권한은 온보딩에서 요청 완료)
@@ -252,6 +239,20 @@ final class SyncCoordinator: SyncCoordinatorProtocol {
         
         // 7. 선크림 만료 체크 및 알림 재예약
         checkSunscreenAndScheduleReminder()
+
+        // 7-1. 활성 선크림이 있고, 시간이 남았으며, Live Activity가 없으면 복원
+        // MED 계산 이후이므로 progress에 실제 계산된 값이 반영됨
+        if let sunscreen = activeSunscreen,
+           sunscreen.nextReapplyTime > .now,
+           !liveActivity.isActivityActive {
+            liveActivity.startActivity(
+                appliedAt: sunscreen.appliedAt,
+                reapplyAt: sunscreen.nextReapplyTime,
+                spfDisplayTitle: sunscreen.spfLevel.displayTitle,
+                warningLevel: warningLevel,
+                progress: todaySEDProgress
+            )
+        }
 
         // 8. 경고 레벨 체크 (Live Activity 초기 warningLevel 갱신 포함)
         checkWarningLevelAndNotify()
@@ -768,7 +769,8 @@ extension SyncCoordinator {
             location: MockLocationManager(),
             localStorage: MockLocalStorageManager(),
             notification: MockNotificationManager(),
-            watchConnectivity: MockWatchConnectivityManager()
+            watchConnectivity: MockWatchConnectivityManager(),
+            liveActivity: MockLiveActivityManager()
         )
         coordinator.userProfile = UserProfile(skinType: skinType)
         coordinator.todayTotalSED = totalSED

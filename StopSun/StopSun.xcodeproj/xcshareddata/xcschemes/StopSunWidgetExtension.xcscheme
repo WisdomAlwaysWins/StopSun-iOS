@@ -16,7 +16,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8C42AC1A2F513E6F00856B55"
+               BlueprintIdentifier = "8C42B0E62F51682600856B55"
                BuildableName = "StopSunWidgetExtension.appex"
                BlueprintName = "StopSunWidgetExtension"
                ReferencedContainer = "container:StopSun.xcodeproj">
