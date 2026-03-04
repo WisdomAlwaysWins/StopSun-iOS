@@ -317,6 +317,8 @@ final class SyncCoordinator: SyncCoordinatorProtocol {
         
         Log.info("새로고침 시작")
         
+        loadUserProfile()
+        
         // 1. 현재 위치 및 날씨 조회
         await fetchCurrentLocationAndWeather()
         
