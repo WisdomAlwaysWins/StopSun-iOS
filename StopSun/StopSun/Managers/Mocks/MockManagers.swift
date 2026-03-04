@@ -231,9 +231,9 @@ final class MockNotificationManager: NotificationManagerProtocol {
 // MARK: - MockWatchConnectivityManager
 
 final class MockWatchConnectivityManager: WatchConnectivityManagerProtocol {
-    
+
     var _isPaired: Bool = true
-    
+
     var isPaired: Bool { _isPaired }
     var isReachable: Bool { false }
 
