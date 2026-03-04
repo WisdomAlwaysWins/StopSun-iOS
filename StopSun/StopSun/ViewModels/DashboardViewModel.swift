@@ -120,16 +120,21 @@ final class DashboardViewModel {
         // 날짜 갱신 (자정 지났을 때 대비)
         formattedDate = Date().toDayWithWeekdayString
         
-        // 한 번도 sync 안 했으면 바로 시작
+        // 최초 진입: startSync (HealthKit BD, Watch 활성화 등 포함)
         guard let lastSync = syncCoordinator.lastSyncTime else {
             await syncCoordinator.startSync()
             return
         }
         
-        // 마지막 sync로부터 15분 이상 경과했으면 재sync
+        // 15분 이상 경과: 가벼운 refresh만
         if Date().timeIntervalSince(lastSync) > resyncInterval {
-            await syncCoordinator.startSync()
+            await syncCoordinator.refresh()  // startSync → refresh
         }
+    }
+    
+    /// Pull-to-refresh
+    func pullToRefresh() async {
+        await syncCoordinator.refresh()
     }
     
     // MARK: - Debug
