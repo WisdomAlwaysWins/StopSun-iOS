@@ -80,19 +80,16 @@
 			);
 			target = 058BD66F2E793E2C00AAF08B /* StopSun */;
 		};
-		8C42B1022F51682700856B55 /* Exceptions for "StopSunWidget" folder in "StopSunWidgetExtension" target */ = {
+		8092DFD72F50C3A800E643BC /* Exceptions for "Shared" folder in "StopSunWatch Watch App" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Resources/Color.xcassets,
+				Resources/DesignSystem/Button/SSButton.swift,
+				Resources/DesignSystem/Button/SSPrimaryButtonStyle.swift,
+				Resources/DesignSystem/GageView/MEDGaugeCardView.swift,
+				Resources/DesignSystem/Preview/DesignSystemSampleView.swift,
 			);
-			target = 8C42B0E62F51682600856B55 /* StopSunWidgetExtension */;
-		};
-		8C42B1062F5168A700856B55 /* Exceptions for "Shared" folder in "StopSunWidgetExtension" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Resources/Models/Stored/SunscreenTimerAttributes.swift,
-			);
-			target = 8C42B0E62F51682600856B55 /* StopSunWidgetExtension */;
+			target = 058BD6812E793E3A00AAF08B /* StopSunWatch Watch App */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -113,7 +110,7 @@
 		058BD6AD2E793EC000AAF08B /* Shared */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				8C42B1062F5168A700856B55 /* Exceptions for "Shared" folder in "StopSunWidgetExtension" target */,
+				8092DFD72F50C3A800E643BC /* Exceptions for "Shared" folder in "StopSunWatch Watch App" target */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -123,14 +120,12 @@
 			path = StopSunTests;
 			sourceTree = "<group>";
 		};
-		8C42B0ED2F51682600856B55 /* StopSunWidget */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				8C42B1022F51682700856B55 /* Exceptions for "StopSunWidget" folder in "StopSunWidgetExtension" target */,
 			);
 			path = StopSunWidget;
 			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
