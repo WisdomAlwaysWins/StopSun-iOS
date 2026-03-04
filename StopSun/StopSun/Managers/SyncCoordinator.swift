@@ -355,6 +355,7 @@ final class SyncCoordinator: SyncCoordinatorProtocol {
                 try await notification.scheduleReapplyReminder(at: reapplyTime)
             } catch {
                 Log.error("재도포 알림 예약 실패: \(error.localizedDescription)")
+                self.error = .notification(.scheduleFailed)
             }
         }
         
@@ -473,6 +474,7 @@ private extension SyncCoordinator {
             
         } catch {
             Log.error("위치/날씨 조회 실패: \(error.localizedDescription) - 서울 기본값 사용")
+            self.error = .weather(.requestFailed)
             await fetchDefaultWeather()
         }
     }
@@ -561,6 +563,7 @@ private extension SyncCoordinator {
             
         } catch {
             Log.error("SED 계산 실패: \(error.localizedDescription)")
+            self.error = .healthKit(.dataFetchFailed)
         }
     }
     
@@ -602,6 +605,7 @@ private extension SyncCoordinator {
                     Log.info("선크림 알림 재예약: \(reapplyTime.formatted(date: .omitted, time: .shortened))")
                 } catch {
                     Log.error("선크림 알림 재예약 실패: \(error.localizedDescription)")
+                    self.error = .notification(.scheduleFailed)
                 }
             }
         } else {

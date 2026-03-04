@@ -9,7 +9,7 @@ import Foundation
 import UserNotifications
 
 // MARK: - MockHealthKitManager
-
+#if DEBUG
 final class MockHealthKitManager: HealthKitManagerProtocol {
     var isAvailable: Bool { true }
     var isAuthorized: Bool { true }
@@ -255,8 +255,6 @@ final class MockWatchConnectivityManager: WatchConnectivityManagerProtocol {
     func updateApplicationContext(_ context: [String: Any]) throws {}
 }
 
-// MARK: - MockLiveActivityManager
-
 @MainActor
 final class MockLiveActivityManager: LiveActivityManagerProtocol {
 
@@ -320,3 +318,4 @@ final class MockLiveActivityManager: LiveActivityManagerProtocol {
         endCallCount = 0
     }
 }
+#endif
