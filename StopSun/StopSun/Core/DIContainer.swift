@@ -43,24 +43,26 @@ final class DIContainer {
         let location = LocationManager()
         let notification = NotificationManager()
         let watchConnectivity = WatchConnectivityManager()
+        let liveActivity = LiveActivityManager()
         let errorHandler = ErrorHandler()
-        
+
         let syncCoordinator = SyncCoordinator(
             healthKit: healthKit,
             weather: weather,
             location: location,
             localStorage: localStorage,
             notification: notification,
-            watchConnectivity: watchConnectivity
+            watchConnectivity: watchConnectivity,
+            liveActivity: liveActivity
         )
-        
+
         let permissionManager = PermissionManager(
             notification: notification,
             healthKit: healthKit,
             location: location
         )
         let router = Router()
-        
+
         return DIContainer(
             healthKit: healthKit,
             weather: weather,
@@ -68,15 +70,16 @@ final class DIContainer {
             localStorage: localStorage,
             notification: notification,
             watchConnectivity: watchConnectivity,
+            liveActivity: liveActivity,
             syncCoordinator: syncCoordinator,
             permissionManager: permissionManager,
             router: router,
             errorHandler: errorHandler
         )
     }()
-    
+
     // MARK: - Preview
-    
+
     @MainActor
     static let preview: DIContainer = {
         let localStorage = MockLocalStorageManager()
@@ -85,25 +88,27 @@ final class DIContainer {
         let location = MockLocationManager()
         let notification = MockNotificationManager()
         let watchConnectivity = MockWatchConnectivityManager()
+        let liveActivity = MockLiveActivityManager()
         let errorHandler = ErrorHandler()
-        
+
         let syncCoordinator = SyncCoordinator(
             healthKit: healthKit,
             weather: weather,
             location: location,
             localStorage: localStorage,
             notification: notification,
-            watchConnectivity: watchConnectivity
+            watchConnectivity: watchConnectivity,
+            liveActivity: liveActivity
         )
-        
+
         let permissionManager = PermissionManager(
             notification: notification,
             healthKit: healthKit,
             location: location
         )
-        
+
         let router = Router()
-        
+
         return DIContainer(
             healthKit: healthKit,
             weather: weather,
@@ -111,13 +116,14 @@ final class DIContainer {
             localStorage: localStorage,
             notification: notification,
             watchConnectivity: watchConnectivity,
+            liveActivity: liveActivity,
             syncCoordinator: syncCoordinator,
             permissionManager: permissionManager,
             router: router,
             errorHandler: errorHandler
         )
     }()
-    
+
     // MARK: - Managers
     
     let healthKit: any HealthKitManagerProtocol
@@ -126,14 +132,14 @@ final class DIContainer {
     let localStorage: any LocalStorageManagerProtocol
     let notification: any NotificationManagerProtocol
     let watchConnectivity: any WatchConnectivityManagerProtocol
-    
+    let liveActivity: any LiveActivityManagerProtocol
     let syncCoordinator: SyncCoordinator
     let permissionManager: PermissionManager
     let errorHandler: ErrorHandler
     let router: Router
-    
+
     // MARK: - Initializer
-    
+
     private init(
         healthKit: any HealthKitManagerProtocol,
         weather: any WeatherManagerProtocol,
@@ -141,6 +147,7 @@ final class DIContainer {
         localStorage: any LocalStorageManagerProtocol,
         notification: any NotificationManagerProtocol,
         watchConnectivity: any WatchConnectivityManagerProtocol,
+        liveActivity: any LiveActivityManagerProtocol,
         syncCoordinator: SyncCoordinator,
         permissionManager: PermissionManager,
         router: Router,
@@ -152,6 +159,7 @@ final class DIContainer {
         self.localStorage = localStorage
         self.notification = notification
         self.watchConnectivity = watchConnectivity
+        self.liveActivity = liveActivity
         self.syncCoordinator = syncCoordinator
         self.permissionManager = permissionManager
         self.router = router
