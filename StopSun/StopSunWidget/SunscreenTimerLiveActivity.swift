@@ -45,8 +45,8 @@ private struct LockScreenLiveActivityView: View {
 
     // MARK: - Computed
 
-    private var warningDisplay: WarningDisplayInfo {
-        WarningDisplayInfo(rawValue: context.state.warningLevelRawValue)
+    private var warningLevel: WarningLevel {
+        WarningLevel(rawValue: context.state.warningLevelRawValue) ?? .safe
     }
 
     private var progress: CGFloat {
@@ -105,7 +105,7 @@ private struct LockScreenLiveActivityView: View {
                     .fill(.white.opacity(0.2))
 
                 Rectangle()
-                    .fill(warningDisplay.accentColor)
+                    .fill(warningLevel.liveActivityAccentColor)
                     .frame(width: geo.size.width * progress)
 
                 bannerText
@@ -120,8 +120,8 @@ private struct LockScreenLiveActivityView: View {
     private var bannerText: some View {
         (Text("현재 UV  ")
             .foregroundColor(.black)
-         + Text(warningDisplay.title)
-            .foregroundColor(warningDisplay.titleColor)
+         + Text(warningLevel.title)
+            .foregroundColor(warningLevel.liveActivityTitleColor)
          + Text(" 수준 !")
             .foregroundColor(.black))
             .font(.system(size: 14, weight: .semibold))
@@ -140,35 +140,27 @@ private struct LockScreenLiveActivityView: View {
     }
 }
 
-// MARK: - Warning Display Info
+// MARK: - WarningLevel + Live Activity
 
-private struct WarningDisplayInfo {
-    let title: String
-    let accentColor: Color
-    let titleColor: Color
+extension WarningLevel {
 
-    init(rawValue: String) {
-        switch rawValue {
-        case "safe":
-            title = "안전"
-            accentColor = Color(red: 0.72, green: 0.95, blue: 0.72)
-            titleColor = Color(red: 0.1, green: 0.5, blue: 0.1)
-        case "caution":
-            title = "주의"
-            accentColor = Color(red: 1, green: 0.95, blue: 0.72)
-            titleColor = Color(red: 0.7, green: 0.55, blue: 0.0)
-        case "warning":
-            title = "경고"
-            accentColor = Color(red: 1, green: 0.85, blue: 0.6)
-            titleColor = Color(red: 0.8, green: 0.4, blue: 0.0)
-        case "danger":
-            title = "위험"
-            accentColor = Color(red: 1, green: 0.7, blue: 0.7)
-            titleColor = Color(red: 0.7, green: 0.1, blue: 0.1)
-        default:
-            title = "안전"
-            accentColor = Color(red: 0.72, green: 0.95, blue: 0.72)
-            titleColor = Color(red: 0.1, green: 0.5, blue: 0.1)
+    /// Live Activity 프로그레스 바 배경색
+    var liveActivityAccentColor: Color {
+        switch self {
+        case .safe: Color(red: 0.72, green: 0.95, blue: 0.72)
+        case .caution: Color(red: 1, green: 0.95, blue: 0.72)
+        case .warning: Color(red: 1, green: 0.85, blue: 0.6)
+        case .danger: Color(red: 1, green: 0.7, blue: 0.7)
+        }
+    }
+
+    /// Live Activity 경고 텍스트 색상
+    var liveActivityTitleColor: Color {
+        switch self {
+        case .safe: Color(red: 0.1, green: 0.5, blue: 0.1)
+        case .caution: Color(red: 0.7, green: 0.55, blue: 0.0)
+        case .warning: Color(red: 0.8, green: 0.4, blue: 0.0)
+        case .danger: Color(red: 0.7, green: 0.1, blue: 0.1)
         }
     }
 }
