@@ -85,7 +85,7 @@ extension WeatherAPI: TargetType {
 
 enum WeatherAPIConfig {
     static var apiKey: String {
-        guard let key = Bundle.main.infoDictionary?["WeatherAPIKey"] as? String,
+        guard let key = Bundle.main.infoDictionary?[    "WeatherAPIKey"] as? String,
               !key.isEmpty,
               !key.hasPrefix("$(") else {
             fatalError("❌ WeatherAPIKey가 설정되지 않았습니다.")
