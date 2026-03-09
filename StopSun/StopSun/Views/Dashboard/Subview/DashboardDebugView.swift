@@ -98,7 +98,7 @@ struct DashboardDebugView: View {
                     
                     VStack(alignment: .leading, spacing: 4) {
                         HStack {
-                            Text("#\(index + 1)")
+                            Text("#\(index + 1)") 
                                 .font(.caption2)
                                 .fontWeight(.bold)
                             
