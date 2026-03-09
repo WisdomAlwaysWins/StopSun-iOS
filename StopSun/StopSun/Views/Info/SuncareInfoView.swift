@@ -95,6 +95,7 @@ struct SuncareInfoView: View {
             Text(L10n.Info.Error.loadFailed)
                 .font(.ssFont(.R3))
                 .foregroundStyle(Color.text04)
+                .multilineTextAlignment(.center)
         }
         .frame(maxWidth: .infinity)
         .padding(.top, 120)
@@ -103,8 +104,18 @@ struct SuncareInfoView: View {
     // MARK: - Empty View
     
     private var emptyView: some View {
-        Color.clear
-            .frame(height: 1)
+        VStack(spacing: 12) {
+            Image(systemName: "sun.max")
+                .font(.system(size: 40))
+                .foregroundStyle(Color.text04)
+
+            Text(L10n.Info.Empty.prepare)
+                .font(.ssFont(.R3))
+                .foregroundStyle(Color.text04)
+                .multilineTextAlignment(.center)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.top, 120)
     }
 }
 
@@ -113,6 +124,12 @@ struct SuncareInfoView: View {
 #Preview("Info List") {
     NavigationStack {
         SuncareInfoView(viewModel: .preview)
+    }
+}
+
+#Preview("Info empty") {
+    NavigationStack {
+        SuncareInfoView(viewModel: .previewEmpty)
     }
 }
 

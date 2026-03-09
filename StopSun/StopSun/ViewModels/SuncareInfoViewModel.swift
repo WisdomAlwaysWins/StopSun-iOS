@@ -141,4 +141,11 @@ extension SuncareInfoViewModel {
         viewModel.hasError = false
         return viewModel
     }
+    
+    static var previewEmpty: SuncareInfoViewModel {
+        let viewModel = SuncareInfoViewModel(fileName: "__preview_empty__")
+        viewModel.articles = []
+        viewModel.hasError = false
+        return viewModel
+    }
 }

@@ -370,6 +370,11 @@ enum L10n {
             /// "정보를 불러올 수 없습니다"
             static var loadFailed: String { .localized("info.error.loadFailed") }
         }
+        
+        enum Empty {
+            /// "자외선과 피부 보호에 대한 유용한 정보를 준비하고 있어요."
+            static var prepare: String { .localized("info.empty.prepare") }
+        }
     }
     
     // MARK: - Settings
