@@ -45,6 +45,9 @@ struct DashboardView: View {
                 .padding(.bottom, 20)
             }
             .scrollIndicators(.hidden)
+            .refreshable {
+                await viewModel.pullToRefresh()
+            }
         }
         .task {
             await viewModel.onAppear()

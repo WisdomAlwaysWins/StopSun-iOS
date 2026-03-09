@@ -250,9 +250,10 @@ final class SyncCoordinator: SyncCoordinatorProtocol {
         // 2. 저장된 선크림 상태 로드
         loadActiveSunscreen()
 
-        // 4. 위치 권한 요청 및 현재 위치 가져오기
+        // 3. 위치 권한 요청 및 현재 위치 가져오기
         await location.requestAuthorization()
-        // 3. HealthKit Background Delivery 설정 (권한은 온보딩에서 요청 완료)
+        
+        // 4. HealthKit Background Delivery 설정 (권한은 온보딩에서 요청 완료)
         if healthKit.isAuthorized {
             do {
                 try await healthKit.enableBackgroundDelivery()
@@ -264,7 +265,7 @@ final class SyncCoordinator: SyncCoordinatorProtocol {
             Log.warning("HealthKit 권한 없음 — Background Delivery 스킵")
         }
         
-        // 4. 현재 위치 및 날씨 조회 (권한은 온보딩에서 요청 완료)
+        // 5. 현재 위치 및 날씨 조회 (권한은 온보딩에서 요청 완료)
         if location.isAuthorized {
             location.startMonitoringSignificantLocationChanges()
             await fetchCurrentLocationAndWeather()
@@ -272,18 +273,18 @@ final class SyncCoordinator: SyncCoordinatorProtocol {
             Log.warning("위치 권한 없음 — 위치/날씨 조회 스킵")
         }
         
-        // 5. 알림 — 권한 없어도 동기화에 영향 없음
+        // 6. 알림 — 권한 없어도 동기화에 영향 없음
         if !notification.isAuthorized {
             Log.warning("알림 권한 없음 — 알림 기능 제한")
         }
         
-        // 6. 오늘 SED 계산
+        // 7. 오늘 SED 계산
         await calculateTodaySED()
         
-        // 7. 선크림 만료 체크 및 알림 재예약
+        // 8. 선크림 만료 체크 및 알림 재예약
         checkSunscreenAndScheduleReminder()
 
-        // 7-1. 활성 선크림이 있고, 시간이 남았으며, Live Activity가 없으면 복원
+        // 8-1. 활성 선크림이 있고, 시간이 남았으며, Live Activity가 없으면 복원
         // MED 계산 이후이므로 progress에 실제 계산된 값이 반영됨
         if let sunscreen = activeSunscreen,
            sunscreen.nextReapplyTime > .now,
@@ -297,7 +298,7 @@ final class SyncCoordinator: SyncCoordinatorProtocol {
             )
         }
 
-        // 8. 경고 레벨 체크 (Live Activity 초기 warningLevel 갱신 포함)
+        // 9. 경고 레벨 체크 (Live Activity 초기 warningLevel 갱신 포함)
         checkWarningLevelAndNotify()
 
         Log.info("동기화 완료")
