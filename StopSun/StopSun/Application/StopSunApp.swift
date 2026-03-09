@@ -33,7 +33,6 @@ struct StopSunApp: App {
         case .active:
             Task {
                 await container.permissionManager.checkAllStatuses()
-                await container.syncCoordinator.refresh()
             }
         case .background:
             container.syncCoordinator.handleAppWillResignActive()

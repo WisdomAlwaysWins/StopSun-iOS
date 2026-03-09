@@ -16,7 +16,6 @@ import Foundation
 @MainActor
 @Observable
 final class DashboardViewModel {
-    
     // MARK: - View State
     
     var currentPage: Int = 0
@@ -27,14 +26,19 @@ final class DashboardViewModel {
     // MARK: - Dependencies
     
     private let syncCoordinator: SyncCoordinator
+    private let localStorage: any LocalStorageManagerProtocol
     
     /// 재sync 판단 기준 (15분)
     private let resyncInterval: TimeInterval = 15 * 60
     
     // MARK: - Initializer
     
-    init(syncCoordinator: SyncCoordinator) {
+    init(
+        syncCoordinator: SyncCoordinator,
+        localStorage: any LocalStorageManagerProtocol
+    ) {
         self.syncCoordinator = syncCoordinator
+        self.localStorage = localStorage
         self.formattedDate = Date().toDayWithWeekdayString
     }
     
@@ -66,10 +70,45 @@ final class DashboardViewModel {
     
     // MARK: - Weekly Chart
     
-    /// 주간 MED 차트 아이템
+    /// 최근 7일간 MED 차트 데이터 조회
+    ///
+    /// LocalStorage에서 DailyMEDRecord를 읽어 WeeklyBarItem 배열로 변환합니다.
+    /// 오늘 데이터는 SyncCoordinator의 실시간 값을 사용합니다.
     var weeklyChartItems: [WeeklyBarItem] {
-        syncCoordinator.loadWeeklyChartItems()
-	}
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+        let daySymbols = ["일", "월", "화", "수", "목", "금", "토"]
+        
+        guard let skinType = syncCoordinator.userProfile?.skinType else {
+            return (0..<7).map { offset in
+                let date = calendar.date(byAdding: .day, value: offset - 6, to: today)!
+                let weekday = calendar.component(.weekday, from: date) - 1
+                return WeeklyBarItem(dayLabel: daySymbols[weekday], percent: nil, isToday: offset == 6)
+            }
+        }
+        
+        let maxSED = skinType.maxDailyMEDinSED
+        let todayTotalSED = syncCoordinator.todayTotalSED
+        
+        return (0..<7).map { offset in
+            let date = calendar.date(byAdding: .day, value: offset - 6, to: today)!
+            let weekday = calendar.component(.weekday, from: date) - 1
+            let isToday = offset == 6
+            let label = daySymbols[weekday]
+            
+            if isToday {
+                let percent = maxSED > 0 ? (todayTotalSED / maxSED) * 100 : 0
+                return WeeklyBarItem(dayLabel: label, percent: percent, isToday: true)
+            }
+            
+            if let record = localStorage.loadDailyMEDRecord(for: date) {
+                let percent = maxSED > 0 ? (record.totalSED / maxSED) * 100 : 0
+                return WeeklyBarItem(dayLabel: label, percent: percent, isToday: false)
+            }
+            
+            return WeeklyBarItem(dayLabel: label, percent: nil, isToday: false)
+        }
+    }
     
     // MARK: - Weather Data
     
@@ -95,7 +134,8 @@ final class DashboardViewModel {
     /// 남은 시간 포맷 (TimelineView에서 now를 전달받아 사용)
     func timerRemaining(at now: Date) -> String {
         guard let sunscreen = syncCoordinator.activeSunscreen,
-              sunscreen.isActive(at: now) else {
+              sunscreen.isActive(at: now)
+        else {
             return "00:00"
         }
         
@@ -117,26 +157,28 @@ final class DashboardViewModel {
     
     /// 최초 진입 또는 포그라운드 복귀 시 호출
     func onAppear() async {
-        // 날짜 갱신 (자정 지났을 때 대비)
         formattedDate = Date().toDayWithWeekdayString
         
-        // 한 번도 sync 안 했으면 바로 시작
         guard let lastSync = syncCoordinator.lastSyncTime else {
             await syncCoordinator.startSync()
             return
         }
         
-        // 마지막 sync로부터 15분 이상 경과했으면 재sync
         if Date().timeIntervalSince(lastSync) > resyncInterval {
             await syncCoordinator.startSync()
         }
     }
     
+    /// Pull-to-refresh
+    func pullToRefresh() async {
+        await syncCoordinator.refresh()
+    }
+    
     // MARK: - Debug
     
-#if DEBUG
-    var debugSyncCoordinator: SyncCoordinator {
-        syncCoordinator
-    }
-#endif
+    #if DEBUG
+        var debugSyncCoordinator: SyncCoordinator {
+            syncCoordinator
+        }
+    #endif
 }

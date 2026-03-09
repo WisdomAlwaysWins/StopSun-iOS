@@ -73,47 +73,19 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		054F18162F587DE5002FC9D9 /* Exceptions for "StopSunWidget" folder in "StopSunWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 80C9361D2F58727E00E1BB3C /* StopSunWidgetExtension */;
+		};
 		058BD6A92E793E8E00AAF08B /* Exceptions for "StopSun" folder in "StopSun" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
 			target = 058BD66F2E793E2C00AAF08B /* StopSun */;
-		};
-		8092DFD72F50C3A800E643BC /* Exceptions for "Shared" folder in "StopSunWatch Watch App" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Resources/Color.xcassets,
-				Resources/DesignSystem/Button/SSButton.swift,
-				Resources/DesignSystem/Button/SSPrimaryButtonStyle.swift,
-				Resources/DesignSystem/GageView/MEDGaugeCardView.swift,
-				Resources/DesignSystem/Preview/DesignSystemSampleView.swift,
-			);
-			target = 058BD6812E793E3A00AAF08B /* StopSunWatch Watch App */;
-		};
-		80C936732F58739300E1BB3C /* Exceptions for "StopSunWidget" folder in "StopSunWidgetExtension" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 80C9361D2F58727E00E1BB3C /* StopSunWidgetExtension */;
-		};
-		80C936752F5873B800E1BB3C /* Exceptions for "StopSunWidget" folder in "StopSun" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				SunscreenTimerLiveActivity.swift,
-			);
-			target = 058BD66F2E793E2C00AAF08B /* StopSun */;
-		};
-		80C936772F5873E500E1BB3C /* Exceptions for "Shared" folder in "StopSunWidgetExtension" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Resources/Color.xcassets,
-				Resources/DesignSystem/Localization/L10n.swift,
-				Resources/Models/Enums/WarningLevel.swift,
-				Resources/Models/Stored/SunscreenTimerAttributes.swift,
-			);
-			target = 80C9361D2F58727E00E1BB3C /* StopSunWidgetExtension */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -133,10 +105,6 @@
 		};
 		058BD6AD2E793EC000AAF08B /* Shared */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				8092DFD72F50C3A800E643BC /* Exceptions for "Shared" folder in "StopSunWatch Watch App" target */,
-				80C936772F5873E500E1BB3C /* Exceptions for "Shared" folder in "StopSunWidgetExtension" target */,
-			);
 			path = Shared;
 			sourceTree = "<group>";
 		};
@@ -148,8 +116,7 @@
 		80C9365A2F58737500E1BB3C /* StopSunWidget */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				80C936752F5873B800E1BB3C /* Exceptions for "StopSunWidget" folder in "StopSun" target */,
-				80C936732F58739300E1BB3C /* Exceptions for "StopSunWidget" folder in "StopSunWidgetExtension" target */,
+				054F18162F587DE5002FC9D9 /* Exceptions for "StopSunWidget" folder in "StopSunWidgetExtension" target */,
 			);
 			path = StopSunWidget;
 			sourceTree = "<group>";
@@ -314,6 +281,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				058BD6AD2E793EC000AAF08B /* Shared */,
 				80C9365A2F58737500E1BB3C /* StopSunWidget */,
 			);
 			name = StopSunWidgetExtension;
