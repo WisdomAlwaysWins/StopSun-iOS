@@ -191,7 +191,10 @@ final class DIContainer {
     
     @MainActor
     func makeDashboardViewModel() -> DashboardViewModel {
-        DashboardViewModel(syncCoordinator: syncCoordinator)
+        DashboardViewModel(
+            syncCoordinator: syncCoordinator,
+            localStorage: localStorage
+        )
     }
     
 #if DEBUG
