@@ -60,8 +60,7 @@ final class SyncCoordinatorTests: XCTestCase {
         await sut.startSync()
 
         // Assert - 프로필 로드됨 (MockLocalStorage → .mockUser)
-        XCTAssertNotNil(sut.userProfile)
-        XCTAssertEqual(sut.userProfile?.skinType, .type3)
+        XCTAssertEqual(sut.userProfile, .mockUser)
 
         // Assert - 날씨 조회됨 (MockWeatherManager → UV 5.0)
         XCTAssertNotNil(sut.currentWeather)
@@ -105,16 +104,15 @@ final class SyncCoordinatorTests: XCTestCase {
         XCTAssertEqual(history.first?.spfLevel, .spf50)
     }
 
-    func test_applySunscreen_재도포_알림이_예약된다() {
+    func test_applySunscreen_재도포_알림이_예약된다() async throws {
         // Act
         sut.applySunscreen(spf: .spf30)
 
-        // Assert - Spy 검증: 비동기 알림 예약 대기
-        let predicate = NSPredicate { _, _ in
-            !self.spyNotification.scheduledReminders.isEmpty
-        }
-        let exp = expectation(for: predicate, evaluatedWith: nil)
-        wait(for: [exp], timeout: 1.0)
+        // 내부 비동기 Task 완료 대기
+        try await Task.sleep(for: .milliseconds(100))
+
+        // Assert - Spy 검증: 알림 예약됨
+        XCTAssertFalse(spyNotification.scheduledReminders.isEmpty)
     }
 
     func test_applySunscreen_LiveActivity가_시작된다() {
@@ -153,14 +151,11 @@ final class SyncCoordinatorTests: XCTestCase {
         XCTAssertNil(sut.activeSunscreen)
     }
 
-    func test_stopSunscreen_재도포_알림이_취소된다() {
+    func test_stopSunscreen_재도포_알림이_취소된다() async throws {
         // Arrange
         sut.applySunscreen(spf: .spf30)
-        let predicate = NSPredicate { _, _ in
-            !self.spyNotification.scheduledReminders.isEmpty
-        }
-        let scheduled = expectation(for: predicate, evaluatedWith: nil)
-        wait(for: [scheduled], timeout: 1.0)
+        try await Task.sleep(for: .milliseconds(100))
+        XCTAssertFalse(spyNotification.scheduledReminders.isEmpty)
 
         // Act
         sut.stopSunscreen()
