@@ -209,25 +209,29 @@ struct DashboardView: View {
 #if DEBUG
 #Preview("Safe (0~30%)") {
     DashboardView(viewModel: DashboardViewModel(
-        syncCoordinator: .preview(totalSED: 0.8, uvIndex: 3)
+        syncCoordinator: .preview(totalSED: 0.8, uvIndex: 3),
+        localStorage: MockLocalStorageManager()
     ))
 }
 
 #Preview("Caution (30~50%)") {
     DashboardView(viewModel: DashboardViewModel(
-        syncCoordinator: .preview(totalSED: 1.6, uvIndex: 6)
+        syncCoordinator: .preview(totalSED: 1.6, uvIndex: 6),
+        localStorage: MockLocalStorageManager()
     ))
 }
 
 #Preview("Warning (50~70%)") {
     DashboardView(viewModel: DashboardViewModel(
-        syncCoordinator: .preview(totalSED: 2.4, uvIndex: 8)
+        syncCoordinator: .preview(totalSED: 2.4, uvIndex: 8),
+        localStorage: MockLocalStorageManager()
     ))
 }
 
 #Preview("Danger (70%+)") {
     DashboardView(viewModel: DashboardViewModel(
-        syncCoordinator: .preview(totalSED: 3.5, uvIndex: 9, temperature: 32)
+        syncCoordinator: .preview(totalSED: 3.5, uvIndex: 9, temperature: 32),
+        localStorage: MockLocalStorageManager()
     ))
 }
 
@@ -237,7 +241,8 @@ struct DashboardView: View {
             totalSED: 1.0,
             uvIndex: 7,
             activeSunscreen: SunscreenApplication(spfLevel: .spf50)
-        )
+        ),
+        localStorage: MockLocalStorageManager()
     ))
 }
 #endif

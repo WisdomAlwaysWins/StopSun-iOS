@@ -78,12 +78,11 @@ final class SyncCoordinator: SyncCoordinatorProtocol {
     }
     
     deinit {
-        // Structured Concurrency: 모든 Task 취소
         observerTasks.forEach { $0.cancel() }
         Log.info("SyncCoordinator deinit - 모든 observer 취소됨")
     }
     
-    // MARK: - SED Computed Properties
+    // MARK: - Computed Properties
     
     var todaySEDProgress: Double {
         guard let skinType = userProfile?.skinType else { return 0 }
@@ -105,9 +104,7 @@ final class SyncCoordinator: SyncCoordinatorProtocol {
     
     func minutesUntilMaxSED() -> Double {
         guard let skinType = userProfile?.skinType else { return 0 }
-        
         let spf: Double? = activeSunscreen?.spfLevel.protectionFactor
-        
         return SEDCalculator.minutesUntilMax(
             currentSED: todayTotalSED,
             skinType: skinType,
@@ -116,54 +113,9 @@ final class SyncCoordinator: SyncCoordinatorProtocol {
         )
     }
     
-    // MARK: - Weekly Chart Data
-    
-    /// 최근 7일간 MED 차트 데이터 조회
-    ///
-    /// LocalStorage에서 DailyMEDRecord를 읽어 WeeklyBarItem 배열로 변환합니다.
-    /// 오늘 데이터는 실시간 를 사용합니다.
-    func loadWeeklyChartItems() -> [WeeklyBarItem] {
-        let calendar = Calendar.current
-        let today = calendar.startOfDay(for: Date())
-        let daySymbols = ["일", "월", "화", "수", "목", "금", "토"]
-        
-        guard let skinType = userProfile?.skinType else {
-            // 프로필 없으면 빈 7일
-            return (0..<7).map { offset in
-                let date = calendar.date(byAdding: .day, value: offset - 6, to: today)!
-                let weekday = calendar.component(.weekday, from: date) - 1
-                return WeeklyBarItem(dayLabel: daySymbols[weekday], percent: nil, isToday: offset == 6)
-            }
-        }
-        
-        let maxSED = skinType.maxDailyMEDinSED
-        
-        return (0..<7).map { offset in
-            let date = calendar.date(byAdding: .day, value: offset - 6, to: today)!
-            let weekday = calendar.component(.weekday, from: date) - 1
-            let isToday = offset == 6
-            let label = daySymbols[weekday]
-            
-            if isToday {
-                // 오늘은 실시간 데이터 사용
-                let percent = maxSED > 0 ? (todayTotalSED / maxSED) * 100 : 0
-                return WeeklyBarItem(dayLabel: label, percent: percent, isToday: true)
-            }
-            
-            // 과거 데이터는 LocalStorage에서
-            if let record = localStorage.loadDailyMEDRecord(for: date) {
-                let percent = maxSED > 0 ? (record.totalSED / maxSED) * 100 : 0
-                return WeeklyBarItem(dayLabel: label, percent: percent, isToday: false)
-            }
-            
-            return WeeklyBarItem(dayLabel: label, percent: nil, isToday: false)
-        }
-    }
-    
     // MARK: - Setup Observers
     
     private func setupObservers() {
-        // 1. 위치 변경 Observer
         let locationTask = Task { [weak self] in
             let notifications = NotificationCenter.default.notifications(named: .locationDidChange)
             for await notification in notifications {
@@ -173,7 +125,6 @@ final class SyncCoordinator: SyncCoordinatorProtocol {
         }
         observerTasks.append(locationTask)
         
-        // 2. HealthKit 데이터 업데이트 Observer
         let healthKitTask = Task { [weak self] in
             let notifications = NotificationCenter.default.notifications(named: .healthKitDataDidUpdate)
             for await _ in notifications {
@@ -183,7 +134,6 @@ final class SyncCoordinator: SyncCoordinatorProtocol {
         }
         observerTasks.append(healthKitTask)
         
-        // 3. 자정 Observer (SED 리셋)
         let midnightTask = Task { [weak self] in
             let notifications = NotificationCenter.default.notifications(named: .NSCalendarDayChanged)
             for await _ in notifications {
@@ -193,7 +143,6 @@ final class SyncCoordinator: SyncCoordinatorProtocol {
         }
         observerTasks.append(midnightTask)
         
-        // 4. 푸시 알림 "바르기" 버튼 탭 Observer
         let pushApplyTask = Task { [weak self] in
             let notifications = NotificationCenter.default.notifications(named: .didTapApplySunscreenNotification)
             for await _ in notifications {
@@ -204,23 +153,8 @@ final class SyncCoordinator: SyncCoordinatorProtocol {
         observerTasks.append(pushApplyTask)
         
         Log.debug("Observer 설정 완료: \(observerTasks.count)개")
-
-        // 5. Watch Connectivity 콜백 설정
+        
         setupWatchConnectivity()
-    }
-
-    // MARK: - Watch Connectivity
-
-    private func setupWatchConnectivity() {
-        watchConnectivity.onMessageReceived = { [weak self] message in
-            self?.handleWatchMessage(message)
-        }
-
-        watchConnectivity.onUserInfoReceived = { [weak self] userInfo in
-            self?.handleUserInfoFromWatch(userInfo)
-        }
-
-        Log.debug("Watch Connectivity 콜백 설정 완료")
     }
     
     // MARK: - Sync
@@ -250,10 +184,7 @@ final class SyncCoordinator: SyncCoordinatorProtocol {
         // 2. 저장된 선크림 상태 로드
         loadActiveSunscreen()
 
-        // 3. 위치 권한 요청 및 현재 위치 가져오기
-        await location.requestAuthorization()
-        
-        // 4. HealthKit Background Delivery 설정 (권한은 온보딩에서 요청 완료)
+        // 3. HealthKit Background Delivery 설정
         if healthKit.isAuthorized {
             do {
                 try await healthKit.enableBackgroundDelivery()
@@ -265,7 +196,9 @@ final class SyncCoordinator: SyncCoordinatorProtocol {
             Log.warning("HealthKit 권한 없음 — Background Delivery 스킵")
         }
         
-        // 5. 현재 위치 및 날씨 조회 (권한은 온보딩에서 요청 완료)
+        // 4. 현재 위치 및 날씨 조회
+        await location.requestAuthorization()
+        
         if location.isAuthorized {
             location.startMonitoringSignificantLocationChanges()
             await fetchCurrentLocationAndWeather()
@@ -273,19 +206,18 @@ final class SyncCoordinator: SyncCoordinatorProtocol {
             Log.warning("위치 권한 없음 — 위치/날씨 조회 스킵")
         }
         
-        // 6. 알림 — 권한 없어도 동기화에 영향 없음
+        // 5. 알림 상태 확인
         if !notification.isAuthorized {
             Log.warning("알림 권한 없음 — 알림 기능 제한")
         }
         
-        // 7. 오늘 SED 계산
+        // 6. 오늘 SED 계산
         await calculateTodaySED()
         
-        // 8. 선크림 만료 체크 및 알림 재예약
+        // 7. 선크림 만료 체크 및 알림 재예약
         checkSunscreenAndScheduleReminder()
-
-        // 8-1. 활성 선크림이 있고, 시간이 남았으며, Live Activity가 없으면 복원
-        // MED 계산 이후이므로 progress에 실제 계산된 값이 반영됨
+        
+        // 7-1. Live Activity 복원
         if let sunscreen = activeSunscreen,
            sunscreen.nextReapplyTime > .now,
            !liveActivity.isActivityActive {
@@ -297,10 +229,9 @@ final class SyncCoordinator: SyncCoordinatorProtocol {
                 progress: todaySEDProgress
             )
         }
-
-        // 9. 경고 레벨 체크 (Live Activity 초기 warningLevel 갱신 포함)
+        // 8. 경고 레벨 체크
         checkWarningLevelAndNotify()
-
+        
         Log.info("동기화 완료")
         NotificationCenter.default.post(name: .syncDidComplete, object: nil)
     }
@@ -318,21 +249,12 @@ final class SyncCoordinator: SyncCoordinatorProtocol {
         
         Log.info("새로고침 시작")
         
-        // 1. 현재 위치 및 날씨 조회
         await fetchCurrentLocationAndWeather()
-        
-        // 2. SED 재계산
         await calculateTodaySED()
-        
-        // 3. 선크림 상태 갱신
         loadActiveSunscreen()
-        
-        // 4. 경고 레벨 체크 및 알림
         checkWarningLevelAndNotify()
-
-        // 5. Watch에 최신 상태 동기화
         sendDashboardToWatch()
-
+        
         Log.info("새로고침 완료")
     }
     
@@ -345,11 +267,9 @@ final class SyncCoordinator: SyncCoordinatorProtocol {
             reapplyIntervalMinutes: spf.recommendedReapplicationMinutes
         )
         
-        // 1. 히스토리에 저장
         localStorage.saveSunscreenApplication(application)
         activeSunscreen = application
         
-        // 2. 재도포 알림 예약
         let reapplyTime = application.nextReapplyTime
         Task {
             do {
@@ -360,11 +280,9 @@ final class SyncCoordinator: SyncCoordinatorProtocol {
             }
         }
         
-        // 3. Watch에 상태 전송
         watchConnectivity.sendSunscreenApplication(application)
         sendDashboardToWatch()
-
-        // 4. Live Activity 시작
+        
         liveActivity.startActivity(
             appliedAt: application.appliedAt,
             reapplyAt: reapplyTime,
@@ -372,20 +290,14 @@ final class SyncCoordinator: SyncCoordinatorProtocol {
             warningLevel: warningLevel,
             progress: todaySEDProgress
         )
-
+        
         Log.info("선크림 도포: SPF \(spf.rawValue), 재도포 알림: \(reapplyTime.formatted(date: .omitted, time: .shortened))")
     }
     
     func stopSunscreen() {
-        // 1. 활성 선크림 해제 (히스토리는 유지)
         activeSunscreen = nil
-        
-        // 2. 재도포 알림 취소
         notification.cancelReapplyReminder()
-        
-        // 3. Live Activity 종료
         liveActivity.endActivity()
-
         Log.info("선크림 타이머 종료")
     }
     
@@ -393,10 +305,8 @@ final class SyncCoordinator: SyncCoordinatorProtocol {
         localStorage.updateSkinType(skinType)
         userProfile?.skinType = skinType
         
-        // 경고 레벨 재계산
         checkWarningLevelAndNotify()
         
-        // Watch에 프로필 전송
         if let profile = userProfile {
             watchConnectivity.sendUserProfile(profile)
         }
@@ -408,7 +318,6 @@ final class SyncCoordinator: SyncCoordinatorProtocol {
         localStorage.updateSunscreenSPF(spfLevel)
         userProfile?.spfLevel = spfLevel
         
-        // Watch에 프로필 전송
         if let profile = userProfile {
             watchConnectivity.sendUserProfile(profile)
         }
@@ -420,90 +329,28 @@ final class SyncCoordinator: SyncCoordinatorProtocol {
     
     func handleAppDidBecomeActive() {
         Log.debug("앱 Active")
-        
-        Task {
-            await refresh()
-        }
+        Task { await refresh() }
     }
     
     func handleAppWillResignActive() {
         Log.debug("앱 Background 전환")
-        
-        // 현재 상태 저장 (필요시)
         if let profile = userProfile {
             localStorage.saveUserProfile(profile)
         }
     }
 }
 
-// MARK: - Private Methods
+// MARK: - SED Calculation
 
 private extension SyncCoordinator {
     
-    // MARK: - Load Methods
-    
-    func loadUserProfile() {
-        userProfile = localStorage.loadUserProfile() ?? .defaultUser
-        Log.debug("프로필 로드: \(userProfile?.skinType.title ?? "없음")")
-    }
-    
-    func loadActiveSunscreen() {
-        // 히스토리에서 현재 유효한 선크림 찾기
-        activeSunscreen = localStorage.loadSunscreenHistory()
-            .filter { $0.isActive(at: Date()) }
-            .sorted { $0.appliedAt > $1.appliedAt }
-            .first
-        
-        Log.debug("활성 선크림: \(activeSunscreen != nil ? "있음" : "없음")")
-    }
-    
-    // MARK: - Fetch Methods
-    
-    func fetchCurrentLocationAndWeather() async {
-        do {
-            let locationInfo = try await location.getCurrentLocation()
-            
-            // 위치 기록 저장
-            let locationRecord = LocationRecord(from: locationInfo)
-            localStorage.saveLocationRecord(locationRecord)
-            
-            // 날씨 조회
-            let weather = try await self.weather.fetchCurrentWeather(for: locationInfo)
-            currentWeather = weather
-            
-            Log.info("위치/날씨 조회 완료: \(locationInfo.cityName ?? "알 수 없음"), UV \(weather.currentUVIndex)")
-            
-        } catch {
-            Log.error("위치/날씨 조회 실패: \(error.localizedDescription) - 서울 기본값 사용")
-            self.error = .weather(.requestFailed)
-            await fetchDefaultWeather()
-        }
-    }
-    
-    /// 위치 권한 없거나 조회 실패 시 서울 날씨로 fallback
-    func fetchDefaultWeather() async {
-        do {
-            let weather = try await self.weather.fetchCurrentWeather(for: .mockSeoul)
-            currentWeather = weather
-            Log.info("서울 기본 날씨 로드: UV \(weather.currentUVIndex)")
-        } catch {
-            Log.error("서울 기본 날씨도 실패: \(error.localizedDescription) - 정적 기본값 사용")
-            currentWeather = LocationWeather(
-                location: .mockSeoul,
-                currentUVIndex: 0,
-                currentTemperature: 0
-            )
-        }
-    }
-    
-    // MARK: - SED Calculation
-    
+    /// 오늘의 총 SED 계산
+    ///
+    /// HealthKit에서 TimeInDaylight 데이터를 조회하고,
+    /// 미처리 레코드만 선별하여 SED를 계산합니다.
     func calculateTodaySED() async {
         do {
-            // 오늘의 TimeInDaylight 조회
             let timeInDaylightData = try await healthKit.fetchTodayTimeInDaylight()
-            
-            // 오늘의 선크림 히스토리 로드
             let sunscreenHistory = localStorage.loadSunscreenHistory()
             
             // 1. 기존 저장된 기록에서 SED 먼저 로드
@@ -516,15 +363,12 @@ private extension SyncCoordinator {
             var newCount = 0
             
             for data in timeInDaylightData {
-                // 이미 처리된 데이터 스킵
                 if localStorage.isProcessed(healthKitID: data.id) {
                     continue
                 }
                 
-                // 해당 시점의 UV Index 조회 (API)
                 let uvIndex = await getUVIndex(for: data.startTime)
                 
-                // 시간 분할을 고려한 SED 계산
                 let sed = SEDCalculator.calculateWithSunscreenHistory(
                     start: data.startTime,
                     end: data.endTime,
@@ -532,10 +376,8 @@ private extension SyncCoordinator {
                     sunscreenHistory: sunscreenHistory
                 )
                 
-                // 해당 시점의 SPF 조회 (노출 기록용)
                 let spf = localStorage.getActiveSPF(at: data.startTime)
                 
-                // 노출 기록 저장 (isProcessed도 여기서 마킹됨)
                 let record = UVExposureRecord(
                     healthKitID: data.id,
                     startTime: data.startTime,
@@ -568,14 +410,18 @@ private extension SyncCoordinator {
         }
     }
     
+    /// 특정 시점의 UV Index 조회
+    ///
+    /// 우선순위:
+    /// 1. 해당 시점의 저장된 위치 → API 조회
+    /// 2. 현재 위치 → API 조회
+    /// 3. 현재 UV Index 반환 (fallback)
     func getUVIndex(for date: Date) async -> Double {
-        // 1. 해당 시점의 저장된 위치 조회
         let locationInfo: LocationInfo
         
         if let locationRecord = localStorage.getLocation(at: date) {
             locationInfo = locationRecord.locationInfo
         } else if let currentLocation = currentWeather?.location {
-            // 2. 저장된 위치 없으면 현재 위치 사용 (앱 첫 설치 등)
             locationInfo = currentLocation
             Log.debug("과거 위치 없음, 현재 위치로 과거 UV 조회: \(date.toTimeString)")
         } else {
@@ -583,7 +429,6 @@ private extension SyncCoordinator {
             return currentUVIndex
         }
         
-        // 3. API로 해당 시점 UV 조회
         do {
             return try await weather.fetchUVIndex(for: locationInfo, at: date)
         } catch {
@@ -591,50 +436,181 @@ private extension SyncCoordinator {
             return currentUVIndex
         }
     }
+}
+
+// MARK: - Watch Communication
+
+private extension SyncCoordinator {
     
-    // MARK: - Check Methods
-    
-    func checkSunscreenAndScheduleReminder() {
-        guard let sunscreen = activeSunscreen else { return }
+    func setupWatchConnectivity() {
+        watchConnectivity.onMessageReceived = { [weak self] message in
+            self?.handleWatchMessage(message)
+        }
         
-        if sunscreen.isActive(at: Date()) {
-            // 아직 유효함 - 남은 시간으로 알림 재예약
-            let reapplyTime = sunscreen.nextReapplyTime
-            Task {
-                do {
-                    try await notification.scheduleReapplyReminder(at: reapplyTime)
-                    Log.info("선크림 알림 재예약: \(reapplyTime.formatted(date: .omitted, time: .shortened))")
-                } catch {
-                    Log.error("선크림 알림 재예약 실패: \(error.localizedDescription)")
-                    self.error = .notification(.scheduleFailed)
-                }
-            }
-        } else {
-            // 만료됨
-            activeSunscreen = nil
-            liveActivity.endActivity()
-            Log.info("선크림 효과 만료됨")
+        watchConnectivity.onUserInfoReceived = { [weak self] userInfo in
+            self?.handleUserInfoFromWatch(userInfo)
+        }
+        
+        Log.debug("Watch Connectivity 콜백 설정 완료")
+    }
+    
+    /// Watch에서 수신한 즉시 메시지 처리
+    func handleWatchMessage(_ message: [String: Any]) {
+        let type = message[WatchMessageKey.type] as? String
+        Log.debug("Watch 메시지 수신: \(type ?? "unknown")")
+        
+        switch type {
+        case WatchMessageKey.TypeValue.sunscreenApplication:
+            handleSunscreenFromWatch(message)
+        case WatchMessageKey.TypeValue.sunscreenCancellation:
+            stopSunscreen()
+            sendDashboardToWatch()
+            Log.info("Watch에서 선크림 중단 수신")
+        default:
+            break
+        }
+        
+        if message[WatchMessageKey.requestDashboardSync] as? Bool == true {
+            sendDashboardToWatch()
         }
     }
+    
+    /// Watch에서 선크림 도포 수신
+    func handleSunscreenFromWatch(_ message: [String: Any]) {
+        let spfRaw = message[WatchMessageKey.sunscreenSPF] as? Int ?? 50
+        let spf = SPFLevel(rawValue: spfRaw) ?? .spf50
+        
+        applySunscreen(spf: spf)
+        Log.info("Watch에서 선크림 도포 수신: SPF \(spfRaw)")
+    }
+    
+    /// Watch에서 수신한 백그라운드 UserInfo 처리
+    func handleUserInfoFromWatch(_ userInfo: [String: Any]) {
+        let type = userInfo[WatchMessageKey.type] as? String
+        Log.debug("Watch UserInfo 수신: \(type ?? "unknown")")
+        
+        if type == WatchMessageKey.TypeValue.sunscreenApplication {
+            handleSunscreenFromWatch(userInfo)
+        }
+    }
+    
+    /// Watch에 대시보드 데이터 전송 및 Application Context 업데이트
+    func sendDashboardToWatch() {
+        var data: [String: Any] = [
+            WatchMessageKey.type: WatchMessageKey.TypeValue.dashboardData,
+            WatchMessageKey.uvIndex: currentUVIndex,
+            WatchMessageKey.totalSED: todayTotalSED,
+            WatchMessageKey.warningLevel: warningLevel.rawValue,
+            WatchMessageKey.timestamp: Date().timeIntervalSince1970
+        ]
+        
+        if let weather = currentWeather {
+            data[WatchMessageKey.cityName] = weather.location.cityName
+            data[WatchMessageKey.temperature] = weather.currentTemperature
+        }
+        
+        if let skinType = userProfile?.skinType {
+            data[WatchMessageKey.maxSED] = SEDCalculator.maxSED(for: skinType)
+        }
+        
+        if let sunscreen = activeSunscreen {
+            data[WatchMessageKey.sunscreenSPF] = sunscreen.spfLevel.rawValue
+            data[WatchMessageKey.sunscreenAppliedAt] = sunscreen.appliedAt.timeIntervalSince1970
+            data[WatchMessageKey.reapplyMinutes] = sunscreen.reapplyIntervalMinutes
+        }
+        
+        // 1. Application Context 업데이트 (보장된 전달)
+        do {
+            try watchConnectivity.updateApplicationContext(data)
+        } catch {
+            Log.error("Application Context 업데이트 실패: \(error.localizedDescription)")
+        }
+        
+        // 2. 즉시 메시지 전송 (Watch 실행 중일 때)
+        watchConnectivity.sendMessage(data, replyHandler: { reply in
+            Log.debug("Watch 대시보드 응답: \(reply)")
+        }, errorHandler: { _ in
+            Log.debug("Watch 즉시 전송 불가 - Application Context로 대체됨")
+        })
+        
+        Log.info("Watch 대시보드 데이터 전송")
+    }
+}
+
+// MARK: - Event Handlers
+
+private extension SyncCoordinator {
+    
+    func handleLocationDidChange(_ notification: Notification) async {
+        Log.debug("위치 변경 감지")
+        
+        guard let locationInfo = notification.userInfo?[NotificationUserInfoKey.location] as? LocationInfo else {
+            await fetchCurrentLocationAndWeather()
+            return
+        }
+        
+        do {
+            let locationRecord = LocationRecord(from: locationInfo)
+            localStorage.saveLocationRecord(locationRecord)
+            
+            let weather = try await self.weather.fetchCurrentWeather(for: locationInfo)
+            currentWeather = weather
+            
+            Log.info("위치 변경 처리 완료: UV \(weather.currentUVIndex)")
+        } catch {
+            Log.error("위치 변경 처리 실패: \(error.localizedDescription)")
+        }
+    }
+    
+    func handleHealthKitDataUpdate() async {
+        Log.debug("HealthKit 데이터 업데이트")
+        await calculateTodaySED()
+        checkWarningLevelAndNotify()
+    }
+    
+    func handleDayChanged() async {
+        Log.info("자정 - SED 리셋")
+        todayTotalSED = 0
+        lastNotifiedWarningLevel = .safe
+        notification.resetMEDWarningHistory()
+        localStorage.cleanupOldData()
+    }
+    
+    /// 타이머 정지됨 (TimerViewModel에서 HealthKit 저장 후 발송)
+    func handleTimerStopped() async {
+        Log.debug("타이머 정지됨 - SED 재계산")
+        await calculateTodaySED()
+        checkWarningLevelAndNotify()
+    }
+    
+    /// 푸시 알림에서 "바르기" 버튼 탭
+    func handlePushNotificationApply() async {
+        Log.debug("푸시 알림에서 선크림 바르기 탭")
+        let spf = userProfile?.spfLevel ?? .spf30
+        applySunscreen(spf: spf)
+    }
+}
+
+// MARK: - Warning & Check Helpers
+
+private extension SyncCoordinator {
     
     func checkWarningLevelAndNotify() {
         // 푸시 알림은 항상 호출 (NotificationManager가 자체 중복 방지)
         notification.sendMEDWarning(percentage: todaySEDProgress)
-
+        
         // Live Activity는 항상 현재 레벨 반영
         let newLevel = warningLevel
         liveActivity.updateWarningLevel(newLevel, progress: todaySEDProgress)
-
+        
         // UI/Watch 갱신은 레벨 변경 시에만
         guard newLevel.notificationPriority > lastNotifiedWarningLevel.notificationPriority else {
             return
         }
-        
         guard newLevel.shouldNotify else { return }
         
         lastNotifiedWarningLevel = newLevel
         
-        // Watch에 상태 전송
         if let skinType = userProfile?.skinType {
             watchConnectivity.sendMEDStatus(
                 totalSED: todayTotalSED,
@@ -651,160 +627,71 @@ private extension SyncCoordinator {
         )
     }
     
-    // MARK: - Notification Handlers
+    func loadUserProfile() {
+        userProfile = localStorage.loadUserProfile() ?? .defaultUser
+        Log.debug("프로필 로드: \(userProfile?.skinType.title ?? "없음")")
+    }
     
-    func handleLocationDidChange(_ notification: Notification) async {
-        Log.debug("위치 변경 감지")
-        
-        guard let locationInfo = notification.userInfo?[NotificationUserInfoKey.location] as? LocationInfo else {
-            // userInfo 없으면 직접 조회
-            await fetchCurrentLocationAndWeather()
-            return
-        }
-        
+    func loadActiveSunscreen() {
+        activeSunscreen = localStorage.loadSunscreenHistory()
+            .filter { $0.isActive(at: Date()) }
+            .sorted { $0.appliedAt > $1.appliedAt }
+            .first
+        Log.debug("활성 선크림: \(activeSunscreen != nil ? "있음" : "없음")")
+    }
+    
+    func fetchCurrentLocationAndWeather() async {
         do {
-            // 위치 기록 저장
+            let locationInfo = try await location.getCurrentLocation()
+            
             let locationRecord = LocationRecord(from: locationInfo)
             localStorage.saveLocationRecord(locationRecord)
             
-            // 날씨 조회
             let weather = try await self.weather.fetchCurrentWeather(for: locationInfo)
             currentWeather = weather
             
-            Log.info("위치 변경 처리 완료: UV \(weather.currentUVIndex)")
-            
+            Log.info("위치/날씨 조회 완료: \(locationInfo.cityName ?? "알 수 없음"), UV \(weather.currentUVIndex)")
         } catch {
-            Log.error("위치 변경 처리 실패: \(error.localizedDescription)")
+            Log.error("위치/날씨 조회 실패: \(error.localizedDescription) - 서울 기본값 사용")
+            self.error = .weather(.requestFailed)
+            await fetchDefaultWeather()
         }
     }
     
-    func handleHealthKitDataUpdate() async {
-        Log.debug("HealthKit 데이터 업데이트")
-        
-        await calculateTodaySED()
-        checkWarningLevelAndNotify()
-    }
-    
-    func handleDayChanged() async {
-        Log.info("자정 - SED 리셋")
-        
-        // SED 리셋
-        todayTotalSED = 0
-        lastNotifiedWarningLevel = .safe
-        
-        // 알림 경고 이력 초기화
-        notification.resetMEDWarningHistory()
-        
-        // 오래된 데이터 정리
-        localStorage.cleanupOldData()
-        
-        // 새로운 날 시작 알림 (필요시)
-    }
-    
-    /// 타이머 정지됨 (TimerViewModel에서 HealthKit 저장 후 발송)
-    func handleTimerStopped() async {
-        Log.debug("타이머 정지됨 - SED 재계산")
-        
-        // HealthKit에 새 데이터가 저장되었으므로 SED 재계산
-        await calculateTodaySED()
-        
-        // 경고 레벨 체크
-        checkWarningLevelAndNotify()
-    }
-    
-    /// 푸시 알림에서 "바르기" 버튼 탭
-    func handlePushNotificationApply() async {
-        Log.debug("푸시 알림에서 선크림 바르기 탭")
-
-        // 사용자 설정된 SPF로 도포
-        let spf = userProfile?.spfLevel ?? .spf30
-        applySunscreen(spf: spf)
-    }
-
-    // MARK: - Watch Communication
-
-    /// Watch에서 수신한 즉시 메시지 처리
-    func handleWatchMessage(_ message: [String: Any]) {
-        let type = message[WatchMessageKey.type] as? String
-        Log.debug("Watch 메시지 수신: \(type ?? "unknown")")
-
-        switch type {
-        case WatchMessageKey.TypeValue.sunscreenApplication:
-            handleSunscreenFromWatch(message)
-        case WatchMessageKey.TypeValue.sunscreenCancellation:
-            stopSunscreen()
-            sendDashboardToWatch()
-            Log.info("Watch에서 선크림 중단 수신")
-        default:
-            break
-        }
-        
-        // 대시보드 동기화 요청 (type 무관하게 별도 키 체크)
-        if message[WatchMessageKey.requestDashboardSync] as? Bool == true {
-            sendDashboardToWatch()
-        }
-    }
-
-    /// Watch에서 선크림 도포 수신
-    func handleSunscreenFromWatch(_ message: [String: Any]) {
-        let spfRaw = message[WatchMessageKey.sunscreenSPF] as? Int ?? 50
-        let spf = SPFLevel(rawValue: spfRaw) ?? .spf50
-        
-        applySunscreen(spf: spf)
-        Log.info("Watch에서 선크림 도포 수신: SPF \(spfRaw)")
-    }
-
-    /// Watch에서 수신한 백그라운드 UserInfo 처리
-    func handleUserInfoFromWatch(_ userInfo: [String: Any]) {
-        let type = userInfo[WatchMessageKey.type] as? String
-        Log.debug("Watch UserInfo 수신: \(type ?? "unknown")")
-
-        // Watch → iPhone 백그라운드 선크림 도포
-        if type == WatchMessageKey.TypeValue.sunscreenApplication {
-            handleSunscreenFromWatch(userInfo)
-        }
-    }
-
-    /// Watch에 대시보드 데이터 전송 및 Application Context 업데이트
-    func sendDashboardToWatch() {
-        var data: [String: Any] = [
-            WatchMessageKey.type: WatchMessageKey.TypeValue.dashboardData,
-            WatchMessageKey.uvIndex: currentUVIndex,
-            WatchMessageKey.totalSED: todayTotalSED,
-            WatchMessageKey.warningLevel: warningLevel.rawValue,
-            WatchMessageKey.timestamp: Date().timeIntervalSince1970
-        ]
-
-        if let weather = currentWeather {
-            data[WatchMessageKey.cityName] = weather.location.cityName
-            data[WatchMessageKey.temperature] = weather.currentTemperature
-        }
-
-        if let skinType = userProfile?.skinType {
-            data[WatchMessageKey.maxSED] = SEDCalculator.maxSED(for: skinType)
-        }
-
-        if let sunscreen = activeSunscreen {
-            data[WatchMessageKey.sunscreenSPF] = sunscreen.spfLevel.rawValue
-            data[WatchMessageKey.sunscreenAppliedAt] = sunscreen.appliedAt.timeIntervalSince1970
-            data[WatchMessageKey.reapplyMinutes] = sunscreen.reapplyIntervalMinutes
-        }
-
-        // 1. Application Context 업데이트 (보장된 전달 — 먼저 실행)
+    func fetchDefaultWeather() async {
         do {
-            try watchConnectivity.updateApplicationContext(data)
+            let weather = try await self.weather.fetchCurrentWeather(for: .mockSeoul)
+            currentWeather = weather
+            Log.info("서울 기본 날씨 로드: UV \(weather.currentUVIndex)")
         } catch {
-            Log.error("Application Context 업데이트 실패: \(error.localizedDescription)")
+            Log.error("서울 기본 날씨도 실패: \(error.localizedDescription) - 정적 기본값 사용")
+            currentWeather = LocationWeather(
+                location: .mockSeoul,
+                currentUVIndex: 0,
+                currentTemperature: 0
+            )
         }
-
-        // 2. 즉시 메시지 전송 (Watch가 실행 중일 때 — 실패 가능)
-        watchConnectivity.sendMessage(data, replyHandler: { reply in
-            Log.debug("Watch 대시보드 응답: \(reply)")
-        }, errorHandler: { _ in
-            Log.debug("Watch 즉시 전송 불가 - Application Context로 대체됨")
-        })
-
-        Log.info("Watch 대시보드 데이터 전송")
+    }
+    
+    func checkSunscreenAndScheduleReminder() {
+        guard let sunscreen = activeSunscreen else { return }
+        
+        if sunscreen.isActive(at: Date()) {
+            let reapplyTime = sunscreen.nextReapplyTime
+            Task {
+                do {
+                    try await notification.scheduleReapplyReminder(at: reapplyTime)
+                    Log.info("선크림 알림 재예약: \(reapplyTime.formatted(date: .omitted, time: .shortened))")
+                } catch {
+                    Log.error("선크림 알림 재예약 실패: \(error.localizedDescription)")
+                    self.error = .notification(.scheduleFailed)
+                }
+            }
+        } else {
+            activeSunscreen = nil
+            liveActivity.endActivity()
+            Log.info("선크림 효과 만료됨")
+        }
     }
 }
 
@@ -813,22 +700,9 @@ private extension SyncCoordinator {
 #if DEBUG
 extension SyncCoordinator {
     
-    /// 디버그용 localStorage 접근
     var debugLocalStorage: any LocalStorageManagerProtocol { localStorage }
-    
-    /// 디버그용 HealthKit 접근
     var debugHealthKit: any HealthKitManagerProtocol { healthKit }
     
-    /// Preview용 상태 설정
-    ///
-    /// `private(set)` 프로퍼티를 직접 설정할 수 있도록 하는 DEBUG 전용 메서드입니다.
-    ///
-    /// ```swift
-    /// #Preview {
-    ///     let coordinator = SyncCoordinator.preview(totalSED: 2.5, uvIndex: 8)
-    ///     DashboardView(viewModel: DashboardViewModel(syncCoordinator: coordinator))
-    /// }
-    /// ```
     static func preview(
         totalSED: Double = 0,
         uvIndex: Double = 5.0,
