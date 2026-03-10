@@ -32,6 +32,13 @@ final class OnboardingViewModel {
     
     // MARK: - Phase & Navigation
     
+    enum NavigationDirection {
+        case forward
+        case backward
+    }
+
+    var navigationDirection: NavigationDirection = .forward
+    
     var currentPhase: OnboardingPhase = .introduction
     var currentIntroPage: IntroductionPage = .trackExposure
     var currentSetupStep: SetupStep = .watchCheck
@@ -130,6 +137,7 @@ final class OnboardingViewModel {
     
     func moveToPreviousSetupStep() {
         guard let prev = SetupStep(rawValue: currentSetupStep.rawValue - 1) else { return }
+        navigationDirection = .backward
         withAnimation(.easeInOut(duration: 0.3)) {
             currentSetupStep = prev
         }
@@ -137,6 +145,7 @@ final class OnboardingViewModel {
     
     private func moveToNextSetupStep() {
         guard let next = SetupStep(rawValue: currentSetupStep.rawValue + 1) else { return }
+        navigationDirection = .forward
         withAnimation(.easeInOut(duration: 0.3)) {
             currentSetupStep = next
         }
