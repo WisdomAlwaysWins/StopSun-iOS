@@ -550,6 +550,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = StopSun/StopSun.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -559,6 +560,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StopSun/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "그만해";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "운동 감지 및 자외선 노출 관리를 위해 HealthKit 데이터에 접근합니다.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "현재 위치의 UV 지수를 조회하기 위해 위치 정보가 필요합니다.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "현재 위치의 UV 지수를 조회하기 위해 위치 정보가 필요합니다.";
@@ -587,6 +590,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = StopSun/StopSun.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -596,6 +600,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StopSun/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "그만해";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "운동 감지 및 자외선 노출 관리를 위해 HealthKit 데이터에 접근합니다.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "현재 위치의 UV 지수를 조회하기 위해 위치 정보가 필요합니다.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "현재 위치의 UV 지수를 조회하기 위해 위치 정보가 필요합니다.";
@@ -633,7 +639,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "StopSunWatch-Watch-App-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = StopSunWatch;
+				INFOPLIST_KEY_CFBundleDisplayName = "그만해";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "운동 감지를 통해 자외선 차단제 사용 알림을 제공하기 위해 HealthKit에 접근합니다.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.xcodeblue.StopSun;
@@ -669,7 +675,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "StopSunWatch-Watch-App-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = StopSunWatch;
+				INFOPLIST_KEY_CFBundleDisplayName = "그만해";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "운동 감지를 통해 자외선 차단제 사용 알림을 제공하기 위해 HealthKit에 접근합니다.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.xcodeblue.StopSun;
