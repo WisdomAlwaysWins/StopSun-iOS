@@ -12,14 +12,10 @@ import Foundation
 /// - `percent`: `nil`이면 데이터 없음, `0`이면 노출 없음
 /// - `isToday`: 오늘 날짜 강조 여부
 struct WeeklyBarItem: Identifiable, Equatable {
-    let id = UUID()
     let dayLabel: String
-    let percent: Double?
+    let percent: Double
+    let exposureMinutes: Int
     let isToday: Bool
     
-    static func == (lhs: Self, rhs: Self) -> Bool {
-        lhs.dayLabel == rhs.dayLabel
-        && lhs.percent == rhs.percent
-        && lhs.isToday == rhs.isToday
-    }
+    var id: String { dayLabel }
 }

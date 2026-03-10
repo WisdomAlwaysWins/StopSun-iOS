@@ -38,6 +38,7 @@ struct DashboardMEDCardView: View {
                             .font(.ssFont(.R5))
                             .foregroundStyle(.text01)
                     }
+                    .frame(width: 122)
                 }
                 
                 VStack(spacing: 4){
@@ -54,6 +55,7 @@ struct DashboardMEDCardView: View {
                             .font(.ssFont(.R5))
                             .foregroundStyle(.text01)
                     }
+                    .frame(width: 122)
                 }
             }
         }

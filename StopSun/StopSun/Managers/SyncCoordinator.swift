@@ -394,12 +394,17 @@ private extension SyncCoordinator {
             
             todayTotalSED = runningTotal
             
+            let totalMinutes = timeInDaylightData.reduce(0) { total, data in
+                total + Int(data.endTime.timeIntervalSince(data.startTime) / 60)
+            }
+            
             Log.debug("새로 처리: \(newCount)건, 최종 SED: \(String(format: "%.4f", todayTotalSED))")
             
             // 일일 MED 기록 업데이트
             var dailyRecord = localStorage.loadDailyMEDRecord(for: Date()) ?? DailyMEDRecord(date: Date())
             dailyRecord.totalSED = todayTotalSED
             dailyRecord.recordCount = existingRecords.count + newCount
+            dailyRecord.totalExposureMinutes = totalMinutes
             localStorage.saveDailyMEDRecord(dailyRecord)
             
             Log.info("오늘 SED 계산 완료: \(String(format: "%.2f", todayTotalSED))")
