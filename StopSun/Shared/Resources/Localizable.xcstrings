@@ -1,3249 +1,3249 @@
 {
-  "sourceLanguage": "ko",
-  "strings": {
-    "chart.minutes.format": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lldmin"
+  "sourceLanguage" : "ko",
+  "strings" : {
+    "chart.minutes.format" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lldmin"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld분"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld분"
           }
         }
       }
     },
-    "chart.weekly.recentDays": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Last 7 Days"
+    "chart.weekly.recentDays" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Last 7 Days"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "최근 7일"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "최근 7일"
           }
         }
       }
     },
-    "chart.weekly.title": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Weekly UV Exposure Summary"
+    "chart.weekly.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weekly UV Exposure Summary"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "주간 자외선 노출 요약"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "주간 자외선 노출 요약"
           }
         }
       }
     },
-    "common.button.cancel": {
-      "comment": "버튼 취소",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cancel"
+    "common.button.cancel" : {
+      "comment" : "버튼 취소",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "취소"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "취소"
           }
         }
       }
     },
-    "common.button.confirm": {
-      "comment": "버튼 확인",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "OK"
+    "common.button.confirm" : {
+      "comment" : "버튼 확인",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "확인"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "확인"
           }
         }
       }
     },
-    "common.button.guide": {
-      "comment": "버튼 안내",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Guide"
+    "common.button.guide" : {
+      "comment" : "버튼 안내",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guide"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "안내"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "안내"
           }
         }
       }
     },
-    "common.button.next": {
-      "comment": "버튼 다음",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Next"
+    "common.button.next" : {
+      "comment" : "버튼 다음",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "다음"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다음"
           }
         }
       }
     },
-    "common.button.openSettings": {
-      "comment": "버튼 설정 열기",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Open Settings"
+    "common.button.openSettings" : {
+      "comment" : "버튼 설정 열기",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Settings"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "설정 열기"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "설정 열기"
           }
         }
       }
     },
-    "common.button.retry": {
-      "comment": "버튼 재시도",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Retry"
+    "common.button.retry" : {
+      "comment" : "버튼 재시도",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retry"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "재시도"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "재시도"
           }
         }
       }
     },
-    "common.button.setting": {
-      "comment": "버튼 설정",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Setting"
+    "common.button.setting" : {
+      "comment" : "버튼 설정",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Setting"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "설정"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "설정"
           }
         }
       }
     },
-    "common.button.skip": {
-      "comment": "버튼 건너뛰기",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skip"
+    "common.button.skip" : {
+      "comment" : "버튼 건너뛰기",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skip"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "건너뛰기"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "건너뛰기"
           }
         }
       }
     },
-    "dashboard.weather.temperature": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Temperature"
+    "dashboard.weather.temperature" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temperature"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "현재 기온"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "현재 기온"
           }
         }
       }
     },
-    "dashboard.weather.title": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ Weather"
+    "dashboard.weather.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Weather"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ 날씨 정보"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 날씨 정보"
           }
         }
       }
     },
-    "dashboard.weather.uvIndex": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "UV Index"
+    "dashboard.weather.uvIndex" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "UV Index"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "UV 지수"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "UV 지수"
           }
         }
       }
     },
-    "error.healthKit.authorizationDenied": {
-      "comment": "HealthKit 권한 거부",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "HealthKit access was denied. Please enable it in Settings."
+    "error.healthKit.authorizationDenied" : {
+      "comment" : "HealthKit 권한 거부",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HealthKit access was denied. Please enable it in Settings."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "건강 데이터 접근이 거부되었습니다. 설정에서 권한을 허용해주세요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "건강 데이터 접근이 거부되었습니다. 설정에서 권한을 허용해주세요."
           }
         }
       }
     },
-    "error.healthKit.backgroundDeliveryFailed": {
-      "comment": "HealthKit 백그라운드 전송 실패",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Failed to enable background health data updates."
+    "error.healthKit.backgroundDeliveryFailed" : {
+      "comment" : "HealthKit 백그라운드 전송 실패",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to enable background health data updates."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "백그라운드 건강 데이터 업데이트 설정에 실패했습니다."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "백그라운드 건강 데이터 업데이트 설정에 실패했습니다."
           }
         }
       }
     },
-    "error.healthKit.dataFetchFailed": {
-      "comment": "HealthKit 데이터 조회 실패",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Failed to fetch health data. Please try again."
+    "error.healthKit.dataFetchFailed" : {
+      "comment" : "HealthKit 데이터 조회 실패",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to fetch health data. Please try again."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "건강 데이터를 불러오는데 실패했습니다. 다시 시도해주세요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "건강 데이터를 불러오는데 실패했습니다. 다시 시도해주세요."
           }
         }
       }
     },
-    "error.healthKit.notAvailable": {
-      "comment": "HealthKit 사용 불가",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "HealthKit is not available on this device."
+    "error.healthKit.notAvailable" : {
+      "comment" : "HealthKit 사용 불가",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HealthKit is not available on this device."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "이 기기에서는 건강 데이터를 사용할 수 없습니다."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이 기기에서는 건강 데이터를 사용할 수 없습니다."
           }
         }
       }
     },
-    "error.location.authorizationDenied": {
-      "comment": "위치 권한 거부",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Location access was denied. Please enable it in Settings."
+    "error.location.authorizationDenied" : {
+      "comment" : "위치 권한 거부",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Location access was denied. Please enable it in Settings."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "위치 접근이 거부되었습니다. 설정에서 권한을 허용해주세요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "위치 접근이 거부되었습니다. 설정에서 권한을 허용해주세요."
           }
         }
       }
     },
-    "error.location.geocodingFailed": {
-      "comment": "역지오코딩 실패",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Failed to get location name."
+    "error.location.geocodingFailed" : {
+      "comment" : "역지오코딩 실패",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to get location name."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "위치 이름을 가져오는데 실패했습니다."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "위치 이름을 가져오는데 실패했습니다."
           }
         }
       }
     },
-    "error.location.locationUnavailable": {
-      "comment": "위치 조회 실패",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Unable to get current location. Please try again."
+    "error.location.locationUnavailable" : {
+      "comment" : "위치 조회 실패",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to get current location. Please try again."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "현재 위치를 가져올 수 없습니다. 다시 시도해주세요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "현재 위치를 가져올 수 없습니다. 다시 시도해주세요."
           }
         }
       }
     },
-    "error.location.servicesDisabled": {
-      "comment": "위치 서비스 비활성화",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Location services are disabled. Please enable them in Settings."
+    "error.location.servicesDisabled" : {
+      "comment" : "위치 서비스 비활성화",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Location services are disabled. Please enable them in Settings."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "위치 서비스가 비활성화되어 있습니다. 설정에서 활성화해주세요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "위치 서비스가 비활성화되어 있습니다. 설정에서 활성화해주세요."
           }
         }
       }
     },
-    "error.network.noConnection": {
-      "comment": "인터넷 연결 없음",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No internet connection. Please check your network."
+    "error.network.noConnection" : {
+      "comment" : "인터넷 연결 없음",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No internet connection. Please check your network."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "인터넷에 연결되어 있지 않습니다. 네트워크를 확인해주세요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "인터넷에 연결되어 있지 않습니다. 네트워크를 확인해주세요."
           }
         }
       }
     },
-    "error.network.serverError": {
-      "comment": "서버 에러",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Server error occurred (Code: %d). Please try again later."
+    "error.network.serverError" : {
+      "comment" : "서버 에러",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Server error occurred (Code: %d). Please try again later."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "서버 오류가 발생했습니다 (코드: %d). 잠시 후 다시 시도해주세요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "서버 오류가 발생했습니다 (코드: %d). 잠시 후 다시 시도해주세요."
           }
         }
       }
     },
-    "error.network.timeout": {
-      "comment": "요청 타임아웃",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Request timed out. Please try again."
+    "error.network.timeout" : {
+      "comment" : "요청 타임아웃",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Request timed out. Please try again."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "요청 시간이 초과되었습니다. 다시 시도해주세요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "요청 시간이 초과되었습니다. 다시 시도해주세요."
           }
         }
       }
     },
-    "error.notification.authorizationDenied": {
-      "comment": "알림 권한 거부",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Notification access was denied. Please enable it in Settings."
+    "error.notification.authorizationDenied" : {
+      "comment" : "알림 권한 거부",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notification access was denied. Please enable it in Settings."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "알림 권한이 거부되었습니다. 설정에서 권한을 허용해주세요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "알림 권한이 거부되었습니다. 설정에서 권한을 허용해주세요."
           }
         }
       }
     },
-    "error.notification.invalidDate": {
-      "comment": "잘못된 알림 시간",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Invalid notification time."
+    "error.notification.invalidDate" : {
+      "comment" : "잘못된 알림 시간",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invalid notification time."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "유효하지 않은 알림 시간입니다."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "유효하지 않은 알림 시간입니다."
           }
         }
       }
     },
-    "error.notification.scheduleFailed": {
-      "comment": "알림 예약 실패",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Failed to schedule notification. Please try again."
+    "error.notification.scheduleFailed" : {
+      "comment" : "알림 예약 실패",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to schedule notification. Please try again."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "알림 예약에 실패했습니다. 다시 시도해주세요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "알림 예약에 실패했습니다. 다시 시도해주세요."
           }
         }
       }
     },
-    "error.storage.dataCorrupted": {
-      "comment": "데이터 손상",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Data is corrupted. Some settings may need to be reset."
+    "error.storage.dataCorrupted" : {
+      "comment" : "데이터 손상",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data is corrupted. Some settings may need to be reset."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "데이터가 손상되었습니다. 일부 설정을 다시 해야 할 수 있습니다."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "데이터가 손상되었습니다. 일부 설정을 다시 해야 할 수 있습니다."
           }
         }
       }
     },
-    "error.storage.insufficientSpace": {
-      "comment": "저장 공간 부족",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Not enough storage space. Please free up some space."
+    "error.storage.insufficientSpace" : {
+      "comment" : "저장 공간 부족",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not enough storage space. Please free up some space."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "저장 공간이 부족합니다. 공간을 확보해주세요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "저장 공간이 부족합니다. 공간을 확보해주세요."
           }
         }
       }
     },
-    "error.storage.loadFailed": {
-      "comment": "로드 실패",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Failed to load data. Please try again."
+    "error.storage.loadFailed" : {
+      "comment" : "로드 실패",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to load data. Please try again."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "데이터를 불러오는데 실패했습니다. 다시 시도해주세요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "데이터를 불러오는데 실패했습니다. 다시 시도해주세요."
           }
         }
       }
     },
-    "error.storage.saveFailed": {
-      "comment": "저장 실패",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Failed to save data. Please try again."
+    "error.storage.saveFailed" : {
+      "comment" : "저장 실패",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to save data. Please try again."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "데이터 저장에 실패했습니다. 다시 시도해주세요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "데이터 저장에 실패했습니다. 다시 시도해주세요."
           }
         }
       }
     },
-    "error.title.healthKit": {
-      "comment": "HealthKit 에러 제목",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Health Data Error"
+    "error.title.healthKit" : {
+      "comment" : "HealthKit 에러 제목",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Health Data Error"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "건강 데이터 오류"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "건강 데이터 오류"
           }
         }
       }
     },
-    "error.title.location": {
-      "comment": "위치 에러 제목",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Location Error"
+    "error.title.location" : {
+      "comment" : "위치 에러 제목",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Location Error"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "위치 오류"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "위치 오류"
           }
         }
       }
     },
-    "error.title.network": {
-      "comment": "네트워크 에러 제목",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Network Error"
+    "error.title.network" : {
+      "comment" : "네트워크 에러 제목",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Network Error"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "네트워크 오류"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "네트워크 오류"
           }
         }
       }
     },
-    "error.title.notification": {
-      "comment": "알림 에러 제목",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Notification Error"
+    "error.title.notification" : {
+      "comment" : "알림 에러 제목",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notification Error"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "알림 오류"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "알림 오류"
           }
         }
       }
     },
-    "error.title.storage": {
-      "comment": "저장소 에러 제목",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Storage Error"
+    "error.title.storage" : {
+      "comment" : "저장소 에러 제목",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Storage Error"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "저장 오류"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "저장 오류"
           }
         }
       }
     },
-    "error.title.unknown": {
-      "comment": "알 수 없는 에러 제목",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Error"
+    "error.title.unknown" : {
+      "comment" : "알 수 없는 에러 제목",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "오류"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "오류"
           }
         }
       }
     },
-    "error.title.watchConnectivity": {
-      "comment": "Watch 연결 에러 제목",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Watch Connection Error"
+    "error.title.watchConnectivity" : {
+      "comment" : "Watch 연결 에러 제목",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Watch Connection Error"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "워치 연결 오류"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "워치 연결 오류"
           }
         }
       }
     },
-    "error.title.weather": {
-      "comment": "날씨 에러 제목",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Weather Error"
+    "error.title.weather" : {
+      "comment" : "날씨 에러 제목",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weather Error"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "날씨 오류"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "날씨 오류"
           }
         }
       }
     },
-    "error.unknown": {
-      "comment": "알 수 없는 에러 메시지",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "An unexpected error occurred. Please try again."
+    "error.unknown" : {
+      "comment" : "알 수 없는 에러 메시지",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An unexpected error occurred. Please try again."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "알 수 없는 오류가 발생했습니다. 다시 시도해주세요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "알 수 없는 오류가 발생했습니다. 다시 시도해주세요."
           }
         }
       }
     },
-    "error.watchConnectivity.notReachable": {
-      "comment": "Watch 연결 불가",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Unable to connect to Apple Watch. Please make sure your watch is nearby and unlocked."
+    "error.watchConnectivity.notReachable" : {
+      "comment" : "Watch 연결 불가",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to connect to Apple Watch. Please make sure your watch is nearby and unlocked."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apple Watch에 연결할 수 없습니다. 워치가 가까이 있고 잠금이 해제되어 있는지 확인해주세요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Watch에 연결할 수 없습니다. 워치가 가까이 있고 잠금이 해제되어 있는지 확인해주세요."
           }
         }
       }
     },
-    "error.watchConnectivity.sessionInactive": {
-      "comment": "Watch 세션 비활성",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Watch connection session is inactive. Please try again."
+    "error.watchConnectivity.sessionInactive" : {
+      "comment" : "Watch 세션 비활성",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Watch connection session is inactive. Please try again."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "워치 연결 세션이 비활성 상태입니다. 다시 시도해주세요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "워치 연결 세션이 비활성 상태입니다. 다시 시도해주세요."
           }
         }
       }
     },
-    "error.watchConnectivity.transferFailed": {
-      "comment": "Watch 데이터 전송 실패",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Failed to send data to Apple Watch."
+    "error.watchConnectivity.transferFailed" : {
+      "comment" : "Watch 데이터 전송 실패",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to send data to Apple Watch."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apple Watch로 데이터 전송에 실패했습니다."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Watch로 데이터 전송에 실패했습니다."
           }
         }
       }
     },
-    "error.weather.invalidLocation": {
-      "comment": "유효하지 않은 위치",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Invalid location for weather data."
+    "error.weather.invalidLocation" : {
+      "comment" : "유효하지 않은 위치",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invalid location for weather data."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "날씨 데이터를 가져올 수 없는 위치입니다."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "날씨 데이터를 가져올 수 없는 위치입니다."
           }
         }
       }
     },
-    "error.weather.parsingFailed": {
-      "comment": "데이터 파싱 실패",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Failed to process weather data."
+    "error.weather.parsingFailed" : {
+      "comment" : "데이터 파싱 실패",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to process weather data."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "날씨 데이터 처리에 실패했습니다."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "날씨 데이터 처리에 실패했습니다."
           }
         }
       }
     },
-    "error.weather.quotaExceeded": {
-      "comment": "API 할당량 초과",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Weather service limit reached. Please try again later."
+    "error.weather.quotaExceeded" : {
+      "comment" : "API 할당량 초과",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weather service limit reached. Please try again later."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "날씨 서비스 사용량을 초과했습니다. 잠시 후 다시 시도해주세요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "날씨 서비스 사용량을 초과했습니다. 잠시 후 다시 시도해주세요."
           }
         }
       }
     },
-    "error.weather.requestFailed": {
-      "comment": "API 요청 실패",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Failed to fetch weather data. Please try again."
+    "error.weather.requestFailed" : {
+      "comment" : "API 요청 실패",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to fetch weather data. Please try again."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "날씨 정보를 가져오는데 실패했습니다. 다시 시도해주세요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "날씨 정보를 가져오는데 실패했습니다. 다시 시도해주세요."
           }
         }
       }
     },
-    "info.empty.prepare": {
-      "comment": "정보 아티클 빈값",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Helpful information about UV protection and skin care is coming soon."
+    "info.empty.prepare" : {
+      "comment" : "정보 아티클 빈값",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Helpful information about UV protection and skin care is coming soon."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "자외선과 피부 보호에 대한 유용한 정보를 준비하고 있어요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "자외선과 피부 보호에 대한 유용한 정보를 준비하고 있어요."
           }
         }
       }
     },
-    "info.error.loadFailed": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Failed to load information"
+    "info.error.loadFailed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to load information"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "정보를 불러올 수 없습니다"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "정보를 불러올 수 없습니다"
           }
         }
       }
     },
-    "info.title": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Info"
+    "info.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Info"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "정보"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "정보"
           }
         }
       }
     },
-    "liveActivity.timer.remaining": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": " left"
+    "liveActivity.timer.remaining" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " left"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": " 남음"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " 남음"
           }
         }
       }
     },
-    "liveActivity.timer.title": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sunscreen Timer"
+    "liveActivity.timer.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sunscreen Timer"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "선크림 타이머"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선크림 타이머"
           }
         }
       }
     },
-    "liveActivity.uv.current": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Current UV  "
+    "liveActivity.uv.current" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Current UV  "
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "현재 UV  "
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "현재 UV  "
           }
         }
       }
     },
-    "liveActivity.uv.levelSuffix": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": " level !"
+    "liveActivity.uv.levelSuffix" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " level !"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": " 수준 !"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " 수준 !"
           }
         }
       }
     },
-    "med.gauge.title": {
-      "comment": "MED 게이지 섹션 타이틀",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "UV Exposure"
+    "med.gauge.title" : {
+      "comment" : "MED 게이지 섹션 타이틀",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "UV Exposure"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "UV 노출량"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "UV 노출량"
           }
         }
       }
     },
-    "med.max.uv": {
-      "comment": "최대 허용 UV 노출량 라벨",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Maximum UV Exposure"
+    "med.max.uv" : {
+      "comment" : "최대 허용 UV 노출량 라벨",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maximum UV Exposure"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "최대 UV 노출량"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "최대 UV 노출량"
           }
         }
       }
     },
-    "med.status.caution.desc": {
-      "comment": "UV 주의 수준 설명 문구",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Consider limiting outdoor exposure."
+    "med.status.caution.desc" : {
+      "comment" : "UV 주의 수준 설명 문구",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Consider limiting outdoor exposure."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "실내 활동을 고려해보세요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "실내 활동을 고려해보세요."
           }
         }
       }
     },
-    "med.status.caution.title": {
-      "comment": "UV 주의 수준 상태 제목",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "needs_review",
-            "value": "Your current UV exposure requires caution."
+    "med.status.caution.title" : {
+      "comment" : "UV 주의 수준 상태 제목",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "caution"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "주의"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "주의"
           }
         }
       }
     },
-    "med.status.critical.desc": {
-      "comment": "UV 나쁨 수준 설명 문구",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "It is recommended to engage in indoor activities."
+    "med.status.critical.desc" : {
+      "comment" : "UV 나쁨 수준 설명 문구",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "It is recommended to engage in indoor activities."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "실내 활동을 권장합니다."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "실내 활동을 권장합니다."
           }
         }
       }
     },
-    "med.status.critical.title": {
-      "comment": "UV 나쁨 수준 상태 제목",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "needs_review",
-            "value": "Your current UV exposure is at a critical level."
+    "med.status.critical.title" : {
+      "comment" : "UV 나쁨 수준 상태 제목",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "critical"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "나쁨"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "나쁨"
           }
         }
       }
     },
-    "med.status.danger.desc": {
-      "comment": "UV 위험 수준 설명 문구",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Avoid direct sun exposure and seek shade."
+    "med.status.danger.desc" : {
+      "comment" : "UV 위험 수준 설명 문구",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avoid direct sun exposure and seek shade."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "외출을 자제하고 그늘로 이동하는 것이 좋습니다."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "외출을 자제하고 그늘로 이동하는 것이 좋습니다."
           }
         }
       }
     },
-    "med.status.danger.title": {
-      "comment": "UV 위험 수준 상태 제목",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "needs_review",
-            "value": "Your current UV exposure is at a dangerous level."
+    "med.status.danger.title" : {
+      "comment" : "UV 위험 수준 상태 제목",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "danger"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "위험"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "위험"
           }
         }
       }
     },
-    "med.status.prefix": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your current UV exposure is at a "
+    "med.status.prefix" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your current UV exposure is at a "
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "현재 UV 노출량은 "
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "현재 UV 노출량은 "
           }
         }
       }
     },
-    "med.status.safe.desc": {
-      "comment": "UV 안전 수준 설명 문구",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Outdoor activity is generally safe."
+    "med.status.safe.desc" : {
+      "comment" : "UV 안전 수준 설명 문구",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Outdoor activity is generally safe."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "야외 활동에 큰 문제가 없습니다."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "야외 활동에 큰 문제가 없습니다."
           }
         }
       }
     },
-    "med.status.safe.title": {
-      "comment": "UV 안전 수준 상태 제목",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "needs_review",
-            "value": "Your current UV exposure is at a safe level."
+    "med.status.safe.title" : {
+      "comment" : "UV 안전 수준 상태 제목",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "safe"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "안전"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "안전"
           }
         }
       }
     },
-    "med.status.suffix": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "level"
+    "med.status.suffix" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " level"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": " 수준"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " 수준"
           }
         }
       }
     },
-    "med.status.warning.desc": {
-      "comment": "UV 위험 수준 설명 문구",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Avoid direct sun exposure and seek shade."
+    "med.status.warning.desc" : {
+      "comment" : "UV 위험 수준 설명 문구",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avoid direct sun exposure and seek shade."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "외출을 자제하고 그늘로 이동하는 것이 좋습니다."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "외출을 자제하고 그늘로 이동하는 것이 좋습니다."
           }
         }
       }
     },
-    "med.status.warning.title": {
-      "comment": "UV 경고 수준 상태 제목",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "needs_review",
-            "value": "Your current UV exposure is at a warning level."
+    "med.status.warning.title" : {
+      "comment" : "UV 경고 수준 상태 제목",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "warning"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "경고"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "경고"
           }
         }
       }
     },
-    "med.today.uv": {
-      "comment": "오늘 누적 UV 노출량 라벨",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Today's UV Exposure"
+    "med.today.uv" : {
+      "comment" : "오늘 누적 UV 노출량 라벨",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Today's UV Exposure"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "오늘 UV 노출량"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "오늘 UV 노출량"
           }
         }
       }
     },
-    "med.unit.joule": {
-      "comment": "UV 노출 단위 (J/m²)",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "J/m²"
+    "med.unit.joule" : {
+      "comment" : "UV 노출 단위 (J/m²)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "J/m²"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "J/m²"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "J/m²"
           }
         }
       }
     },
-    "notification.action.apply": {
-      "comment": "알림 액션 - 선크림 바르기",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apply Sunscreen"
+    "notification.action.apply" : {
+      "comment" : "알림 액션 - 선크림 바르기",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apply Sunscreen"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "선크림 바르기"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선크림 바르기"
           }
         }
       }
     },
-    "notification.action.dismiss": {
-      "comment": "알림 액션 - 닫기",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dismiss"
+    "notification.action.dismiss" : {
+      "comment" : "알림 액션 - 닫기",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dismiss"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "닫기"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "닫기"
           }
         }
       }
     },
-    "notification.action.snooze": {
-      "comment": "알림 액션 - 15분 후 다시 알림",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Remind in 15 min"
+    "notification.action.snooze" : {
+      "comment" : "알림 액션 - 15분 후 다시 알림",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remind in 15 min"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "15분 후 다시 알림"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "15분 후 다시 알림"
           }
         }
       }
     },
-    "notification.med.body100": {
-      "comment": "MED 100% 경고 본문",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "You've reached your daily UV limit! Please seek shade or go indoors."
+    "notification.med.body30" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You've reached 30%% of your daily UV exposure. Stay aware of your UV exposure."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "일일 자외선 한계에 도달했습니다! 그늘로 이동하거나 실내로 들어가세요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "일일 자외선 노출량의 30%%에 도달했습니다. 자외선 노출에 주의하세요."
           }
         }
       }
     },
-    "notification.med.body30": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "You've reached 30%% of your daily UV exposure. Stay aware of your UV exposure."
+    "notification.med.body50" : {
+      "comment" : "MED 50% 경고 본문",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You've reached half of your daily UV exposure limit."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "일일 자외선 노출량의 30%%에 도달했습니다. 자외선 노출에 주의하세요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "일일 자외선 노출량의 절반에 도달했습니다."
           }
         }
       }
     },
-    "notification.med.body50": {
-      "comment": "MED 50% 경고 본문",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "You've reached half of your daily UV exposure limit."
+    "notification.med.body70" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You've reached 70%% of your daily UV limit. Consider seeking shade."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "일일 자외선 노출량의 절반에 도달했습니다."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "일일 자외선 한계의 70%%에 도달했습니다. 그늘을 찾는 것이 좋습니다."
           }
         }
       }
     },
-    "notification.med.body70": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "You've reached 70%% of your daily UV limit. Consider seeking shade."
+    "notification.med.body100" : {
+      "comment" : "MED 100% 경고 본문",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You've reached your daily UV limit! Please seek shade or go indoors."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "일일 자외선 한계의 70%%에 도달했습니다. 그늘을 찾는 것이 좋습니다."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "일일 자외선 한계에 도달했습니다! 그늘로 이동하거나 실내로 들어가세요."
           }
         }
       }
     },
-    "notification.med.title100": {
-      "comment": "MED 100% 경고 제목",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "UV Limit Reached!"
+    "notification.med.title30" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "30%% UV Exposure"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "자외선 한계 도달!"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "자외선 노출 30%%"
           }
         }
       }
     },
-    "notification.med.title30": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "30%% UV Exposure"
+    "notification.med.title50" : {
+      "comment" : "MED 50% 경고 제목",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "50%% UV Exposure"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "자외선 노출 30%%"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "자외선 노출 50%%"
           }
         }
       }
     },
-    "notification.med.title50": {
-      "comment": "MED 50% 경고 제목",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "50%% UV Exposure"
+    "notification.med.title70" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "70%% UV Exposure"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "자외선 노출 50%%"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "자외선 노출 70%%"
           }
         }
       }
     },
-    "notification.med.title70": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "70%% UV Exposure"
+    "notification.med.title100" : {
+      "comment" : "MED 100% 경고 제목",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "UV Limit Reached!"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "자외선 노출 70%%"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "자외선 한계 도달!"
           }
         }
       }
     },
-    "notification.reapply.body": {
-      "comment": "재도포 알림 본문",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "It's been 2 hours since you applied sunscreen. Time to reapply!"
+    "notification.reapply.body" : {
+      "comment" : "재도포 알림 본문",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "It's been 2 hours since you applied sunscreen. Time to reapply!"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "선크림을 바른 지 2시간이 지났습니다. 다시 발라주세요!"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선크림을 바른 지 2시간이 지났습니다. 다시 발라주세요!"
           }
         }
       }
     },
-    "notification.reapply.title": {
-      "comment": "재도포 알림 제목",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Time to Reapply Sunscreen"
+    "notification.reapply.title" : {
+      "comment" : "재도포 알림 제목",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time to Reapply Sunscreen"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "선크림 다시 바를 시간이에요"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선크림 다시 바를 시간이에요"
           }
         }
       }
     },
-    "onboarding.introduction.personalRecommend.subtitle": {
-      "comment": "Introduction 3페이지 부제목",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Get personalized skin care guides by analyzing UV index, weather, and your activity patterns."
+    "onboarding.introduction.personalRecommend.subtitle" : {
+      "comment" : "Introduction 3페이지 부제목",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get personalized skin care guides by analyzing UV index, weather, and your activity patterns."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "UV 지수, 날씨, 개인 활동 패턴을 분석해\n나만의 피부 관리 가이드를 제공해요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "UV 지수, 날씨, 개인 활동 패턴을 분석해\n나만의 피부 관리 가이드를 제공해요."
           }
         }
       }
     },
-    "onboarding.introduction.personalRecommend.title": {
-      "comment": "Introduction 3페이지 제목 - 개인 맞춤 추천",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Personalized Recommendations"
+    "onboarding.introduction.personalRecommend.title" : {
+      "comment" : "Introduction 3페이지 제목 - 개인 맞춤 추천",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personalized Recommendations"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "개인 맞춤 추천"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "개인 맞춤 추천"
           }
         }
       }
     },
-    "onboarding.introduction.realTimeAlert.subtitle": {
-      "comment": "Introduction 2페이지 부제목",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Get alerts at the optimal time to apply sunscreen based on your location and weather data."
+    "onboarding.introduction.realTimeAlert.subtitle" : {
+      "comment" : "Introduction 2페이지 부제목",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get alerts at the optimal time to apply sunscreen based on your location and weather data."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "현재 위치와 날씨 데이터를 기반으로\n최적의 선크림 사용 시점에 알림을 줘요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "현재 위치와 날씨 데이터를 기반으로\n최적의 선크림 사용 시점에 알림을 줘요."
           }
         }
       }
     },
-    "onboarding.introduction.realTimeAlert.title": {
-      "comment": "Introduction 2페이지 제목 - 실시간 자외선 알림",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Real-time UV Alerts"
+    "onboarding.introduction.realTimeAlert.title" : {
+      "comment" : "Introduction 2페이지 제목 - 실시간 자외선 알림",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Real-time UV Alerts"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "실시간 자외선 알림"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "실시간 자외선 알림"
           }
         }
       }
     },
-    "onboarding.introduction.startSetup": {
-      "comment": "Introduction 마지막 페이지의 기본 설정 시작 버튼",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Start Setup"
+    "onboarding.introduction.startSetup" : {
+      "comment" : "Introduction 마지막 페이지의 기본 설정 시작 버튼",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start Setup"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "기본 설정하기"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "기본 설정하기"
           }
         }
       }
     },
-    "onboarding.introduction.trackExposure.subtitle": {
-      "comment": "Introduction 1페이지 부제목",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Monitor sun exposure data collected from your Apple Watch."
+    "onboarding.introduction.trackExposure.subtitle" : {
+      "comment" : "Introduction 1페이지 부제목",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Monitor sun exposure data collected from your Apple Watch."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apple Watch 에서 수집된 일광량을 모니터링해요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Watch 에서 수집된 일광량을 모니터링해요."
           }
         }
       }
     },
-    "onboarding.introduction.trackExposure.title": {
-      "comment": "Introduction 1페이지 제목 - 일광 노출 추적",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Track Sun Exposure"
+    "onboarding.introduction.trackExposure.title" : {
+      "comment" : "Introduction 1페이지 제목 - 일광 노출 추적",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Track Sun Exposure"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "일광 노출을 추적"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "일광 노출을 추적"
           }
         }
       }
     },
-    "onboarding.permission.button.continue": {
-      "comment": "온보딩 Step 2 - 계속 버튼",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Continue"
+    "onboarding.permission.button.continue" : {
+      "comment" : "온보딩 Step 2 - 계속 버튼",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "계속"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "계속"
           }
         }
       }
     },
-    "onboarding.permission.healthKit.description": {
-      "comment": "온보딩 Step 2 - HealthKit 권한 카드 설명",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "needs_review",
-            "value": "Reads time in daylight data"
+    "onboarding.permission.healthKit.description" : {
+      "comment" : "온보딩 Step 2 - HealthKit 권한 카드 설명",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Reads time in daylight data"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "건강 앱에서 일광시간을 조회해요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "건강 앱에서 일광시간을 조회해요."
           }
         }
       }
     },
-    "onboarding.permission.healthKit.title": {
-      "comment": "온보딩 Step 2 - HealthKit 권한 카드 타이틀",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Health Access"
+    "onboarding.permission.healthKit.title" : {
+      "comment" : "온보딩 Step 2 - HealthKit 권한 카드 타이틀",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Health Access"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "건강 접근"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "건강 접근"
           }
         }
       }
     },
-    "onboarding.permission.location.description": {
-      "comment": "온보딩 Step 2 - 위치 권한 카드 설명",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "needs_review",
-            "value": "Checks the UV index at your current location"
+    "onboarding.permission.location.description" : {
+      "comment" : "온보딩 Step 2 - 위치 권한 카드 설명",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Checks the UV index at your current location"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "이 앱은 현재 위치를 기반으로 자외선 지수와  피부 보호 팁을 제공하기 위해 위치 접근권한이 필요해요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이 앱은 현재 위치를 기반으로 자외선 지수와  피부 보호 팁을 제공하기 위해 위치 접근권한이 필요해요."
           }
         }
       }
     },
-    "onboarding.permission.location.title": {
-      "comment": "온보딩 Step 2 - 위치 권한 카드 타이틀",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Location Services"
+    "onboarding.permission.location.title" : {
+      "comment" : "온보딩 Step 2 - 위치 권한 카드 타이틀",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Location Services"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "위치 서비스 접근"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "위치 서비스 접근"
           }
         }
       }
     },
-    "onboarding.permission.notification.description": {
-      "comment": "온보딩 Step 2 - 알림 권한 카드 설명",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "needs_review",
-            "value": "Alerts you for sunscreen reapplication and UV warnings"
+    "onboarding.permission.notification.description" : {
+      "comment" : "온보딩 Step 2 - 알림 권한 카드 설명",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Alerts you for sunscreen reapplication and UV warnings"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "피부 보호와 건강한 자외선 습관을 위해 자외선 경고와 선크림 알림을 보내요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "피부 보호와 건강한 자외선 습관을 위해 자외선 경고와 선크림 알림을 보내요."
           }
         }
       }
     },
-    "onboarding.permission.notification.title": {
-      "comment": "온보딩 Step 2 - 알림 권한 카드 타이틀",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Notifications"
+    "onboarding.permission.notification.title" : {
+      "comment" : "온보딩 Step 2 - 알림 권한 카드 타이틀",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifications"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "알림 접근"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "알림 접근"
           }
         }
       }
     },
-    "onboarding.permission.subtitle": {
-      "comment": "온보딩 Step 2 - 권한 설정 서브타이틀",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "needs_review",
-            "value": "The following permissions are needed\nfor StopSun to work properly"
+    "onboarding.permission.subtitle" : {
+      "comment" : "온보딩 Step 2 - 권한 설정 서브타이틀",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "The following permissions are needed\nfor StopSun to work properly"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "그만-해를 사용하고 일광시간을 체크하려면  건강, 위치 및 알림 접근을 허용이 필요해요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "그만-해를 사용하고 일광시간을 체크하려면  건강, 위치 및 알림 접근을 허용이 필요해요."
           }
         }
       }
     },
-    "onboarding.permission.title": {
-      "comment": "온보딩 Step 2 - 권한 설정 타이틀",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Set up permissions"
+    "onboarding.permission.title" : {
+      "comment" : "온보딩 Step 2 - 권한 설정 타이틀",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Set up permissions"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "필요 권한 설정하기"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "필요 권한 설정하기"
           }
         }
       }
     },
-    "onboarding.skinType.button.start": {
-      "comment": "온보딩 Step 3 - 시작하기 버튼",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Get started"
+    "onboarding.skinType.button.start" : {
+      "comment" : "온보딩 Step 3 - 시작하기 버튼",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get started"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "시작하기"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "시작하기"
           }
         }
       }
     },
-    "onboarding.skinType.subtitle": {
-      "comment": "온보딩 Step 3 - 피부 타입 선택 서브타이틀",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "needs_review",
-            "value": "UV exposure limits are calculated based on your skin type"
+    "onboarding.skinType.subtitle" : {
+      "comment" : "온보딩 Step 3 - 피부 타입 선택 서브타이틀",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "UV exposure limits are calculated based on your skin type"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "나에게 맞는 자외선 차단 방식 추천을 위해 설명을 보고 내 피부 타입을 선택해주세요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "나에게 맞는 자외선 차단 방식 추천을 위해 설명을 보고 내 피부 타입을 선택해주세요."
           }
         }
       }
     },
-    "onboarding.skinType.title": {
-      "comment": "온보딩 Step 3 - 피부 타입 선택 타이틀",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Set your skin type"
+    "onboarding.skinType.title" : {
+      "comment" : "온보딩 Step 3 - 피부 타입 선택 타이틀",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Set your skin type"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "피부 타입 설정하기"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "피부 타입 설정하기"
           }
         }
       }
     },
-    "onboarding.title": {
-      "comment": "온보딩 타이틀",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "How to use App 'StopSun'"
+    "onboarding.title" : {
+      "comment" : "온보딩 타이틀",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How to use App 'StopSun'"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "그만해 앱 시작하기"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "그만해 앱 시작하기"
           }
         }
       }
     },
-    "onboarding.watch.alert.noWatch.message": {
-      "comment": "온보딩 Step 1 - Watch 미보유 Alert 메시지",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "needs_review",
-            "value": "StopSun uses daylight exposure data from Apple Watch. Core features are unavailable without it."
+    "onboarding.watch.alert.notPaired.message" : {
+      "comment" : "온보딩 Step 1 - Watch 미페어링 Alert 메시지",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No paired Apple Watch found. Apple Watch Series 7 or SE 2nd generation or later is required."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "정확한 데이터를 위해선  Apple Watch가 필요해요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "현재 iPhone과 페어링된 Apple Watch를 찾을 수 없어요. Apple Watch 7세대 또는 SE 2세대 이상이 필요해요."
           }
         }
       }
     },
-    "onboarding.watch.alert.noWatch.title": {
-      "comment": "온보딩 Step 1 - Watch 미보유 Alert 타이틀",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apple Watch is recommended!"
+    "onboarding.watch.alert.notPaired.title" : {
+      "comment" : "온보딩 Step 1 - Watch 미페어링 Alert 타이틀",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please check your device model"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apple Watch 보유를 권장해요!"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "기기 모델을 확인해주세요"
           }
         }
       }
     },
-    "onboarding.watch.alert.notPaired.message": {
-      "comment": "온보딩 Step 1 - Watch 미페어링 Alert 메시지",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No paired Apple Watch found. Apple Watch Series 7 or SE 2nd generation or later is required."
+    "onboarding.watch.alert.noWatch.message" : {
+      "comment" : "온보딩 Step 1 - Watch 미보유 Alert 메시지",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "StopSun uses daylight exposure data from Apple Watch. Core features are unavailable without it."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "현재 iPhone과 페어링된 Apple Watch를 찾을 수 없어요. Apple Watch 7세대 또는 SE 2세대 이상이 필요해요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "정확한 데이터를 위해선  Apple Watch가 필요해요."
           }
         }
       }
     },
-    "onboarding.watch.alert.notPaired.title": {
-      "comment": "온보딩 Step 1 - Watch 미페어링 Alert 타이틀",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Please check your device model"
+    "onboarding.watch.alert.noWatch.title" : {
+      "comment" : "온보딩 Step 1 - Watch 미보유 Alert 타이틀",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Watch is recommended!"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "기기 모델을 확인해주세요"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Watch 보유를 권장해요!"
           }
         }
       }
     },
-    "onboarding.watch.button.no": {
-      "comment": "온보딩 Step 1 - Watch 미보유 버튼",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No, I don't"
+    "onboarding.watch.button.no" : {
+      "comment" : "온보딩 Step 1 - Watch 미보유 버튼",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No, I don't"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "아니오, 없어요"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "아니오, 없어요"
           }
         }
       }
     },
-    "onboarding.watch.button.yes": {
-      "comment": "온보딩 Step 1 - Watch 보유 버튼",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Yes, I have one"
+    "onboarding.watch.button.yes" : {
+      "comment" : "온보딩 Step 1 - Watch 보유 버튼",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yes, I have one"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "네, 보유 중이에요"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "네, 보유 중이에요"
           }
         }
       }
     },
-    "onboarding.watch.subtitle": {
-      "comment": "온보딩 Step 1 - Watch 보유 확인 서브타이틀",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "needs_review",
-            "value": "StopSun works together with Apple Watch"
+    "onboarding.watch.subtitle" : {
+      "comment" : "온보딩 Step 1 - Watch 보유 확인 서브타이틀",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "StopSun works together with Apple Watch"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apple Watch를 활용해 일광 데이터를 얻어요. *애플워치 7세대 또는 SE2세대 이상이 필요해요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Watch를 활용해 일광 데이터를 얻어요. *애플워치 7세대 또는 SE2세대 이상이 필요해요."
           }
         }
       }
     },
-    "onboarding.watch.title": {
-      "comment": "온보딩 Step 1 - Watch 보유 확인 타이틀",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "needs_review",
-            "value": "Do you have an\nApple Watch?"
+    "onboarding.watch.title" : {
+      "comment" : "온보딩 Step 1 - Watch 보유 확인 타이틀",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Do you have an\nApple Watch?"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apple Watch 보유 여부 확인"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Watch 보유 여부 확인"
           }
         }
       }
     },
-    "settings.appInfo.privacy": {
-      "comment": "설정 - 개인정보 처리 방침",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Privacy Policy"
+    "settings.appInfo.privacy" : {
+      "comment" : "설정 - 개인정보 처리 방침",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy Policy"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "개인정보 처리 방침"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "개인정보 처리 방침"
           }
         }
       }
     },
-    "settings.appInfo.support": {
-      "comment": "설정 - 앱 정보 및 지원",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "App Info & Support"
+    "settings.appInfo.support" : {
+      "comment" : "설정 - 앱 정보 및 지원",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App Info & Support"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "앱 정보 및 지원"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "앱 정보 및 지원"
           }
         }
       }
     },
-    "settings.healthKit.desc": {
-      "comment": "설정 - 건강 데이터 권한 설명",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Learn how to enable daylight data access in the Health app."
+    "settings.healthKit.desc" : {
+      "comment" : "설정 - 건강 데이터 권한 설명",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Learn how to enable daylight data access in the Health app."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "건강 앱의 일광시간 데이터 접근 허용 방법을 안내해요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "건강 앱의 일광시간 데이터 접근 허용 방법을 안내해요."
           }
         }
       }
     },
-    "settings.healthKit.guide": {
-      "comment": "설정 - 건강 데이터 권한 안내 텍스트",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Go to Settings > Apps > Health\nand enable daylight data access."
+    "settings.healthKit.guide" : {
+      "comment" : "설정 - 건강 데이터 권한 안내 텍스트",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go to Settings > Apps > Health\nand enable daylight data access."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "설정 > 앱 > 건강에서\n일광시간 데이터 접근을 허용해주세요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "설정 > 앱 > 건강에서\n일광시간 데이터 접근을 허용해주세요."
           }
         }
       }
     },
-    "settings.healthKit.guide.step1": {
-      "comment": "건강 데이터 안내 스텝",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Select 'Apps' in the Settings app."
+    "settings.healthKit.guide.step1" : {
+      "comment" : "건강 데이터 안내 스텝",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select 'Apps' in the Settings app."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "설정 앱에서 '앱'을 선택해요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "설정 앱에서 '앱'을 선택해요."
           }
         }
       }
     },
-    "settings.healthKit.guide.step2": {
-      "comment": "건강 데이터 안내 스텝",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Select 'Health'."
+    "settings.healthKit.guide.step2" : {
+      "comment" : "건강 데이터 안내 스텝",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select 'Health'."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "'건강'을 선택해요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "'건강'을 선택해요."
           }
         }
       }
     },
-    "settings.healthKit.guide.step3": {
-      "comment": "건강 데이터 안내 스텝",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Select 'Data Access & Devices'."
+    "settings.healthKit.guide.step3" : {
+      "comment" : "건강 데이터 안내 스텝",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select 'Data Access & Devices'."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "'데이터 접근 및 기기'를 선택해요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "'데이터 접근 및 기기'를 선택해요."
           }
         }
       }
     },
-    "settings.healthKit.guide.step4": {
-      "comment": "건강 데이터 안내 스텝",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Select 'StopSun'."
+    "settings.healthKit.guide.step4" : {
+      "comment" : "건강 데이터 안내 스텝",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select 'StopSun'."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "'그만해'를 선택해요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "'그만해'를 선택해요."
           }
         }
       }
     },
-    "settings.healthKit.guide.step5": {
-      "comment": "건강 데이터 안내 스텝",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Enable 'Daylight Time' reading."
+    "settings.healthKit.guide.step5" : {
+      "comment" : "건강 데이터 안내 스텝",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enable 'Daylight Time' reading."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "'일광 시간' 읽기를 허용해요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "'일광 시간' 읽기를 허용해요."
           }
         }
       }
     },
-    "settings.healthKit.title": {
-      "comment": "설정 - 건강 데이터 권한 타이틀",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Health Data Access"
+    "settings.healthKit.title" : {
+      "comment" : "설정 - 건강 데이터 권한 타이틀",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Health Data Access"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "건강 데이터 권한"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "건강 데이터 권한"
           }
         }
       }
     },
-    "settings.permission.desc": {
-      "comment": "설정 - 앱 권한 설정 설명",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Manage notification and location permissions."
+    "settings.permission.desc" : {
+      "comment" : "설정 - 앱 권한 설정 설명",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manage notification and location permissions."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "알림, 위치 권한을 설정해요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "알림, 위치 권한을 설정해요."
           }
         }
       }
     },
-    "settings.permission.title": {
-      "comment": "설정 - 앱 권한 설정 타이틀",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "App Permissions"
+    "settings.permission.title" : {
+      "comment" : "설정 - 앱 권한 설정 타이틀",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App Permissions"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "앱 권한 설정"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "앱 권한 설정"
           }
         }
       }
     },
-    "settings.section.appInfo": {
-      "comment": "설정 섹션 - 앱 정보",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "App Information"
+    "settings.section.appInfo" : {
+      "comment" : "설정 섹션 - 앱 정보",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App Information"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "앱 정보"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "앱 정보"
           }
         }
       }
     },
-    "settings.section.service": {
-      "comment": "설정 섹션 - 서비스 설정",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Service Settings"
+    "settings.section.service" : {
+      "comment" : "설정 섹션 - 서비스 설정",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Service Settings"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "서비스 설정"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "서비스 설정"
           }
         }
       }
     },
-    "settings.section.skin": {
-      "comment": "설정 섹션 - 피부 정보",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skin Information"
+    "settings.section.skin" : {
+      "comment" : "설정 섹션 - 피부 정보",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skin Information"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "피부 정보"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "피부 정보"
           }
         }
       }
     },
-    "settings.skinType.desc": {
-      "comment": "설정 - 피부 타입 설정 설명",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Change your Fitzpatrick skin type."
+    "settings.skinType.desc" : {
+      "comment" : "설정 - 피부 타입 설정 설명",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change your Fitzpatrick skin type."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "피츠패트릭 피부 타입을 수정해요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "피츠패트릭 피부 타입을 수정해요."
           }
         }
       }
     },
-    "settings.skinType.heading": {
-      "comment": "설정 - 피부 타입 화면 헤딩",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Set your skin type"
+    "settings.skinType.heading" : {
+      "comment" : "설정 - 피부 타입 화면 헤딩",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Set your skin type"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "피부 타입 설정하기"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "피부 타입 설정하기"
           }
         }
       }
     },
-    "settings.skinType.nav.title": {
-      "comment": "설정 - 피부 타입 네비게이션 타이틀",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skin Type"
+    "settings.skinType.nav.title" : {
+      "comment" : "설정 - 피부 타입 네비게이션 타이틀",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skin Type"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "피부 타입 설정"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "피부 타입 설정"
           }
         }
       }
     },
-    "settings.skinType.subtitle": {
-      "comment": "설정 - 피부 타입 화면 서브타이틀",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Select your skin type based on the descriptions\nfor personalized UV protection recommendations."
+    "settings.skinType.subtitle" : {
+      "comment" : "설정 - 피부 타입 화면 서브타이틀",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select your skin type based on the descriptions\nfor personalized UV protection recommendations."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "나에게 맞는 자외선 차단 방식 추천을 위해\n설명을 보고 내 피부 타입을 선택해주세요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "나에게 맞는 자외선 차단 방식 추천을 위해\n설명을 보고 내 피부 타입을 선택해주세요."
           }
         }
       }
     },
-    "settings.skinType.title": {
-      "comment": "설정 - 피부 타입 설정 타이틀",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skin Type"
+    "settings.skinType.title" : {
+      "comment" : "설정 - 피부 타입 설정 타이틀",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skin Type"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "피부 타입 설정"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "피부 타입 설정"
           }
         }
       }
     },
-    "settings.spf.desc": {
-      "comment": "설정 - SPF 설정 설명",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Change your sunscreen SPF level."
+    "settings.spf.desc" : {
+      "comment" : "설정 - SPF 설정 설명",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change your sunscreen SPF level."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "사용하는 선크림의 SPF 지수를 수정해요."
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "사용하는 선크림의 SPF 지수를 수정해요."
           }
         }
       }
     },
-    "settings.spf.title": {
-      "comment": "설정 - SPF 설정 타이틀",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sunscreen SPF"
+    "settings.spf.title" : {
+      "comment" : "설정 - SPF 설정 타이틀",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sunscreen SPF"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "선크림 SPF 설정"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선크림 SPF 설정"
           }
         }
       }
     },
-    "settings.title": {
-      "comment": "설정 화면 타이틀",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Settings"
+    "settings.title" : {
+      "comment" : "설정 화면 타이틀",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "설정"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "설정"
           }
         }
       }
     },
-    "skin.maxMED.format": {
-      "comment": "하루 최대 권장 MED 포맷",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Recommended max MED: %.0f J/m²"
+    "skin.maxMED.format" : {
+      "comment" : "하루 최대 권장 MED 포맷",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recommended max MED: %.0f J/m²"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "하루 최대 권장 MED: %.0f J/m²"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "하루 최대 권장 MED: %.0f J/m²"
           }
         }
       }
     },
-    "skin.type1.description": {
-      "comment": "피부 타입 1 설명",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Always burns, never tans"
+    "skin.type1.description" : {
+      "comment" : "피부 타입 1 설명",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Always burns, never tans"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "항상 타거나 화상을 입음, 거의 태닝되지 않음"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "항상 타거나 화상을 입음, 거의 태닝되지 않음"
           }
         }
       }
     },
-    "skin.type1.summary": {
-      "comment": "피부 타입 1 요약",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Very fair skin, many freckles"
+    "skin.type1.summary" : {
+      "comment" : "피부 타입 1 요약",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Very fair skin, many freckles"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "매우 하얀 피부, 주근깨 많음"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "매우 하얀 피부, 주근깨 많음"
           }
         }
       }
     },
-    "skin.type1.title": {
-      "comment": "피부 타입 1 제목",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Type 1"
+    "skin.type1.title" : {
+      "comment" : "피부 타입 1 제목",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Type 1"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1형"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1형"
           }
         }
       }
     },
-    "skin.type2.description": {
-      "comment": "피부 타입 2 설명",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Burns easily, tans with difficulty"
+    "skin.type2.description" : {
+      "comment" : "피부 타입 2 설명",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Burns easily, tans with difficulty"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "쉽게 타고, 태닝이 어려움"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "쉽게 타고, 태닝이 어려움"
           }
         }
       }
     },
-    "skin.type2.summary": {
-      "comment": "피부 타입 2 요약",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fair skin, some freckles"
+    "skin.type2.summary" : {
+      "comment" : "피부 타입 2 요약",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fair skin, some freckles"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "하얀 피부, 주근깨 있음"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "하얀 피부, 주근깨 있음"
           }
         }
       }
     },
-    "skin.type2.title": {
-      "comment": "피부 타입 2 제목",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Type 2"
+    "skin.type2.title" : {
+      "comment" : "피부 타입 2 제목",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Type 2"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "2형"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2형"
           }
         }
       }
     },
-    "skin.type3.description": {
-      "comment": "피부 타입 3 설명",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sometimes burns, gradually tans"
+    "skin.type3.description" : {
+      "comment" : "피부 타입 3 설명",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sometimes burns, gradually tans"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "가끔 타지만 점진적으로 태닝됨"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "가끔 타지만 점진적으로 태닝됨"
           }
         }
       }
     },
-    "skin.type3.summary": {
-      "comment": "피부 타입 3 요약",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Medium skin tone"
+    "skin.type3.summary" : {
+      "comment" : "피부 타입 3 요약",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Medium skin tone"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "약간 어두운 피부"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "약간 어두운 피부"
           }
         }
       }
     },
-    "skin.type3.title": {
-      "comment": "피부 타입 3 제목",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Type 3"
+    "skin.type3.title" : {
+      "comment" : "피부 타입 3 제목",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Type 3"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "3형"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3형"
           }
         }
       }
     },
-    "skin.type4.description": {
-      "comment": "피부 타입 4 설명",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rarely burns, tans easily"
+    "skin.type4.description" : {
+      "comment" : "피부 타입 4 설명",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rarely burns, tans easily"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "거의 타지 않고 쉽게 태닝됨"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "거의 타지 않고 쉽게 태닝됨"
           }
         }
       }
     },
-    "skin.type4.summary": {
-      "comment": "피부 타입 4 요약",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Olive or light brown skin"
+    "skin.type4.summary" : {
+      "comment" : "피부 타입 4 요약",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Olive or light brown skin"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "올리브톤 또는 황갈색 피부"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "올리브톤 또는 황갈색 피부"
           }
         }
       }
     },
-    "skin.type4.title": {
-      "comment": "피부 타입 4 제목",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Type 4"
+    "skin.type4.title" : {
+      "comment" : "피부 타입 4 제목",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Type 4"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "4형"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "4형"
           }
         }
       }
     },
-    "skin.type5.description": {
-      "comment": "피부 타입 5 설명",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Very rarely burns, tans very easily"
+    "skin.type5.description" : {
+      "comment" : "피부 타입 5 설명",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Very rarely burns, tans very easily"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "거의 타지 않고 매우 쉽게 태닝됨"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "거의 타지 않고 매우 쉽게 태닝됨"
           }
         }
       }
     },
-    "skin.type5.summary": {
-      "comment": "피부 타입 5 요약",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Brown skin"
+    "skin.type5.summary" : {
+      "comment" : "피부 타입 5 요약",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Brown skin"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "갈색 피부"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "갈색 피부"
           }
         }
       }
     },
-    "skin.type5.title": {
-      "comment": "피부 타입 5 제목",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Type 5"
+    "skin.type5.title" : {
+      "comment" : "피부 타입 5 제목",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Type 5"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "5형"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "5형"
           }
         }
       }
     },
-    "skin.type6.description": {
-      "comment": "피부 타입 6 설명",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Never burns, naturally dark pigmentation"
+    "skin.type6.description" : {
+      "comment" : "피부 타입 6 설명",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Never burns, naturally dark pigmentation"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "거의 타지 않음, 자연스럽게 어두운 색소"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "거의 타지 않음, 자연스럽게 어두운 색소"
           }
         }
       }
     },
-    "skin.type6.summary": {
-      "comment": "피부 타입 6 요약",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Very dark brown or black skin"
+    "skin.type6.summary" : {
+      "comment" : "피부 타입 6 요약",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Very dark brown or black skin"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "매우 어두운 갈색/검은 피부"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "매우 어두운 갈색/검은 피부"
           }
         }
       }
     },
-    "skin.type6.title": {
-      "comment": "피부 타입 6 제목",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Type 6"
+    "skin.type6.title" : {
+      "comment" : "피부 타입 6 제목",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Type 6"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "6형"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "6형"
           }
         }
       }
     },
-    "spf.50plus": {
-      "comment": "SPF 50+ 표시",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "SPF 50+"
+    "spf.50plus" : {
+      "comment" : "SPF 50+ 표시",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SPF 50+"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "SPF 50+"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SPF 50+"
           }
         }
       }
     },
-    "spf.level.format": {
-      "comment": "SPF 레벨 포맷 (예: SPF 30)",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "SPF %lld"
+    "spf.level.format" : {
+      "comment" : "SPF 레벨 포맷 (예: SPF 30)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SPF %lld"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "SPF %lld"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SPF %lld"
           }
         }
       }
     },
-    "spf.none": {
-      "comment": "선크림 미사용",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "None"
+    "spf.none" : {
+      "comment" : "선크림 미사용",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "None"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "미사용"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "미사용"
           }
         }
       }
     },
-    "sunscreen.card.watchPrompt": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Start the sunscreen timer\non your Apple Watch"
+    "sunscreen.card.watchPrompt" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start the sunscreen timer\non your Apple Watch"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "선크림 타이머를\n워치에서 작동시켜주세요"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선크림 타이머를\n워치에서 작동시켜주세요"
           }
         }
       }
     },
-    "sunscreen.effectiveness.excellent": {
-      "comment": "선크림 효과 상태: 매우 좋음 (80-100%)",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Excellent"
+    "sunscreen.effectiveness.excellent" : {
+      "comment" : "선크림 효과 상태: 매우 좋음 (80-100%)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Excellent"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "매우 좋음"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "매우 좋음"
           }
         }
       }
     },
-    "sunscreen.effectiveness.good": {
-      "comment": "선크림 효과 상태: 보통 (50-79%)",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Good"
+    "sunscreen.effectiveness.good" : {
+      "comment" : "선크림 효과 상태: 보통 (50-79%)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Good"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "보통"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "보통"
           }
         }
       }
     },
-    "sunscreen.effectiveness.reapply": {
-      "comment": "선크림 효과 상태: 재발림 필요 (0%)",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Reapply needed"
+    "sunscreen.effectiveness.reapply" : {
+      "comment" : "선크림 효과 상태: 재발림 필요 (0%)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reapply needed"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "재발림 필요"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "재발림 필요"
           }
         }
       }
     },
-    "sunscreen.effectiveness.weak": {
-      "comment": "선크림 효과 상태: 약함 (1-49%)",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Weak"
+    "sunscreen.effectiveness.weak" : {
+      "comment" : "선크림 효과 상태: 약함 (1-49%)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weak"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "약함"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "약함"
           }
         }
       }
     },
-    "sunscreen.time.expired": {
-      "comment": "선크림 만료됨",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Expired"
+    "sunscreen.time.expired" : {
+      "comment" : "선크림 만료됨",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Expired"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "만료됨"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "만료됨"
           }
         }
       }
     },
-    "sunscreen.time.hours": {
-      "comment": "남은 시간: N시간",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld hours"
+    "sunscreen.time.hours" : {
+      "comment" : "남은 시간: N시간",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld hours"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld시간"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld시간"
           }
         }
       }
     },
-    "sunscreen.time.hours_minutes": {
-      "comment": "남은 시간: N시간 M분",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld hours %lld minutes"
+    "sunscreen.time.hours_minutes" : {
+      "comment" : "남은 시간: N시간 M분",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld hours %lld minutes"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld시간 %lld분"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld시간 %lld분"
           }
         }
       }
     },
-    "sunscreen.time.minutes": {
-      "comment": "남은 시간: N분",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld minutes"
+    "sunscreen.time.minutes" : {
+      "comment" : "남은 시간: N분",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld minutes"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld분"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld분"
           }
         }
       }
     },
-    "tab.dashboard": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dashboard"
+    "tab.dashboard" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dashboard"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "대시보드"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "대시보드"
           }
         }
       }
     },
-    "tab.info": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Info"
+    "tab.info" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Info"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "정보"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "정보"
           }
         }
       }
     },
-    "tab.settings": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Settings"
+    "tab.settings" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "설정"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "설정"
           }
         }
       }
     },
-    "timer.cancel": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cancel"
+    "timer.cancel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "취소"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "취소"
           }
         }
       }
     },
-    "timer.reapply.alert": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Time to reapply!"
+    "timer.reapply.alert" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time to reapply!"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "재도포할 시간!"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "재도포할 시간!"
           }
         }
       }
     },
-    "timer.refresh": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Refresh"
+    "timer.refresh" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Refresh"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "갱신"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "갱신"
           }
         }
       }
     },
-    "timer.restart": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Restart"
+    "timer.restart" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restart"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "재시작"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "재시작"
           }
         }
       }
     },
-    "timer.start": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Start"
+    "timer.start" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "시작"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "시작"
           }
         }
       }
     },
-    "timer.start.prompt": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Start\nsunscreen timer?"
+    "timer.start.prompt" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start\nsunscreen timer?"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "선크림 타이머를\n시작하시겠습니까?"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선크림 타이머를\n시작하시겠습니까?"
           }
         }
       }
     },
-    "timer.stop": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Stop"
+    "timer.stop" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stop"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "중지"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "중지"
           }
         }
       }
     },
-    "timer.untilReapply": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Until reapply"
+    "timer.untilReapply" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Until reapply"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "재도포까지"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "재도포까지"
           }
         }
       }
     },
-    "uv.label": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "UV Index"
+    "uv.label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "UV Index"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "자외선"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "자외선"
           }
         }
       }
     },
-    "uv.level.extreme": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Extreme"
+    "uv.level.extreme" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Extreme"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "위험"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "위험"
           }
         }
       }
     },
-    "uv.level.high": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "High"
+    "uv.level.high" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "High"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "위험"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "위험"
           }
         }
       }
     },
-    "uv.level.low": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Low"
+    "uv.level.low" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Low"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "안심"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "안심"
           }
         }
       }
     },
-    "uv.level.moderate": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Moderate"
+    "uv.level.moderate" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moderate"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "주의"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "주의"
           }
         }
       }
     },
-    "uv.level.veryHigh": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Very High"
+    "uv.level.veryHigh" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Very High"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "매우 위험"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "매우 위험"
           }
         }
       }
     }
   },
-  "version": "1.1"
+  "version" : "1.1"
 }

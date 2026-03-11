@@ -94,7 +94,7 @@ private extension WeeklyMEDChartView {
         HStack(spacing: ChartLayout.barSpacing) {
             ForEach(items) { item in
                 Text(item.dayLabel)
-                    .font(.ssFont(.R1))
+                    .font(.ssFont(.M1))
                     .foregroundStyle(dayLabelColor(for: item))
                     .frame(maxWidth: .infinity)
             }
