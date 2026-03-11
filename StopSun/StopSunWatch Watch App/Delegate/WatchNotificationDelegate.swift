@@ -64,21 +64,19 @@ final class WatchNotificationDelegate: NSObject, UNUserNotificationCenterDelegat
         print("[Watch] 알림 응답 수신 - 알림 ID: \(notificationIdentifier), 액션: \(actionIdentifier)")
 
         // 알림 액션에 따른 처리
+        // NotificationCenter를 통해 ViewModel/View에 이벤트를 전달합니다.
         switch actionIdentifier {
         case WatchNotificationIdentifier.Action.sunscreenYes:
             print("[Watch] 사용자가 자외선 차단제를 발랐습니다.")
-            // TODO: ViewModel/Coordinator를 통한 비즈니스 로직 처리
-            // 예: viewModel.recordSunscreenApplication()
+            postEvent(.watchDidTapSunscreenYes, notificationIdentifier: notificationIdentifier)
 
         case WatchNotificationIdentifier.Action.sunscreenNo:
             print("[Watch] 사용자가 자외선 차단제를 바르지 않았습니다.")
-            // TODO: ViewModel/Coordinator를 통한 비즈니스 로직 처리
-            // 예: viewModel.recordSunscreenSkip()
+            postEvent(.watchDidTapSunscreenNo, notificationIdentifier: notificationIdentifier)
 
         case UNNotificationDefaultActionIdentifier:
             print("[Watch] 알림 본문이 탭되었습니다.")
-            // TODO: Coordinator를 통한 화면 네비게이션 구현
-            // 예: coordinator.navigate(to: .timer) 또는 coordinator.navigate(to: .sunscreenReminder)
+            postEvent(.watchDidTapNotificationBody, notificationIdentifier: notificationIdentifier)
 
         case UNNotificationDismissActionIdentifier:
             print("[Watch] 알림이 닫혔습니다.")
@@ -88,5 +86,23 @@ final class WatchNotificationDelegate: NSObject, UNUserNotificationCenterDelegat
         }
 
         completionHandler()
+    }
+
+    // MARK: - Private
+
+    /// NotificationCenter를 통해 이벤트를 발송합니다.
+    ///
+    /// - Parameters:
+    ///   - name: 발송할 Notification.Name
+    ///   - notificationIdentifier: 원본 알림의 식별자 (디버깅 및 추적용)
+    private func postEvent(_ name: Notification.Name, notificationIdentifier: String) {
+        NotificationCenter.default.post(
+            name: name,
+            object: nil,
+            userInfo: [
+                WatchNotificationUserInfoKey.notificationIdentifier: notificationIdentifier,
+                WatchNotificationUserInfoKey.timestamp: Date().timeIntervalSince1970
+            ]
+        )
     }
 }
