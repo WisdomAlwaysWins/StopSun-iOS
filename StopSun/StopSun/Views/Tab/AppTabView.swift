@@ -60,7 +60,9 @@ struct AppTabView: View {
     private func tabLabel(for tab: AppTab) -> some View {
         let icon = selectedTab == tab ? tab.selectedIconName : tab.iconName
         Image(icon)
+            .renderingMode(.original)
         Text(tab.title)
+            .foregroundStyle(.text00)
     }
 }
 
