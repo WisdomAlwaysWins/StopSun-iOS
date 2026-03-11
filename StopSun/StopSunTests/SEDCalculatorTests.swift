@@ -349,33 +349,33 @@ final class SEDCalculatorTests: XCTestCase {
     // MARK: - WarningLevel Tests
     
     func test_warningLevel_safe() {
-        // Given: 진행률 40%
-        let level = WarningLevel.from(progress: 0.4)
-        
+        // Given: 진행률 20% (0~30% = safe)
+        let level = WarningLevel.from(progress: 0.2)
+
         // Then
         XCTAssertEqual(level, .safe)
     }
-    
+
     func test_warningLevel_caution() {
-        // Given: 진행률 60%
-        let level = WarningLevel.from(progress: 0.6)
-        
+        // Given: 진행률 40% (30~50% = caution)
+        let level = WarningLevel.from(progress: 0.4)
+
         // Then
         XCTAssertEqual(level, .caution)
     }
-    
+
     func test_warningLevel_warning() {
-        // Given: 진행률 90%
-        let level = WarningLevel.from(progress: 0.9)
-        
+        // Given: 진행률 60% (50~70% = warning)
+        let level = WarningLevel.from(progress: 0.6)
+
         // Then
         XCTAssertEqual(level, .warning)
     }
-    
+
     func test_warningLevel_danger() {
-        // Given: 진행률 120%
-        let level = WarningLevel.from(progress: 1.2)
-        
+        // Given: 진행률 90% (70%+ = danger)
+        let level = WarningLevel.from(progress: 0.9)
+
         // Then
         XCTAssertEqual(level, .danger)
     }

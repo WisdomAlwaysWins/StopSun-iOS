@@ -20,7 +20,7 @@ import Foundation
 /// let maxMED = profile.skinType.maxDailyMEDinSED  // 2.5 SED
 /// ```
 ///
-struct UserProfile: Codable {
+struct UserProfile: Codable, Equatable {
     
     /// 고유 식별자
     let id: UUID
