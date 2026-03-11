@@ -95,22 +95,22 @@ struct IntroductionView: View {
     
     private var buttonSection: some View {
         VStack(spacing: 12) {
-            if isLastPage {
-                SSButton(L10n.Onboarding.Introduction.startSetup, style: .primary) {
-                    onStart()
-                }
-            } else {
-                SSButton(L10n.Button.next, style: .primary) {
-                    onNext()
-                }
-                Button {
-                    onSkip()
-                } label: {
-                    Text(L10n.Button.skip)
-                        .font(.ssFont(.R2))
-                        .foregroundStyle(Color.text01)
-                }
+            SSButton(
+                isLastPage ? L10n.Onboarding.Introduction.startSetup : L10n.Button.next,
+                style: .primary
+            ) {
+                isLastPage ? onStart() : onNext()
             }
+
+            Button {
+                onSkip()
+            } label: {
+                Text(L10n.Button.skip)
+                    .font(.ssFont(.R2))
+                    .foregroundStyle(Color.text01)
+            }
+            .opacity(isLastPage ? 0 : 1)
+            .disabled(isLastPage)
         }
     }
 }

@@ -37,6 +37,8 @@ struct WeeklyMEDChartView: View {
     
     let items: [WeeklyBarItem]
     
+    @State private var selectedIndex: Int?
+    
     private var maxPercent: Double {
         let dataMax = items.compactMap(\.percent).max() ?? 0
         return max(dataMax, 100)
@@ -77,10 +79,12 @@ private extension WeeklyMEDChartView {
     
     var bars: some View {
         HStack(spacing: ChartLayout.barSpacing) {
-            ForEach(items) { item in
+            ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
                 ChartBarColumn(
                     item: item,
-                    maxPercent: maxPercent
+                    maxPercent: maxPercent,
+                    isSelected: selectedIndex == index,
+                    onTap: { selectedIndex = selectedIndex == index ? nil : index }
                 )
             }
         }
@@ -99,8 +103,7 @@ private extension WeeklyMEDChartView {
     
     func dayLabelColor(for item: WeeklyBarItem) -> Color {
         if item.isToday { return .text00 }
-        if item.percent != nil { return .text04 }
-        return .text05
+        return .text04
     }
 }
 
@@ -111,9 +114,11 @@ private struct ChartBarColumn: View {
     
     let item: WeeklyBarItem
     let maxPercent: Double
+    let isSelected: Bool
+    let onTap: () -> Void
     
     private var isOver: Bool {
-        (item.percent ?? 0) >= 100
+        item.percent >= 100
     }
     
     var body: some View {
@@ -121,19 +126,33 @@ private struct ChartBarColumn: View {
             overLabel
             barShape
         }
+        .onTapGesture {
+            onTap()
+        }
     }
     
-    @ViewBuilder
     private var overLabel: some View {
-        if let percent = item.percent {
-            Text("\(Int(percent))%")
-                .font(.ssFont(.M1))
-                .foregroundStyle(isOver ? .text00 : .text04)
-        } else {
-            Text(" ")
-                .font(.ssFont(.M1))
-                .hidden()
+        Group {
+            if isSelected {
+                Text("\(item.exposureMinutes)분")
+                    .font(.ssFont(.M1))
+                    .foregroundStyle(labelColor)
+            } else {
+                Text("\(Int(item.percent))%")
+                    .font(.ssFont(.M1))
+                    .foregroundStyle(labelColor)
+            }
         }
+    }
+    
+    private var labelColor: Color {
+        if item.isToday { return WarningLevel.fromPercentage(item.percent).color }
+        return .text04
+    }
+    
+    private var barColor: Color {
+        if item.isToday { return WarningLevel.fromPercentage(item.percent).color }
+        return isOver ? .chart02 : .chart01
     }
     
     private var barShape: some View {
@@ -142,9 +161,9 @@ private struct ChartBarColumn: View {
                 RoundedRectangle(cornerRadius: ChartLayout.barCornerRadius)
                     .fill(.chart00)
                 
-                if let percent = item.percent, percent > 0 {
+                if item.percent > 0 {
                     RoundedRectangle(cornerRadius: ChartLayout.barCornerRadius)
-                        .fill(isOver ? .chart02 : .chart01)
+                        .fill(barColor)
                         .frame(height: barHeight(in: geo.size.height))
                 }
             }
@@ -153,8 +172,8 @@ private struct ChartBarColumn: View {
     }
     
     private func barHeight(in totalHeight: CGFloat) -> CGFloat {
-        guard let percent = item.percent, percent > 0 else { return 0 }
-        let ratio = min(percent / maxPercent, 1.0)
+        guard item.percent > 0 else { return 0 }
+        let ratio = min(item.percent / maxPercent, 1.0)
         return max(ratio * totalHeight, ChartLayout.minBarHeight)
     }
 }
@@ -163,13 +182,13 @@ private struct ChartBarColumn: View {
 
 #Preview("풀 데이터") {
     WeeklyMEDChartView(items: [
-        .init(dayLabel: "금", percent: 24, isToday: false),
-        .init(dayLabel: "토", percent: 92, isToday: false),
-        .init(dayLabel: "일", percent: 128, isToday: false),
-        .init(dayLabel: "월", percent: 45, isToday: false),
-        .init(dayLabel: "화", percent: 86, isToday: false),
-        .init(dayLabel: "수", percent: 39, isToday: false),
-        .init(dayLabel: "목", percent: 67, isToday: true),
+        .init(dayLabel: "금", percent: 24, exposureMinutes: 18, isToday: false),
+        .init(dayLabel: "토", percent: 92, exposureMinutes: 65, isToday: false),
+        .init(dayLabel: "일", percent: 128, exposureMinutes: 90, isToday: false),
+        .init(dayLabel: "월", percent: 45, exposureMinutes: 32, isToday: false),
+        .init(dayLabel: "화", percent: 86, exposureMinutes: 58, isToday: false),
+        .init(dayLabel: "수", percent: 39, exposureMinutes: 25, isToday: false),
+        .init(dayLabel: "오늘", percent: 12, exposureMinutes: 43, isToday: true),
     ])
     .padding()
     .background(.white01)
@@ -177,13 +196,13 @@ private struct ChartBarColumn: View {
 
 #Preview("설치 3일째") {
     WeeklyMEDChartView(items: [
-        .init(dayLabel: "금", percent: nil, isToday: false),
-        .init(dayLabel: "토", percent: nil, isToday: false),
-        .init(dayLabel: "일", percent: nil, isToday: false),
-        .init(dayLabel: "월", percent: nil, isToday: false),
-        .init(dayLabel: "화", percent: 72, isToday: false),
-        .init(dayLabel: "수", percent: 45, isToday: false),
-        .init(dayLabel: "목", percent: 30, isToday: true),
+        .init(dayLabel: "금", percent: 0, exposureMinutes: 0, isToday: false),
+        .init(dayLabel: "토", percent: 0, exposureMinutes: 0, isToday: false),
+        .init(dayLabel: "일", percent: 0, exposureMinutes: 0, isToday: false),
+        .init(dayLabel: "월", percent: 0, exposureMinutes: 0, isToday: false),
+        .init(dayLabel: "화", percent: 72, exposureMinutes: 48, isToday: false),
+        .init(dayLabel: "수", percent: 45, exposureMinutes: 30, isToday: false),
+        .init(dayLabel: "오늘", percent: 32, exposureMinutes: 43, isToday: true),
     ])
     .padding()
     .background(.white01)
@@ -191,13 +210,27 @@ private struct ChartBarColumn: View {
 
 #Preview("첫날") {
     WeeklyMEDChartView(items: [
-        .init(dayLabel: "금", percent: nil, isToday: false),
-        .init(dayLabel: "토", percent: nil, isToday: false),
-        .init(dayLabel: "일", percent: nil, isToday: false),
-        .init(dayLabel: "월", percent: nil, isToday: false),
-        .init(dayLabel: "화", percent: nil, isToday: false),
-        .init(dayLabel: "수", percent: nil, isToday: false),
-        .init(dayLabel: "목", percent: 18, isToday: true),
+        .init(dayLabel: "금", percent: 0, exposureMinutes: 0, isToday: false),
+        .init(dayLabel: "토", percent: 0, exposureMinutes: 0, isToday: false),
+        .init(dayLabel: "일", percent: 0, exposureMinutes: 0, isToday: false),
+        .init(dayLabel: "월", percent: 0, exposureMinutes: 0, isToday: false),
+        .init(dayLabel: "화", percent: 0, exposureMinutes: 0, isToday: false),
+        .init(dayLabel: "수", percent: 0, exposureMinutes: 0, isToday: false),
+        .init(dayLabel: "오늘", percent: 82, exposureMinutes: 43, isToday: true),
+    ])
+    .padding()
+    .background(.white01)
+}
+
+#Preview("오버") {
+    WeeklyMEDChartView(items: [
+        .init(dayLabel: "금", percent: 0, exposureMinutes: 0, isToday: false),
+        .init(dayLabel: "토", percent: 0, exposureMinutes: 0, isToday: false),
+        .init(dayLabel: "일", percent: 0, exposureMinutes: 0, isToday: false),
+        .init(dayLabel: "월", percent: 0, exposureMinutes: 0, isToday: false),
+        .init(dayLabel: "화", percent: 0, exposureMinutes: 0, isToday: false),
+        .init(dayLabel: "수", percent: 0, exposureMinutes: 0, isToday: false),
+        .init(dayLabel: "오늘", percent: 128, exposureMinutes: 43, isToday: true),
     ])
     .padding()
     .background(.white01)

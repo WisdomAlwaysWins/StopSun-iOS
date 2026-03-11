@@ -28,7 +28,7 @@ struct MEDGaugeCardView: View {
             HStack {
                 VStack(spacing: 4) {
                     Text(L10n.MED.Gauge.todayUV)
-                        .font(.ssFont(.R4))
+                        .font(.ssFont(.R1))
                         .foregroundStyle(.text03)
                     
                     HStack {
@@ -46,7 +46,7 @@ struct MEDGaugeCardView: View {
                 
                 VStack(spacing: 4) {
                     Text(L10n.MED.Gauge.maxUV)
-                        .font(.ssFont(.R4))
+                        .font(.ssFont(.R1))
                         .foregroundStyle(.text03)
                     
                     HStack {
@@ -60,6 +60,7 @@ struct MEDGaugeCardView: View {
                     }
                 }
             }
+            .padding(.top, 8)
             .padding(.horizontal, 24)
             
             VStack(spacing: 6) {

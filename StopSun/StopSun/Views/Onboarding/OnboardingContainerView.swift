@@ -67,6 +67,21 @@ struct OnboardingContainerView: View {
             setupProgressBar
             setupStepContent(vm: vm)
                 .animation(.easeInOut(duration: 0.3), value: viewModel.currentSetupStep)
+                .transition(setupTransition)
+        }
+    }
+    
+    private var setupTransition: AnyTransition {
+        if viewModel.navigationDirection == .forward {
+            return .asymmetric(
+                insertion: .move(edge: .trailing),
+                removal: .move(edge: .leading)
+            )
+        } else {
+            return .asymmetric(
+                insertion: .move(edge: .leading),
+                removal: .move(edge: .trailing)
+            )
         }
     }
     
@@ -118,10 +133,6 @@ struct OnboardingContainerView: View {
                 onHasWatch: { viewModel.handleHasWatch() },
                 onNoWatch: { viewModel.handleNoWatch() }
             )
-            .transition(.asymmetric(
-                insertion: .move(edge: .trailing),
-                removal: .move(edge: .leading)
-            ))
             
         case .permission:
             OnboardingPermissionView(
@@ -130,10 +141,6 @@ struct OnboardingContainerView: View {
                     Task { await viewModel.handleRequestPermissions() }
                 }
             )
-            .transition(.asymmetric(
-                insertion: .move(edge: .trailing),
-                removal: .move(edge: .leading)
-            ))
             
         case .skinType:
             OnboardingSkinTypeView(
@@ -141,10 +148,6 @@ struct OnboardingContainerView: View {
                 onSelectSkinType: { viewModel.selectSkinType($0) },
                 onStart: { viewModel.completeOnboarding() }
             )
-            .transition(.asymmetric(
-                insertion: .move(edge: .trailing),
-                removal: .move(edge: .leading)
-            ))
         }
     }
 }
