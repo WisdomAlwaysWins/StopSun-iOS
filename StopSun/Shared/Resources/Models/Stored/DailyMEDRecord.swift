@@ -42,16 +42,21 @@ struct DailyMEDRecord: Codable, Identifiable {
     /// 노출 횟수
     var recordCount: Int
     
+    /// 노출 시간 (분)
+    var totalExposureMinutes: Int
+    
     init(
         id: UUID = UUID(),
         date: Date,
         totalSED: Double = 0,
-        recordCount: Int = 0
+        recordCount: Int = 0,
+        totalExposureMinutes: Int = 0
     ) {
         self.id = id
         self.date = date
         self.totalSED = totalSED
         self.recordCount = recordCount
+        self.totalExposureMinutes = totalExposureMinutes
     }
     
     /// 새 노출 추가

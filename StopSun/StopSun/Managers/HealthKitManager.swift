@@ -31,7 +31,6 @@ final class HealthKitManager: HealthKitManagerProtocol {
     // MARK: - Authorization
     
     func requestAuthorization() async throws {
-        // TODO: 구현
         guard isAvailable else {
             throw AppError.healthKit(.notAvailable)
         }
@@ -44,7 +43,6 @@ final class HealthKitManager: HealthKitManagerProtocol {
     // MARK: - Fetch Data
     
     func fetchTodayTimeInDaylight() async throws -> [TimeInDaylight] {
-        // TODO: 구현
         let calendar = Calendar.current
         let startOfDay = calendar.startOfDay(for: Date())
         let now = Date()
@@ -112,7 +110,6 @@ final class HealthKitManager: HealthKitManagerProtocol {
             
             guard error == nil else { return }
             
-            // TODO: - NotificationCenter 파일 분리 필요
             NotificationCenter.default.post(name: .healthKitDataDidUpdate, object: nil)
         }
         

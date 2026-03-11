@@ -83,7 +83,7 @@ final class DashboardViewModel {
             return (0..<7).map { offset in
                 let date = calendar.date(byAdding: .day, value: offset - 6, to: today)!
                 let weekday = calendar.component(.weekday, from: date) - 1
-                return WeeklyBarItem(dayLabel: daySymbols[weekday], percent: nil, isToday: offset == 6)
+                return WeeklyBarItem(dayLabel: offset == 6 ? "오늘" : daySymbols[weekday], percent: 0, exposureMinutes: 0, isToday: offset == 6)
             }
         }
         
@@ -94,19 +94,20 @@ final class DashboardViewModel {
             let date = calendar.date(byAdding: .day, value: offset - 6, to: today)!
             let weekday = calendar.component(.weekday, from: date) - 1
             let isToday = offset == 6
-            let label = daySymbols[weekday]
+            let label = isToday ? "오늘" : daySymbols[weekday]
             
             if isToday {
                 let percent = maxSED > 0 ? (todayTotalSED / maxSED) * 100 : 0
-                return WeeklyBarItem(dayLabel: label, percent: percent, isToday: true)
+                let minutes = localStorage.loadDailyMEDRecord(for: date)?.totalExposureMinutes ?? 0
+                return WeeklyBarItem(dayLabel: label, percent: percent, exposureMinutes: minutes, isToday: true)
             }
             
             if let record = localStorage.loadDailyMEDRecord(for: date) {
                 let percent = maxSED > 0 ? (record.totalSED / maxSED) * 100 : 0
-                return WeeklyBarItem(dayLabel: label, percent: percent, isToday: false)
+                return WeeklyBarItem(dayLabel: label, percent: percent, exposureMinutes: record.totalExposureMinutes, isToday: false)
             }
             
-            return WeeklyBarItem(dayLabel: label, percent: nil, isToday: false)
+            return WeeklyBarItem(dayLabel: label, percent: 0, exposureMinutes: 0, isToday: false)
         }
     }
     
