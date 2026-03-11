@@ -84,7 +84,7 @@ private struct LockScreenLiveActivityView: View {
     }
 
     private var timerTitle: some View {
-        Text("선크림 타이머")
+        Text(L10n.LiveActivity.timerTitle)
             .font(.system(size: 14, weight: .semibold, design: .rounded))
             .foregroundColor(.white)
     }
@@ -92,7 +92,7 @@ private struct LockScreenLiveActivityView: View {
     private var timerCountdown: some View {
         (Text(timerInterval: context.attributes.appliedAt...context.attributes.reapplyAt,
               countsDown: true)
-         + Text(" 남음"))
+         + Text(L10n.LiveActivity.remaining))
             .font(.system(size: 24, weight: .black, design: .rounded))
             .foregroundColor(.white)
             .padding(.top, 4)
@@ -118,11 +118,11 @@ private struct LockScreenLiveActivityView: View {
     }
 
     private var bannerText: some View {
-        (Text("현재 UV  ")
+        (Text(L10n.LiveActivity.currentUV)
             .foregroundColor(.black)
          + Text(warningLevel.title)
             .foregroundColor(warningLevel.liveActivityTitleColor)
-         + Text(" 수준 !")
+         + Text(L10n.LiveActivity.levelSuffix)
             .foregroundColor(.black))
             .font(.system(size: 14, weight: .semibold))
             .padding(.leading, 20)

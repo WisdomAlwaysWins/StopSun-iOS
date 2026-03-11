@@ -64,13 +64,13 @@ private extension WeeklyMEDChartView {
     
     var header: some View {
         HStack {
-            Text("주간 자외선 노출 요약")
+            Text(L10n.Chart.weeklyTitle)
                 .font(.ssFont(.SB2))
                 .foregroundStyle(.text00)
             
             Spacer()
             
-            Text("최근 7일")
+            Text(L10n.Chart.recentDays)
                 .font(.ssFont(.M1))
                 .foregroundStyle(.text04)
         }
@@ -134,7 +134,7 @@ private struct ChartBarColumn: View {
     private var overLabel: some View {
         Group {
             if isSelected {
-                Text("\(item.exposureMinutes)분")
+                Text(L10n.Chart.minutes(item.exposureMinutes))
                     .font(.ssFont(.M1))
                     .foregroundStyle(labelColor)
             } else {
