@@ -14,18 +14,19 @@ import SwiftUI
 ///
 /// ## 권한 요청 정책
 /// - 허용/거부 무관하게 Step 3으로 이동합니다.
-/// - HealthKit, Notification만 실제 시스템 팝업이 표시됩니다. (구현 완료)
-/// - Location은 현재 TODO(no-op)입니다.
+/// - 핵심 권한(위치)이 거부된 경우 안내 Alert를 표시하되 계속 진행을 허용합니다.
 ///
 struct OnboardingPermissionView: View {
     
     // MARK: - Data Down
     
     let isRequesting: Bool
+    @Binding var showPermissionDeniedAlert: Bool
     
     // MARK: - Actions Up
     
     let onContinue: () -> Void
+    let onPermissionDeniedContinue: () -> Void
     
     // MARK: - Body
     
@@ -42,6 +43,21 @@ struct OnboardingPermissionView: View {
         }
         .padding(.horizontal, 20)
         .padding(.bottom, 40)
+        .alert(
+            L10n.Onboarding.Permission.DeniedAlert.title,
+            isPresented: $showPermissionDeniedAlert
+        ) {
+            Button(L10n.Button.openSettings) {
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(url)
+                }
+            }
+            Button(L10n.Onboarding.Permission.DeniedAlert.continueAnyway) {
+                onPermissionDeniedContinue()
+            }
+        } message: {
+            Text(L10n.Onboarding.Permission.DeniedAlert.message)
+        }
     }
     
     // MARK: - Title
@@ -90,6 +106,12 @@ struct OnboardingPermissionView: View {
             onContinue()
         }
         .disabled(isRequesting)
+        .overlay {
+            if isRequesting {
+                ProgressView()
+                    .tint(.white)
+            }
+        }
     }
 }
 
@@ -129,8 +151,23 @@ private struct PermissionCardView: View {
 // MARK: - Preview
 
 #Preview("Step 2: Permission") {
+    @Previewable @State var showAlert = false
+    
     OnboardingPermissionView(
         isRequesting: false,
-        onContinue: {}
+        showPermissionDeniedAlert: $showAlert,
+        onContinue: {},
+        onPermissionDeniedContinue: {}
+    )
+}
+
+#Preview("Step 2: Loading") {
+    @Previewable @State var showAlert = false
+    
+    OnboardingPermissionView(
+        isRequesting: true,
+        showPermissionDeniedAlert: $showAlert,
+        onContinue: {},
+        onPermissionDeniedContinue: {}
     )
 }

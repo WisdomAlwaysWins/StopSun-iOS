@@ -137,8 +137,12 @@ struct OnboardingContainerView: View {
         case .permission:
             OnboardingPermissionView(
                 isRequesting: viewModel.isRequesting,
+                showPermissionDeniedAlert: vm.showPermissionDeniedAlert,
                 onContinue: {
                     Task { await viewModel.handleRequestPermissions() }
+                },
+                onPermissionDeniedContinue: {
+                    viewModel.continueAfterPermissionDenied()
                 }
             )
             
