@@ -241,6 +241,7 @@ final class MockWatchConnectivityManager: WatchConnectivityManagerProtocol {
     var onUserInfoReceived: (([String: Any]) -> Void)?
 
     func activate() {}
+    func activateAndWait() async {}
     func sendUserProfile(_ profile: UserProfile) {}
     func sendSunscreenApplication(_ application: SunscreenApplication) {}
     func sendMEDStatus(totalSED: Double, maxMED: Double) {}

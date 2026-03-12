@@ -39,6 +39,9 @@ protocol WatchConnectivityManagerProtocol: AnyObject {
 
     /// Watch Connectivity 세션 활성화
     func activate()
+    
+    /// Watch Connectivity 세션 활성화 후 완료 대기
+    func activateAndWait() async
 
     // MARK: - Domain Methods
 

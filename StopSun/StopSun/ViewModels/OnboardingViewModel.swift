@@ -54,6 +54,9 @@ final class OnboardingViewModel {
     var showWatchAlert: Bool = false
     var watchAlertType: WatchAlertType = .noWatch
     
+    /// 권한 거부 안내 Alert
+    var showPermissionDeniedAlert: Bool = false
+    
     // MARK: - Dependencies
     
     private let healthKit: any HealthKitManagerProtocol
@@ -153,8 +156,25 @@ final class OnboardingViewModel {
     
     // MARK: - Step 1: Watch Check
     
-    func handleHasWatch() {
-        moveToNextSetupStep()
+    /// "네, 보유 중이에요" 탭 시 호출
+    ///
+    /// `activateAndWait()`로 세션 활성화 완료를 대기한 후
+    /// `isPaired`를 체크합니다.
+    ///
+    /// - 페어링됨 → Step 2로 이동
+    /// - 미페어링 → notPaired Alert 표시
+    func handleHasWatch() async {
+        // 세션 활성화 완료까지 대기 (타이밍 이슈 방지)
+        await watchConnectivity.activateAndWait()
+        
+        if watchConnectivity.isPaired {
+            Log.info("Apple Watch 페어링 확인됨 → Step 2 이동")
+            moveToNextSetupStep()
+        } else {
+            Log.info("Apple Watch 미페어링 감지")
+            watchAlertType = .notPaired
+            showWatchAlert = true
+        }
     }
     
     func handleNoWatch() {
@@ -165,22 +185,32 @@ final class OnboardingViewModel {
     
     // MARK: - Step 2: Permission Request
     
+    /// 권한 요청 실행
+    ///
+    /// HealthKit → Location → Notification 순서로 시스템 팝업을 표시합니다.
+    /// 각 권한의 허용/거부와 무관하게 완료 후 Step 3으로 이동합니다.
+    /// 핵심 권한(위치)이 거부된 경우 안내 Alert를 표시합니다.
+    ///
+    /// - Note: HealthKit 플래그는 `HealthKitManager.requestAuthorization()` 내부에서
+    ///   자동 세팅되므로 별도 `markHealthKitRequested()` 호출이 불필요합니다.
     func handleRequestPermissions() async {
         guard !isRequesting else { return }
         isRequesting = true
         defer { isRequesting = false }
         
+        // 1. HealthKit
         do {
             try await healthKit.requestAuthorization()
-            permissionManager.markHealthKitRequested()
             Log.info("HealthKit 권한 요청 완료")
         } catch {
             Log.warning("HealthKit 권한 요청 에러 (계속 진행): \(error)")
         }
         
+        // 2. Location
         await location.requestAuthorization()
         Log.info("위치 권한 요청 완료")
         
+        // 3. Notification
         do {
             try await notification.requestAuthorization()
             Log.info("알림 권한 요청 완료")
@@ -188,7 +218,22 @@ final class OnboardingViewModel {
             Log.warning("알림 권한 거부 (계속 진행): \(error)")
         }
         
+        // 4. 최종 상태 갱신
         await permissionManager.checkAllStatuses()
+        
+        // 5. 핵심 권한 거부 시 안내 (진행은 허용)
+        if location.isDenied {
+            Log.warning("위치 권한 거부됨 — 안내 Alert 표시")
+            showPermissionDeniedAlert = true
+            // Alert dismiss 후 continueAfterPermissionDenied() → moveToNextSetupStep()
+        } else {
+            moveToNextSetupStep()
+        }
+    }
+    
+    /// 권한 거부 안내 Alert에서 "계속" 탭 시 호출
+    func continueAfterPermissionDenied() {
+        showPermissionDeniedAlert = false
         moveToNextSetupStep()
     }
     

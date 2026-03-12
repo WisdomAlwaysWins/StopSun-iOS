@@ -19,10 +19,10 @@ import Foundation
 ///
 protocol HealthKitManagerProtocol {
     
-    /// HealthKit 사용 가능 여부
+    /// HealthKit 사용 가능 여부 (기기 지원)
     var isAvailable: Bool { get }
     
-    /// 권한 허용 여부
+    /// 권한 요청 완료 여부
     var isAuthorized: Bool { get }
     
     /// 권한 요청

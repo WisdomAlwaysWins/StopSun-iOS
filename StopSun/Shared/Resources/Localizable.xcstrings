@@ -1628,6 +1628,60 @@
         }
       }
     },
+    "onboarding.permission.denied.continue" : {
+      "comment" : "위치 권한 비허용 시에도 넘어감 여부 버튼",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Continue anyway"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "계속 진행할래요"
+          }
+        }
+      }
+    },
+    "onboarding.permission.denied.message" : {
+      "comment" : "위치 권한 비허용 시 alert content",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Location access is needed to check\\nUV information for your current location.\\nYou can enable it in Settings."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "현재 위치의 자외선 정보를 확인하려면 위치 접근 권한이 필요합니다. 설정에서 허용할 수 있어요."
+          }
+        }
+      }
+    },
+    "onboarding.permission.denied.title" : {
+      "comment" : "위치 권한 비허용 시 alert title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Location Permission Required"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "위치 권한이 필요해요"
+          }
+        }
+      }
+    },
     "onboarding.permission.healthKit.description" : {
       "comment" : "온보딩 Step 2 - HealthKit 권한 카드 설명",
       "extractionState" : "manual",

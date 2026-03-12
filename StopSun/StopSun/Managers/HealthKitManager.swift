@@ -16,16 +16,21 @@ import HealthKit
 final class HealthKitManager: HealthKitManagerProtocol {
    
     // MARK: - Properties
+    
     private let healthStore = HKHealthStore()
     private let timeInDaylightType = HKQuantityType(.timeInDaylight)
+    
+    /// 권한 요청 완료 플래그 키
+    private static let authRequestedKey = "stopsun.permission.healthKitRequested"
     
     var isAvailable: Bool {
         HKHealthStore.isHealthDataAvailable()
     }
     
+    /// 권한 요청 완료 여부
     var isAuthorized: Bool {
-        _ = healthStore.authorizationStatus(for: timeInDaylightType)
-        return true
+        guard isAvailable else { return false }
+        return UserDefaults.standard.bool(forKey: Self.authRequestedKey)
     }
     
     // MARK: - Authorization
@@ -38,6 +43,8 @@ final class HealthKitManager: HealthKitManagerProtocol {
         let typesToRead: Set<HKObjectType> = [timeInDaylightType]
         
         try await healthStore.requestAuthorization(toShare: [], read: typesToRead)
+        
+        UserDefaults.standard.set(true, forKey: Self.authRequestedKey)
     }
     
     // MARK: - Fetch Data

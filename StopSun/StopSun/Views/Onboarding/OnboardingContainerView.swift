@@ -130,15 +130,21 @@ struct OnboardingContainerView: View {
             OnboardingWatchCheckView(
                 alertType: viewModel.watchAlertType,
                 showAlert: vm.showWatchAlert,
-                onHasWatch: { viewModel.handleHasWatch() },
+                onHasWatch: {
+                    Task { await viewModel.handleHasWatch() }
+                },
                 onNoWatch: { viewModel.handleNoWatch() }
             )
             
         case .permission:
             OnboardingPermissionView(
                 isRequesting: viewModel.isRequesting,
+                showPermissionDeniedAlert: vm.showPermissionDeniedAlert,
                 onContinue: {
                     Task { await viewModel.handleRequestPermissions() }
+                },
+                onPermissionDeniedContinue: {
+                    viewModel.continueAfterPermissionDenied()
                 }
             )
             

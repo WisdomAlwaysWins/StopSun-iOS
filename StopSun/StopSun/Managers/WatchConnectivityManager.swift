@@ -33,6 +33,9 @@ final class WatchConnectivityManager: NSObject, ObservableObject, WatchConnectiv
     // MARK: - Private Properties
 
     private var session: WCSession?
+    
+    /// 세션 활성화 완료 대기 continuation
+    private var activationContinuation: CheckedContinuation<Void, Never>?
 
     // MARK: - Initialization
 
@@ -48,10 +51,42 @@ final class WatchConnectivityManager: NSObject, ObservableObject, WatchConnectiv
             return
         }
 
-        session = WCSession.default
-        session?.delegate = self
+        if session == nil {
+            session = WCSession.default
+            session?.delegate = self
+        }
+        
         session?.activate()
         Log.info("WCSession 활성화 요청")
+    }
+    
+    /// 세션 활성화 후 delegate 콜백까지 대기
+    ///
+    /// 이미 activated 상태이면 즉시 리턴합니다.
+    /// 온보딩에서 `isPaired` 체크 전에 호출하여 타이밍 이슈를 방지합니다.
+    func activateAndWait() async {
+        guard WCSession.isSupported() else {
+            Log.warning("WCSession을 지원하지 않는 기기입니다")
+            return
+        }
+        
+        if session == nil {
+            session = WCSession.default
+            session?.delegate = self
+        }
+        
+        // 이미 활성화된 상태면 바로 리턴
+        if session?.activationState == .activated {
+            Log.debug("WCSession 이미 활성화됨")
+            return
+        }
+        
+        session?.activate()
+        
+        // delegate 콜백 대기
+        await withCheckedContinuation { continuation in
+            activationContinuation = continuation
+        }
     }
 
     // MARK: - Domain Methods
@@ -154,6 +189,8 @@ extension WatchConnectivityManager: WCSessionDelegate {
         DispatchQueue.main.async { [weak self] in
             if let error = error {
                 Log.error("WCSession 활성화 실패: \(error.localizedDescription)")
+                self?.activationContinuation?.resume()
+                self?.activationContinuation = nil
                 return
             }
 
@@ -171,6 +208,10 @@ extension WatchConnectivityManager: WCSessionDelegate {
                 Log.warning("WCSession 알 수 없는 상태")
                 self?.isReachable = false
             }
+            
+            // activateAndWait() 대기 중이면 해제
+            self?.activationContinuation?.resume()
+            self?.activationContinuation = nil
         }
     }
 
