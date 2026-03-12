@@ -44,7 +44,7 @@ final class LocationManager: NSObject, LocationManagerProtocol {
         super.init()
         clLocationManager.delegate = self
         clLocationManager.desiredAccuracy = kCLLocationAccuracyKilometer
-        clLocationManager.allowsBackgroundLocationUpdates = true
+        // init에서 설정하면 WhenInUse 상태에서 의미 없으므ㄹ Always 권한 획득 후에만 설정
     }
     
     // MARK: - Authorization
@@ -120,6 +120,13 @@ final class LocationManager: NSObject, LocationManagerProtocol {
             Log.warning("[Location] 권한 없음 — 위치 모니터링 불가")
             return
         }
+        
+        // Always 권한이 있으면 - 백그라운드 위치 업데이트 활성화
+        if clLocationManager.authorizationStatus == .authorizedAlways {
+            clLocationManager.allowsBackgroundLocationUpdates = true
+            Log.debug("[Location] 백그라운드 위치 업데이트 활성화 (Always 권한)")
+        }
+        
         clLocationManager.startMonitoringSignificantLocationChanges()
         Log.info("Significant Location Changes 모니터링 시작")
     }
