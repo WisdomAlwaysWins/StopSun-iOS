@@ -19,8 +19,8 @@ struct WatchMainView: View {
     @State private var showingUVI = false
     
     var body: some View {
-        TabView {
-            // Page 1: MED ↔ UVI (탭 전환)
+        TabView(selection: $viewModel.selectedPage) {
+            // Page 0: MED ↔ UVI (탭 전환)
             ZStack {
                 if showingUVI {
                     UVIndexView(viewModel: viewModel)
@@ -35,9 +35,11 @@ struct WatchMainView: View {
                     showingUVI.toggle()
                 }
             }
-            
-            // Page 2: 선크림 타이머
+            .tag(WatchPage.dashboard)
+
+            // Page 1: 선크림 타이머
             SunscreenTimerView(viewModel: viewModel)
+                .tag(WatchPage.timer)
         }
         .tabViewStyle(.verticalPage)
     }

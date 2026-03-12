@@ -36,8 +36,12 @@ final class WatchMainViewModel: ObservableObject {
     @Published var reapplyIntervalMinutes: Int = 120
     @Published private(set) var remainingSeconds: Int = 0
     
+    // MARK: - Published (Navigation)
+
+    @Published var selectedPage: WatchPage = .dashboard
+
     // MARK: - Published (Connection)
-    
+
     @Published var isPhoneConnected: Bool = false
     @Published var lastSyncTime: Date?
     @Published var syncFailed: Bool = false
@@ -90,9 +94,10 @@ final class WatchMainViewModel: ObservableObject {
     }
     
     // MARK: - Init
-    
+
     init() {
         setupConnectivity()
+        setupNotificationObservers()
         loadCachedData()
     }
     
@@ -111,8 +116,44 @@ final class WatchMainViewModel: ObservableObject {
         self.sunscreenSPF = sunscreenSPF
     }
     
+    // MARK: - Notification Observers
+
+    /// WatchNotificationDelegate의 알림 액션 이벤트를 구독합니다.
+    ///
+    /// - `.watchDidTapSunscreenYes` → 선크림 도포 + 타이머 페이지 이동
+    /// - `.watchDidTapSunscreenNo` → 로그 기록
+    /// - `.watchDidTapNotificationBody` → 타이머 페이지 이동
+    ///
+    /// - Note: 스레드 안전성을 위해 `.receive(on: DispatchQueue.main)` 적용
+    private func setupNotificationObservers() {
+        let sunscreenYes = NotificationCenter.default.publisher(for: .watchDidTapSunscreenYes)
+            .map { _ in true }
+        let bodyTap = NotificationCenter.default.publisher(for: .watchDidTapNotificationBody)
+            .map { _ in false }
+
+        // "예" 버튼 또는 알림 본문 탭 → 타이머 페이지로 이동
+        sunscreenYes.merge(with: bodyTap)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isSunscreenApply in
+                if isSunscreenApply {
+                    print("[Watch] 알림 액션으로 선크림 도포 처리")
+                    self?.applySunscreen()
+                }
+                self?.selectedPage = .timer
+            }
+            .store(in: &cancellables)
+
+        // "아니오" 버튼 → 별도 처리 없음
+        NotificationCenter.default.publisher(for: .watchDidTapSunscreenNo)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+                print("[Watch] 알림 액션으로 선크림 미도포 확인")
+            }
+            .store(in: &cancellables)
+    }
+
     // MARK: - Connectivity Setup
-    
+
     private func setupConnectivity() {
         // 즉시 메시지 수신
         sessionManager.onMessageReceived = { [weak self] message in
