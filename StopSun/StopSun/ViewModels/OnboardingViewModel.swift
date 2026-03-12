@@ -158,12 +158,14 @@ final class OnboardingViewModel {
     
     /// "네, 보유 중이에요" 탭 시 호출
     ///
-    /// WCSession.isPaired를 확인하여:
+    /// `activateAndWait()`로 세션 활성화 완료를 대기한 후
+    /// `isPaired`를 체크합니다.
+    ///
     /// - 페어링됨 → Step 2로 이동
     /// - 미페어링 → notPaired Alert 표시
-    func handleHasWatch() {
-        // WCSession 활성화 (아직 안 된 경우)
-        watchConnectivity.activate()
+    func handleHasWatch() async {
+        // 세션 활성화 완료까지 대기 (타이밍 이슈 방지)
+        await watchConnectivity.activateAndWait()
         
         if watchConnectivity.isPaired {
             Log.info("Apple Watch 페어링 확인됨 → Step 2 이동")
@@ -187,7 +189,10 @@ final class OnboardingViewModel {
     ///
     /// HealthKit → Location → Notification 순서로 시스템 팝업을 표시합니다.
     /// 각 권한의 허용/거부와 무관하게 완료 후 Step 3으로 이동합니다.
-    /// 핵심 권한(HealthKit + Location)이 모두 거부된 경우 안내 Alert를 표시합니다.
+    /// 핵심 권한(위치)이 거부된 경우 안내 Alert를 표시합니다.
+    ///
+    /// - Note: HealthKit 플래그는 `HealthKitManager.requestAuthorization()` 내부에서
+    ///   자동 세팅되므로 별도 `markHealthKitRequested()` 호출이 불필요합니다.
     func handleRequestPermissions() async {
         guard !isRequesting else { return }
         isRequesting = true
@@ -196,7 +201,6 @@ final class OnboardingViewModel {
         // 1. HealthKit
         do {
             try await healthKit.requestAuthorization()
-            permissionManager.markHealthKitRequested()
             Log.info("HealthKit 권한 요청 완료")
         } catch {
             Log.warning("HealthKit 권한 요청 에러 (계속 진행): \(error)")
@@ -221,7 +225,7 @@ final class OnboardingViewModel {
         if location.isDenied {
             Log.warning("위치 권한 거부됨 — 안내 Alert 표시")
             showPermissionDeniedAlert = true
-            // Alert dismiss 후 moveToNextSetupStep()은 View에서 처리
+            // Alert dismiss 후 continueAfterPermissionDenied() → moveToNextSetupStep()
         } else {
             moveToNextSetupStep()
         }

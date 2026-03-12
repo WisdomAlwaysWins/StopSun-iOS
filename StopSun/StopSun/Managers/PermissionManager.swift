@@ -26,6 +26,11 @@ enum PermissionStatus: String, Equatable, Sendable {
 /// 권한 **요청**은 온보딩 Step 2에서 `OnboardingViewModel`이 직접 수행합니다.
 /// `PermissionManager`는 권한 **상태 조회/갱신**을 담당합니다.
 ///
+/// ## HealthKit Read 권한 특수성
+/// HealthKit read 권한은 시스템에서 granted/denied 구분이 불가합니다.
+/// `HealthKitManager.isAuthorized`가 내부 UserDefaults 플래그로 요청 완료 여부를 추적하며,
+/// `PermissionManager`는 해당 프로퍼티를 그대로 참조합니다.
+///
 /// ## 사용 시점
 /// - 앱 시작 시: `checkAllStatuses()` → 현재 상태 파악
 /// - `scenePhase == .active`: 설정 앱에서 변경한 권한 반영
@@ -46,10 +51,6 @@ final class PermissionManager {
     private let notification: any NotificationManagerProtocol
     private let healthKit: any HealthKitManagerProtocol
     private let location: any LocationManagerProtocol
-    
-    // MARK: - Constants
-    
-    private static let healthKitRequestedKey = "stopsun.permission.healthKitRequested"
     
     // MARK: - Computed Properties
     
@@ -89,16 +90,6 @@ final class PermissionManager {
         )
     }
     
-    // MARK: - HealthKit 요청 완료 기록
-    
-    /// 온보딩에서 HealthKit 요청이 완료되었음을 기록
-    ///
-    /// HealthKit read 권한은 granted/denied 구분이 불가하므로,
-    /// 요청 여부만 UserDefaults에 기록합니다.
-    func markHealthKitRequested() {
-        UserDefaults.standard.set(true, forKey: Self.healthKitRequestedKey)
-    }
-    
     // MARK: - Private Status Checks
     
     private func checkNotificationStatus() async {
@@ -116,14 +107,18 @@ final class PermissionManager {
         }
     }
     
+    /// HealthKit 권한 상태 확인
+    ///
+    /// `HealthKitManager.isAuthorized`가 내부적으로 UserDefaults 플래그를 관리합니다.
+    /// `requestAuthorization()` 호출 완료 시 자동으로 플래그가 세팅되므로,
+    /// 외부에서 별도로 플래그를 설정할 필요가 없습니다.
     private func checkHealthKitStatus() {
         guard healthKit.isAvailable else {
             healthKitStatus = .restricted
             return
         }
         
-        let hasRequested = UserDefaults.standard.bool(forKey: Self.healthKitRequestedKey)
-        healthKitStatus = hasRequested ? .authorized : .notDetermined
+        healthKitStatus = healthKit.isAuthorized ? .authorized : .notDetermined
     }
     
     private func checkLocationStatus() {

@@ -130,7 +130,9 @@ struct OnboardingContainerView: View {
             OnboardingWatchCheckView(
                 alertType: viewModel.watchAlertType,
                 showAlert: vm.showWatchAlert,
-                onHasWatch: { viewModel.handleHasWatch() },
+                onHasWatch: {
+                    Task { await viewModel.handleHasWatch() }
+                },
                 onNoWatch: { viewModel.handleNoWatch() }
             )
             

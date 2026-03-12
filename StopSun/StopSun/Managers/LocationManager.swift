@@ -121,7 +121,7 @@ final class LocationManager: NSObject, LocationManagerProtocol {
             return
         }
         
-        // Always 권한이 있으면 - 백그라운드 위치 업데이트 활성화
+        // Always 권한이 있을 때만 백그라운드 위치 업데이트 활성화
         if clLocationManager.authorizationStatus == .authorizedAlways {
             clLocationManager.allowsBackgroundLocationUpdates = true
             Log.debug("[Location] 백그라운드 위치 업데이트 활성화 (Always 권한)")

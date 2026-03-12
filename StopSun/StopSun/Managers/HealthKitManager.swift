@@ -27,6 +27,7 @@ final class HealthKitManager: HealthKitManagerProtocol {
         HKHealthStore.isHealthDataAvailable()
     }
     
+    /// 권한 요청 완료 여부
     var isAuthorized: Bool {
         guard isAvailable else { return false }
         return UserDefaults.standard.bool(forKey: Self.authRequestedKey)
@@ -42,6 +43,8 @@ final class HealthKitManager: HealthKitManagerProtocol {
         let typesToRead: Set<HKObjectType> = [timeInDaylightType]
         
         try await healthStore.requestAuthorization(toShare: [], read: typesToRead)
+        
+        UserDefaults.standard.set(true, forKey: Self.authRequestedKey)
     }
     
     // MARK: - Fetch Data
