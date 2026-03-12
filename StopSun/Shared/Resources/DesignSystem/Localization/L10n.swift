@@ -104,6 +104,13 @@ enum L10n {
                 static var title: String { .localized("onboarding.permission.notification.title") }
                 static var description: String { .localized("onboarding.permission.notification.description") }
             }
+            
+            // onboarding Alert
+            enum DeniedAlert {
+                static var title: String { .localized("onboarding.permission.denied.title") }
+                static var message: String { .localized("onboarding.permission.denied.message") }
+                static var continueAnyway: String { .localized("onboarding.permission.denied.continue") }
+            }
         }
         
         // MARK: Step 3 — Skin Type
@@ -425,7 +432,7 @@ enum L10n {
             static var support: String { .localized("settings.appInfo.support") }
         }
     }
-
+    
     enum Timer {
         static var startPrompt: String { .localized("timer.start.prompt") }
         static var start: String { .localized("timer.start") }
