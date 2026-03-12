@@ -60,48 +60,50 @@ struct AppTabView: View {
     private func tabLabel(for tab: AppTab) -> some View {
         let icon = selectedTab == tab ? tab.selectedIconName : tab.iconName
         Image(icon)
+            .renderingMode(.original)
         Text(tab.title)
+            .foregroundStyle(.text00)
     }
 }
 
 // MARK: - Placeholder Views
 
 /// 설정 탭 placeholder (추후 실제 화면으로 교체)
-struct SettingsPlaceholderView: View {
-    var body: some View {
-        ZStack {
-            Color.white01.ignoresSafeArea()
-            
-            VStack(spacing: 12) {
-                Image(systemName: "gearshape")
-                    .font(.system(size: 48))
-                    .foregroundStyle(.text04)
-                
-                Text("설정")
-                    .font(.ssFont(.SB4))
-                    .foregroundStyle(.text00)
-                
-                Text("앱 설정이 여기에 표시됩니다")
-                    .font(.ssFont(.R3))
-                    .foregroundStyle(.text04)
-                
-                NavigationLink(value: Route.skinTypeSettings) {
-                    Text("스킨타입 설정")
-                }
-                
-                NavigationLink("스킨타입 설정(라우터없이)") {
-                    EmptyView()
-                }
-            }
-        }
-        .navigationDestination(for: Route.self) { route in
-            switch route {
-            case .skinTypeSettings:
-                EmptyView()
-            }
-        }
-    }
-}
+//struct SettingsPlaceholderView: View {
+//    var body: some View {
+//        ZStack {
+//            Color.white01.ignoresSafeArea()
+//            
+//            VStack(spacing: 12) {
+//                Image(systemName: "gearshape")
+//                    .font(.system(size: 48))
+//                    .foregroundStyle(.text04)
+//                
+//                Text("설정")
+//                    .font(.ssFont(.SB4))
+//                    .foregroundStyle(.text00)
+//                
+//                Text("앱 설정이 여기에 표시됩니다")
+//                    .font(.ssFont(.R3))
+//                    .foregroundStyle(.text04)
+//                
+//                NavigationLink(value: Route.skinTypeSettings) {
+//                    Text("스킨타입 설정")
+//                }
+//                
+//                NavigationLink("스킨타입 설정(라우터없이)") {
+//                    EmptyView()
+//                }
+//            }
+//        }
+//        .navigationDestination(for: Route.self) { route in
+//            switch route {
+//            case .skinTypeSettings:
+//                EmptyView()
+//            }
+//        }
+//    }
+//}
 
 #Preview {
     AppTabView()

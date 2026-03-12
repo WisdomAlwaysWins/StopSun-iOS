@@ -77,13 +77,25 @@ final class DashboardViewModel {
     var weeklyChartItems: [WeeklyBarItem] {
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: Date())
-        let daySymbols = ["일", "월", "화", "수", "목", "금", "토"]
+        
+        let isEnglish = Locale.current.language.languageCode?.identifier == "en"
+        
+        let daySymbols = isEnglish
+        ? ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
+        : ["일", "월", "화", "수", "목", "금", "토"]
+        
+        let todayLabel = isEnglish ? "TODAY" : "오늘"
         
         guard let skinType = syncCoordinator.userProfile?.skinType else {
             return (0..<7).map { offset in
                 let date = calendar.date(byAdding: .day, value: offset - 6, to: today)!
                 let weekday = calendar.component(.weekday, from: date) - 1
-                return WeeklyBarItem(dayLabel: offset == 6 ? "오늘" : daySymbols[weekday], percent: 0, exposureMinutes: 0, isToday: offset == 6)
+                return WeeklyBarItem(
+                    dayLabel: offset == 6 ? todayLabel : daySymbols[weekday],
+                    percent: 0,
+                    exposureMinutes: 0,
+                    isToday: offset == 6
+                )
             }
         }
         
@@ -94,7 +106,7 @@ final class DashboardViewModel {
             let date = calendar.date(byAdding: .day, value: offset - 6, to: today)!
             let weekday = calendar.component(.weekday, from: date) - 1
             let isToday = offset == 6
-            let label = isToday ? "오늘" : daySymbols[weekday]
+            let label = isToday ? todayLabel : daySymbols[weekday]
             
             if isToday {
                 let percent = maxSED > 0 ? (todayTotalSED / maxSED) * 100 : 0

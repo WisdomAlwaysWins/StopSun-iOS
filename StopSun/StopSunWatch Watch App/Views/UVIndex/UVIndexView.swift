@@ -24,7 +24,7 @@ struct UVIndexView: View {
                     .foregroundStyle(.white00)
                 
                 // "자외선" 라벨
-                Text("자외선")
+                Text(L10n.UV.label)
                     .font(.system(size: 15, weight: .medium))
                     .foregroundStyle(.white00)
             }
@@ -57,39 +57,3 @@ struct UVIndexView: View {
 #Preview("높음 · UV 8") { UVIndexView(viewModel: .warning) }
 
 #Preview("위험 · UV 11") { UVIndexView(viewModel: .danger) }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

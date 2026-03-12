@@ -41,6 +41,14 @@ enum L10n {
         static var guide: String { .localized("common.button.guide") }
     }
     
+    // MARK: - Tab
+    
+    enum Tab {
+        static var dashboard: String { .localized("tab.dashboard") }
+        static var info: String { .localized("tab.info") }
+        static var settings: String { .localized("tab.settings") }
+    }
+    
     // MARK: - Onboarding
     
     enum Onboarding {
@@ -180,6 +188,19 @@ enum L10n {
             static var uvIndex: String { .localized("dashboard.weather.uvIndex") }
             /// "현재 기온" / "Temperature"
             static var temperature: String { .localized("dashboard.weather.temperature") }
+        }
+    }
+    
+    // MARK: - Chart
+    
+    enum Chart {
+        /// "주간 자외선 노출 요약"
+        static var weeklyTitle: String { .localized("chart.weekly.title") }
+        /// "최근 7일"
+        static var recentDays: String { .localized("chart.weekly.recentDays") }
+        /// "%lld분" 포맷
+        static func minutes(_ value: Int) -> String {
+            .localized("chart.minutes.format", arguments: value)
         }
     }
     
@@ -365,6 +386,12 @@ enum L10n {
             }
             static var expired: String { .localized("sunscreen.time.expired") }
         }
+        
+        /// 타이머 카드
+        enum Card {
+            /// "선크림 타이머를\n워치에서 작동시켜주세요"
+            static var watchPrompt: String { .localized("sunscreen.card.watchPrompt") }
+        }
     }
     
     // MARK: - Info
@@ -432,6 +459,8 @@ enum L10n {
             static var support: String { .localized("settings.appInfo.support") }
         }
     }
+
+    // MARK: - Timer
     
     enum Timer {
         static var startPrompt: String { .localized("timer.start.prompt") }
@@ -445,5 +474,18 @@ enum L10n {
         enum Alert {
             static var reapply: String { .localized("timer.reapply.alert") }
         }
+    }
+    
+    // MARK: - Live Activity
+    
+    enum LiveActivity {
+        /// "선크림 타이머"
+        static var timerTitle: String { .localized("liveActivity.timer.title") }
+        /// " 남음" (Text concatenation용, 앞 공백 의도적)
+        static var remaining: String { .localized("liveActivity.timer.remaining") }
+        /// "현재 UV  " (Text concatenation용, 뒤 공백 의도적)
+        static var currentUV: String { .localized("liveActivity.uv.current") }
+        /// " 수준 !" (Text concatenation용, 앞 공백 의도적)
+        static var levelSuffix: String { .localized("liveActivity.uv.levelSuffix") }
     }
 }
