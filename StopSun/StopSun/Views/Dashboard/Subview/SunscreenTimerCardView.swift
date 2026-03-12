@@ -29,7 +29,7 @@ struct SunscreenTimerCardView:
             }
 
             // 안내 문구
-            Text("선크림 타이머를\n워치에서 작동시켜주세요")
+            Text(L10n.Sunscreen.Card.watchPrompt)
                 .font(.ssFont(.M2))
                 .multilineTextAlignment(.center)
                 .foregroundStyle(.text02)

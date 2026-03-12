@@ -24,14 +24,13 @@ enum AppTab: String, CaseIterable, Hashable {
     
     // MARK: - Display
     
-    /// 탭 라벨
-    // TODO: -(추후 L10n으로 설정해야함)
+    /// 탭 라벨 (L10n 기반)
     var title: String {
         switch self {
-        case .dashboard: "대시보드"
-//        case .records: "기록"
-        case .info: "정보"
-        case .settings: "설정"
+        case .dashboard: L10n.Tab.dashboard
+//        case .records: L10n.Tab.records
+        case .info: L10n.Tab.info
+        case .settings: L10n.Tab.settings
         }
     }
     
